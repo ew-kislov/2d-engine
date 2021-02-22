@@ -39,12 +39,14 @@ void Game::loadLevel() {
 
         for (uint8_t j = 0; j < mapLine.size(); j++) {
             char* textureSource = (char*)(mapLine[j] == '.' ? "assets/textures/floor/center_001.png" : "assets/textures/walls/wall_001.png");
+
             Tile* tile = new Tile(
                 "src/vertex_shader.glsl",
                 "src/fragment_shader.glsl",
                 textureSource,
                 glm::vec3(j * 72.f, i * 72.f, 0.f),
-                0
+                0,
+                mapLine[j] == '.' ? true : false
             );
 
             tileLine[j] = tile;
@@ -64,8 +66,9 @@ void Game::addMainCharacter() {
         "src/vertex_shader.glsl",
         "src/fragment_shader.glsl",
         "assets/main_character/idle_000.png",
-        glm::vec3(50.f, 50.f, 0.f),
-        1
+        glm::vec3(10.f, 10.f, 0.f),
+        1,
+        3.0f
     );
 
     this->objects.insert((OpenglObject*)this->mainCharacter);
@@ -126,7 +129,7 @@ void Game::updatePositions() {
         this->keyControlsState.isLeftPressed ? -1.0 : this->keyControlsState.isRightPressed ? 1.0 : 0.0,
         this->keyControlsState.isUpPressed ? -1.0 : this->keyControlsState.isDownPressed ? 1.0 : 0.0,
         0.0
-    ));
+    ), this->map);
     }
 
     this->mainCharacter->transform(this->camera->getProjection());

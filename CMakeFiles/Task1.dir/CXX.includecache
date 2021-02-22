@@ -13,12 +13,16 @@ glm/glm.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.hpp
 OpenglObject.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.cpp
+iostream
+-
 GL/glew.h
 -
 glm/glm.hpp
 -
 glm/gtx/transform.hpp
 -
+Tile.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.cpp
 Game.hpp
@@ -59,6 +63,10 @@ Camera.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
+string
+-
+sstream
+-
 glm/glm.hpp
 -
 glm/gtc/matrix_transform.hpp
@@ -103,6 +111,8 @@ GL/glew.h
 -
 glm/glm.hpp
 -
+MathUtils.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglUtils.cpp
 algorithm

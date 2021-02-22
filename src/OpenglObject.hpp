@@ -7,6 +7,8 @@
 
 #include <glm/glm.hpp>
 
+#include "MathUtils.cpp"
+
 using namespace std;
 
 enum VboType {
@@ -26,8 +28,6 @@ class OpenglObject {
         GLuint vao;
         GLuint textureId;
 
-        int width;
-        int height;
         int layer;
 
         map<VboType, GLuint> vbos;
@@ -37,6 +37,9 @@ class OpenglObject {
     protected:
         glm::mat4 positionMatrix;
 
+        int width;
+        int height;
+
         void applyTransformationMatrix(glm::mat4 matrix);
 
     public:
@@ -45,6 +48,8 @@ class OpenglObject {
         int getLayer() const;
 
         virtual void transform(glm::mat4 projectionMatrix) = 0;
+        virtual MathUtils::Rect* getBoundingRect() = 0;
+
         void draw();
 };
 

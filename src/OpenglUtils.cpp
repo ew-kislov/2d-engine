@@ -21,13 +21,6 @@
 using namespace std;
 
 namespace OpenglUtils {
-    void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
-    glViewport(0, 0, 900, 900);
-}
-
     GLuint createShaderProgram(const char* vertexShaderSource, const char* fragmentShaderSource) {
         GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
         GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
@@ -132,7 +125,6 @@ namespace OpenglUtils {
         }
 
         glfwMakeContextCurrent(window);
-        glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 
         glewExperimental = true;

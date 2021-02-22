@@ -46,7 +46,7 @@ struct KeyControlsState {
 
 struct OpenglObjectOrderer {
     bool operator ()(const OpenglObject* lhs, const OpenglObject* rhs) const {
-        return lhs->getLayer() < rhs->getLayer();
+        return lhs->getLayer() > rhs->getLayer();
     }
 };
 
