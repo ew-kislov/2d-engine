@@ -17,17 +17,22 @@
 #include "OpenglUtils.cpp"
 #include "MathUtils.cpp"
 
-OpenglObject::OpenglObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position) {
+OpenglObject::OpenglObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer) {
     this->vertexShaderSource = vertexShaderSource;
     this->fragmentShaderSource = fragmentShaderSource;
     this->textureSource = textureSource;
     this->positionMatrix = glm::translate(position);
+    this->layer = layer;
 
     this->programId = OpenglUtils::createShaderProgram(this->vertexShaderSource, this->fragmentShaderSource);
 
     glUseProgram(this->programId);
 
     this->setPreview();
+}
+
+int OpenglObject::getLayer() const {
+    return this->layer;
 }
 
 void OpenglObject::setPreview() {
@@ -38,29 +43,31 @@ void OpenglObject::setPreview() {
     glGenVertexArrays(1, &this->vao);
     glBindVertexArray(this->vao);
 
-    int width, height, channels;
-    unsigned char *textureData = stbi_load(this->textureSource, &width, &height, &channels, 0);
+    int channels;
+    unsigned char *textureData = stbi_load(this->textureSource, &this->width, &this->height, &channels, 0);
 
     /**
      * initiate vertex data
      */
 
-    GLfloat* positionData = new GLfloat[12] {
-        0.0f, 0.0f,
-        0.0f, 1.0f * height,
-        1.0f * width, 0.0f,
+    GLfloat z = 1.0 * this->layer / MAX_LAYERS;
 
-        0.0f, 1.0f * height,
-        1.0f * width, 0.0f,
-        1.0f * width, 1.0f * height
+    GLfloat* positionData = new GLfloat[18] {
+        0.0f, 0.0f, z,
+        0.0f, 1.0f * this->height, z,
+        1.0f * this->width, 0.0f, z,
+
+        0.0f, 1.0f * this->height, z,
+        1.0f * this->width, 0.0f, z,
+        1.0f * this->width, 1.0f * this->height, z
     };
 
     glGenBuffers(1, &positionVbo);
     glBindBuffer(GL_ARRAY_BUFFER, positionVbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12, positionData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, positionData, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
 
     this->vbos[VboType::Position] = positionVbo;
 
@@ -68,61 +75,55 @@ void OpenglObject::setPreview() {
      * initiate texture coord data
      */
 
-    // GLfloat* textureСoordData = new GLfloat[12] {
-    //     0.0f, 0.0f,
-    //     0.0f, 1.0f,
-    //     1.0f, 0.0f,
+    GLfloat* textureСoordData = new GLfloat[12] {
+        0.0f, 0.0f,
+        0.0f, 1.0f,
+        1.0f, 0.0f,
 
-    //     0.0f, 1.0f,
-    //     1.0f, 0.0f,
-    //     1.0f, 1.0f
-    // };
+        0.0f, 1.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f
+    };
 
-    cout << "Fucking shit" << endl;
-    cout << glm::to_string(MathUtils::projectionMatrix * this->positionMatrix * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f)) << endl;
-    cout << glm::to_string(MathUtils::projectionMatrix * this->positionMatrix * glm::vec4(0.0f, 1.0f * height, 0.0f, 1.0f)) << endl;
-    cout << glm::to_string(MathUtils::projectionMatrix * this->positionMatrix * glm::vec4(1.0f * width, 0.0f, 0.0f, 1.0f)) << endl;
-    cout << glm::to_string(MathUtils::projectionMatrix * this->positionMatrix * glm::vec4(1.0f * width, 1.0f * height, 0.0f, 1.0f)) << endl;
+    glGenBuffers(1, &textureCoordVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, textureCoordVbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12, textureСoordData, GL_STATIC_DRAW);
 
-    // glGenBuffers(1, &textureCoordVbo);
-    // glBindBuffer(GL_ARRAY_BUFFER, textureCoordVbo);
-    // glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12, textureСoordData, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void *)0);
 
-    // glEnableVertexAttribArray(1);
-    // glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void *)0);
-
-    // this->vbos[VboType::TextureCoords] = textureCoordVbo;
+    this->vbos[VboType::TextureCoords] = textureCoordVbo;
 
     /**
      * load texture
      */
 
-    // glGenTextures(1, &this->textureId);
-    // glBindTexture(GL_TEXTURE_2D, this->textureId);
+    glGenTextures(1, &this->textureId);
+    glBindTexture(GL_TEXTURE_2D, this->textureId);
 
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, channels == 4 ? GL_CLAMP_TO_EDGE : GL_REPEAT); // for this tutorial: use GL_CLAMP_TO_EDGE to prevent semi-transparent borders. Due to interpolation it takes texels from next repeat 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, channels == 4 ? GL_CLAMP_TO_EDGE : GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    // if (textureData) {
-    //     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData);
-    //     glGenerateMipmap(GL_TEXTURE_2D);
-    // }
-    // else {
-    //     cout << "Failed to load texture" << endl;
-    // }
+    if (textureData) {
+        glTexImage2D(GL_TEXTURE_2D, 0, channels == 3 ? GL_RGB : GL_RGBA, width, height, 0, channels == 3 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, textureData);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+    else {
+        cout << "Failed to load texture" << endl;
+    }
 
-    // stbi_image_free(textureData);
+    stbi_image_free(textureData);
 }
 
 void OpenglObject::applyTransformationMatrix(glm::mat4 matrix) {
     glUseProgram(this->programId);
-    OpenglUtils::setUniformMat4(this->programId, "transform_matrix", matrix * this->positionMatrix);
+    OpenglUtils::setUniformMat4(this->programId, "transform_matrix", matrix);
 }
 
 void OpenglObject::draw() {
-    // glBindTexture(GL_TEXTURE_2D, this->textureId);
+    glBindTexture(GL_TEXTURE_2D, this->textureId);
     glUseProgram(this->programId);
     glBindVertexArray(this->vao);
 

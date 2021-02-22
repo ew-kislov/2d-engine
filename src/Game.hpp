@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <vector>
+#include <set>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -43,6 +44,12 @@ struct KeyControlsState {
     }
 };
 
+struct OpenglObjectOrderer {
+    bool operator ()(const OpenglObject* lhs, const OpenglObject* rhs) const {
+        return lhs->getLayer() < rhs->getLayer();
+    }
+};
+
 class Game {
     private:
         GLFWwindow* window;
@@ -50,10 +57,9 @@ class Game {
         Camera* camera;
 
         ControlledObject* mainCharacter;
-        ControlledObject* fucker;
         vector<vector<Tile*>> map;
-        vector<OpenglObject*> enemies;
-        vector<OpenglObject*> items;
+
+        std::multiset<OpenglObject*, OpenglObjectOrderer> objects;
 
         GameState gameState;
         KeyControlsState keyControlsState; 

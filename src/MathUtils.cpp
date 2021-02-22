@@ -12,5 +12,5 @@ namespace MathUtils {
     const glm::mat4 projectionMatrix =
         glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(1, 0, 0)) *
         glm::translate(glm::vec3(-1.0, -1.0, 0.0)) *
-        glm::scale(glm::vec3(2.0 / WINDOW_WIDTH, 2.0 / WINDOW_HEIGHT, 0.0));
+        glm::scale(glm::vec3(2.0 / WINDOW_WIDTH, 2.0 / WINDOW_HEIGHT, 1.f));
 }

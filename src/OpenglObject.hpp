@@ -16,6 +16,8 @@ enum VboType {
 
 class OpenglObject {
     private:
+        const static int MAX_LAYERS = 100;
+
         char* vertexShaderSource;
         char* fragmentShaderSource;
         char* textureSource;
@@ -24,7 +26,9 @@ class OpenglObject {
         GLuint vao;
         GLuint textureId;
 
-        glm::vec3 position;
+        int width;
+        int height;
+        int layer;
 
         map<VboType, GLuint> vbos;
 
@@ -36,7 +40,9 @@ class OpenglObject {
         void applyTransformationMatrix(glm::mat4 matrix);
 
     public:
-        OpenglObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position);
+        OpenglObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer);
+
+        int getLayer() const;
 
         virtual void transform(glm::mat4 projectionMatrix) = 0;
         void draw();

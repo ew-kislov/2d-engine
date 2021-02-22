@@ -23,34 +23,38 @@ void Game::init() {
 }
 
 void Game::loadLevel() {
-    // ifstream mazeFile("src/maze.txt");
-    // string line;
+    ifstream mazeFile("src/maze.txt");
+    string line;
 
-    // if (!mazeFile.is_open()){
-    //     cout << "error while opening maze map" << endl;
-    //     exit(1);
-    // }
+    if (!mazeFile.is_open()){
+        cout << "error while opening maze map" << endl;
+        exit(1);
+    }
 
-    // uint8_t i = 0;
+    uint8_t i = 0;
 
-    // while (getline(mazeFile, line)) {
-    //     std::vector<char> mapLine(line.begin(), line.end());
-    //     std::vector<Tile*> tileLine(mapLine.size());
+    while (getline(mazeFile, line)) {
+        vector<char> mapLine(line.begin(), line.end());
+        vector<Tile*> tileLine(mapLine.size());
 
-    //     for (uint8_t j = 0; j < mapLine.size(); j++) {
-    //         char* textureSource = (char*)(mapLine[j] == '.' ? "assets/textures/floor/center_001.png" : "assets/textures/walls/wall_001.png");
-    //         tileLine[j] = new Tile(
-    //             "src/vertex_shader.glsl",
-    //             "src/fragment_shader.glsl",
-    //             textureSource,
-    //             glm::vec3(j * 72.f, i * 72.f, 0.f)
-    //         );
-    //     }
+        for (uint8_t j = 0; j < mapLine.size(); j++) {
+            char* textureSource = (char*)(mapLine[j] == '.' ? "assets/textures/floor/center_001.png" : "assets/textures/walls/wall_001.png");
+            Tile* tile = new Tile(
+                "src/vertex_shader.glsl",
+                "src/fragment_shader.glsl",
+                textureSource,
+                glm::vec3(j * 72.f, i * 72.f, 0.f),
+                0
+            );
 
-    //     this->map.push_back(tileLine);
+            tileLine[j] = tile;
+            this->objects.insert((OpenglObject*)tile);
+        }
 
-    //     i++;
-    // }
+        this->map.push_back(tileLine);
+
+        i++;
+    }
 
     this->addMainCharacter();
 }
@@ -59,20 +63,17 @@ void Game::addMainCharacter() {
     this->mainCharacter = new ControlledObject(
         "src/vertex_shader.glsl",
         "src/fragment_shader.glsl",
-        "assets/textures/floor/angle.png",
-        glm::vec3(0.f, 0.f, 0.f)
+        "assets/main_character/idle_000.png",
+        glm::vec3(50.f, 50.f, 0.f),
+        1
     );
-    this->fucker = new ControlledObject(
-        "src/vertex_shader.glsl",
-        "src/fragment_shader.glsl",
-        "assets/textures/floor/angle.png",
-        glm::vec3(72.f, 72.f, 0.f)
-    );
+
+    this->objects.insert((OpenglObject*)this->mainCharacter);
 }
 
 void Game::runMainLoop() {
     do {
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         this->checkInput();
         this->updatePositions();
@@ -85,14 +86,9 @@ void Game::runMainLoop() {
 }
 
 void Game::draw() {
-    this->mainCharacter->draw();
-    this->fucker->draw();
-
-    // for (uint8_t i = 0; i < this->map.size(); i++) {
-    //     for (uint8_t j = 0; j < this->map[i].size(); j++) {
-    //         this->map[i][j]->draw();
-    //     }
-    // }
+    for(OpenglObject* object : this->objects){
+        object->draw();
+    }
 }
 
 void Game::checkInput() {
@@ -119,6 +115,12 @@ void Game::checkInput() {
 }
 
 void Game::updatePositions() {
+    for (uint8_t i = 0; i < this->map.size(); i++) {
+        for (uint8_t j = 0; j < this->map[i].size(); j++) {
+            this->map[i][j]->transform(this->camera->getProjection());
+        }
+    }
+
     if (this->keyControlsState.isMoving()) {
         this->mainCharacter->move(glm::vec3(
         this->keyControlsState.isLeftPressed ? -1.0 : this->keyControlsState.isRightPressed ? 1.0 : 0.0,
@@ -128,11 +130,4 @@ void Game::updatePositions() {
     }
 
     this->mainCharacter->transform(this->camera->getProjection());
-    this->fucker->transform(this->camera->getProjection());
-
-    // for (uint8_t i = 0; i < this->map.size(); i++) {
-    //     for (uint8_t j = 0; j < this->map[i].size(); j++) {
-    //         this->map[i][j]->transform(this->camera->getProjection());
-    //     }
-    // }
 }
