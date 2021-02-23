@@ -2,6 +2,7 @@
 #define OBJECT_POOL_H
 
 #include <vector>
+#include <mutex>
 
 #include "Camera.hpp"
 #include "ControlledObject.hpp"
@@ -9,38 +10,34 @@
 
 using namespace std;
 
+class ControlledObject;
+class Camera;
+
 class ObjectPool {
     private:
-        Camera* camera;
-        ControlledObject* controlledObject;
+        Camera* camera = nullptr;
+        ControlledObject* controlledObject = nullptr;
         vector<Tile*> map;
 
-    public:
+        static ObjectPool* instance;
+        static std::mutex mutex;
+
         ObjectPool();
+        ~ObjectPool();
 
-        void setCamera(Camera* camera) {
-            this->camera = camera;
-        }
+    public:
+        ObjectPool(ObjectPool&) = delete;
+        void operator=(const ObjectPool&) = delete;
 
-        void setControlledObject(ControlledObject* controlledObject) {
-            this->controlledObject = controlledObject;
-        }
+        static ObjectPool* getInstance();
 
-        void addTile(Tile* tile) {
-            this->map.push_back(tile);
-        }
+        void setCamera(Camera* camera);
+        void setControlledObject(ControlledObject* controlledObject);
+        void addTile(Tile* tile);
 
-        Camera* getCamera() {
-            return this->camera;
-        }
-
-        ControlledObject* getControlledObject() {
-            return this->controlledObject;
-        }
-
-        vector<Tile*> getMap() {
-            return this->map;
-        }
+        Camera* getCamera();
+        ControlledObject* getControlledObject();
+        vector<Tile*> getMap();
 };
 
 #endif

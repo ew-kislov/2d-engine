@@ -12,6 +12,10 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/transform.hpp>
 
+#include "OpenglObject.cpp"
+#include "ControlledObject.cpp"
+#include "Camera.cpp"
+
 Game::Game() {
 }
 
@@ -66,10 +70,12 @@ void Game::addMainCharacter() {
         "src/vertex_shader.glsl",
         "src/fragment_shader.glsl",
         "assets/main_character/idle_000.png",
-        glm::vec3(10.f, 10.f, 0.f),
+        glm::vec3(200.f, 360.f, 0.f),
         1,
         3.0f
     );
+
+    ObjectPool::getInstance()->getCamera()->setTargetInitialPosition(this->mainCharacter);
 
     this->objects.insert((OpenglObject*)this->mainCharacter);
 }
@@ -120,17 +126,17 @@ void Game::checkInput() {
 void Game::updatePositions() {
     for (uint8_t i = 0; i < this->map.size(); i++) {
         for (uint8_t j = 0; j < this->map[i].size(); j++) {
-            this->map[i][j]->transform(this->camera->getProjection());
+            this->map[i][j]->transform();
         }
     }
 
     if (this->keyControlsState.isMoving()) {
         this->mainCharacter->move(glm::vec3(
-        this->keyControlsState.isLeftPressed ? -1.0 : this->keyControlsState.isRightPressed ? 1.0 : 0.0,
-        this->keyControlsState.isUpPressed ? -1.0 : this->keyControlsState.isDownPressed ? 1.0 : 0.0,
-        0.0
-    ), this->map);
+            this->keyControlsState.isLeftPressed ? -1.0 : this->keyControlsState.isRightPressed ? 1.0 : 0.0,
+            this->keyControlsState.isUpPressed ? -1.0 : this->keyControlsState.isDownPressed ? 1.0 : 0.0,
+            0.0
+        ));
     }
 
-    this->mainCharacter->transform(this->camera->getProjection());
+    this->mainCharacter->transform();
 }

@@ -7,9 +7,9 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "OpenglObject.cpp"
+#include "OpenglObject.hpp"
 #include "ControlledObject.hpp"
-#include "Tile.hpp"
+#include "Tile.cpp"
 #include "Camera.hpp"
 
 using namespace std;

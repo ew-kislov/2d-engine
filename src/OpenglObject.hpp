@@ -36,6 +36,8 @@ class OpenglObject {
 
     protected:
         glm::mat4 positionMatrix;
+        
+        glm::vec3 position;
 
         int width;
         int height;
@@ -46,8 +48,11 @@ class OpenglObject {
         OpenglObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer);
 
         int getLayer() const;
+        int getWidth();
+        int getHeight();
+        glm::vec3 getInitialPosition();
 
-        virtual void transform(glm::mat4 projectionMatrix) = 0;
+        virtual void transform() = 0;
         virtual MathUtils::Rect* getBoundingRect() = 0;
 
         void draw();

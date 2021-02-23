@@ -21,6 +21,7 @@ OpenglObject::OpenglObject(char* vertexShaderSource, char* fragmentShaderSource,
     this->vertexShaderSource = vertexShaderSource;
     this->fragmentShaderSource = fragmentShaderSource;
     this->textureSource = textureSource;
+    this->position = position;
     this->positionMatrix = glm::translate(position);
     this->layer = layer;
 
@@ -33,6 +34,18 @@ OpenglObject::OpenglObject(char* vertexShaderSource, char* fragmentShaderSource,
 
 int OpenglObject::getLayer() const {
     return this->layer;
+}
+
+int OpenglObject::getWidth() {
+    return this->width;
+}
+
+int OpenglObject::getHeight() {
+    return this->height;
+}
+
+glm::vec3 OpenglObject::getInitialPosition() {
+    return this->position;
 }
 
 void OpenglObject::setPreview() {
