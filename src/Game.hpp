@@ -10,7 +10,8 @@
 #include "OpenglObject.hpp"
 #include "ControlledObject.hpp"
 #include "Tile.cpp"
-#include "Camera.hpp"
+#include "Camera.cpp"
+#include "Window.cpp"
 
 using namespace std;
 
@@ -46,14 +47,12 @@ struct KeyControlsState {
 
 struct OpenglObjectOrderer {
     bool operator ()(const OpenglObject* lhs, const OpenglObject* rhs) const {
-        return lhs->getLayer() > rhs->getLayer();
+        return lhs->getLayer() < rhs->getLayer();
     }
 };
 
 class Game {
     private:
-        GLFWwindow* window;
-
         Camera* camera;
 
         ControlledObject* mainCharacter;

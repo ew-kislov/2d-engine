@@ -15,6 +15,8 @@ CMakeFiles/Task1.dir/src/main.cpp.o: src/OpenglObject.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/OpenglUtils.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Tile.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Tile.hpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/Window.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/Window.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/config.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: external/glew-1.13.0/include/GL/glew.h

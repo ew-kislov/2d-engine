@@ -20,10 +20,7 @@ Game::Game() {
 }
 
 void Game::init() {
-    this->window = OpenglUtils::initWindow();
-
-    this->camera = new Camera();
-    this->camera->setProjection(MathUtils::projectionMatrix);
+    this->camera = new Camera(Window::getWidth(), Window::getHeight());
 }
 
 void Game::loadLevel() {
@@ -69,7 +66,7 @@ void Game::addMainCharacter() {
     this->mainCharacter = new ControlledObject(
         "src/vertex_shader.glsl",
         "src/fragment_shader.glsl",
-        "assets/main_character/idle_000.png",
+        "assets/main_character/Upset.png",
         glm::vec3(200.f, 360.f, 0.f),
         1,
         3.0f
@@ -82,16 +79,15 @@ void Game::addMainCharacter() {
 
 void Game::runMainLoop() {
     do {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        Window::clear();
 
         this->checkInput();
         this->updatePositions();
         this->draw();
 
-        glfwSwapBuffers(this->window);
-        glfwPollEvents();
+        Window::update();
 
-    } while (glfwWindowShouldClose(this->window) == 0);
+    } while (Window::isOpened());
 }
 
 void Game::draw() {
@@ -103,23 +99,17 @@ void Game::draw() {
 void Game::checkInput() {
     this->keyControlsState.resetState();
 
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+    if (Window::isKeyPressed(EKey::W)) {
         this->keyControlsState.isUpPressed = true;
     }
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+    if (Window::isKeyPressed(EKey::S)) {
         this->keyControlsState.isDownPressed = true;
     }
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+    if (Window::isKeyPressed(EKey::A)) {
         this->keyControlsState.isLeftPressed = true;
     }
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+    if (Window::isKeyPressed(EKey::D)) {
         this->keyControlsState.isRightPressed = true;
-    }
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
-        this->keyControlsState.isEscapePressed = true;
-    }
-    if (glfwGetKey(window, GLFW_KEY_ENTER) == GLFW_PRESS) {
-        this->keyControlsState.isEnterPressed = true;
     }
 }
 

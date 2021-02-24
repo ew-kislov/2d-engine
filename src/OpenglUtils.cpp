@@ -103,51 +103,6 @@ namespace OpenglUtils {
         return programId;
     }
 
-    GLFWwindow* initWindow() {
-        GLFWwindow* window;
-
-        if (!glfwInit()) {
-            fprintf(stderr, "Error: failed to initialize GLFW\n");
-            exit(1);
-        }
-
-        glfwWindowHint(GLFW_SAMPLES, 4);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-        window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, GAME_NAME, NULL, NULL);
-        if (window == NULL) {
-            fprintf(stderr, "Error: failed tp create GLFW window.\n");
-            glfwTerminate();
-            exit(1);
-        }
-
-        glfwMakeContextCurrent(window);
-
-
-        glewExperimental = true;
-        if (glewInit() != GLEW_OK) {
-            fprintf(stderr, "Error: failed to initialize GLEW\n");
-            glfwTerminate();
-            exit(1);
-        }
-
-        glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-
-        // glEnable(GL_ALPHA_TEST);
-        glEnable(GL_DEPTH_TEST);
-        glDepthFunc(GL_LESS);
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        return window;
-    }
-
     void setUniformMat4(GLuint programId, char* name, glm::mat4 matrix) {
         GLuint MatrixId = glGetUniformLocation(programId, "transform_matrix");
         glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(matrix));

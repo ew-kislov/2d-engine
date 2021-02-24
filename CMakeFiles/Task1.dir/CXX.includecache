@@ -87,8 +87,10 @@ ControlledObject.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.hpp
 Tile.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.cpp
-Camera.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.hpp
+Camera.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
+Window.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
 string
@@ -204,6 +206,22 @@ glm/glm.hpp
 glm/gtx/transform.hpp
 -
 
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
+Window.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.hpp
+stdio.h
+-
+stdlib.h
+-
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.hpp
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+string
+-
+
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/config.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/main.cpp
@@ -221,10 +239,10 @@ GL/glew.h
 -
 GLFW/glfw3.h
 -
-OpenglObject.cpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.cpp
 Game.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.cpp
+Window.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
 
 external/glew-1.13.0/include/GL/glew.h
 stddef.h

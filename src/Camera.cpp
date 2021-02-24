@@ -10,7 +10,12 @@
 
 #include "ObjectPool.cpp"
 
-Camera::Camera() {
+Camera::Camera(int width, int height) {
+    this->width = width;
+    this->height = height;
+
+    this->setProjection();
+
     ObjectPool *objectPool = ObjectPool::getInstance();
     if (objectPool->getCamera() != nullptr) {
         throw runtime_error("Camera was already initialized");
@@ -18,12 +23,15 @@ Camera::Camera() {
     objectPool->setCamera(this);
 };
 
-void Camera::setProjection(glm::mat4 projectionMatrix) {
-    this->projectionMatrix = projectionMatrix;
+void Camera::setProjection() {
+    this->projectionMatrix =
+        glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(1, 0, 0)) *
+        glm::translate(glm::vec3(-1.0, -1.0, 0.0)) *
+        glm::scale(glm::vec3(2.0 / this->width, 2.0 / this->height, 1.f));
 }
 
 void Camera::setTargetInitialPosition(ControlledObject* target) {
-    this->lookAtMatrix = glm::translate(this->lookAtMatrix, glm::vec3(-target->getInitialPosition().x + 512 - target->getWidth() / 2, -target->getInitialPosition().y + 384 - target->getHeight() / 2, 0.0f));
+    this->lookAtMatrix = glm::translate(this->lookAtMatrix, glm::vec3(-target->getInitialPosition().x + this->width / 2 - target->getWidth() / 2, -target->getInitialPosition().y + this->height / 2 - target->getHeight() / 2, 0.0f));
 }
 
 void Camera::moveTarget(glm::vec2 vector) {

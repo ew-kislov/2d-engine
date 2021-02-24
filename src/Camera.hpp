@@ -7,13 +7,16 @@
 
 class Camera {
     private:
+        int width;
+        int height;
+
         glm::mat4 projectionMatrix;
         glm::mat4 lookAtMatrix;
 
     public:
-        Camera();
+        Camera(int width, int height);
 
-        void setProjection(glm::mat4 projectionMatrix);
+        void setProjection();
         void setTargetInitialPosition(ControlledObject* target);
         void moveTarget(glm::vec2 vector);
         glm::mat4 getProjection();
