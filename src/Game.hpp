@@ -12,38 +12,9 @@
 #include "Tile.cpp"
 #include "Camera.cpp"
 #include "Window.cpp"
+#include "Scene.cpp"
 
 using namespace std;
-
-enum GameState {
-    MainMenu = 1,
-    Running = 2,
-    Paused = 3,
-    Won = 4,
-    Lost = 5
-};
-
-struct KeyControlsState {
-    bool isEscapePressed = false;
-    bool isLeftPressed = false;
-    bool isRightPressed = false;
-    bool isUpPressed = false;
-    bool isDownPressed = false;
-    bool isEnterPressed = false;
-
-    void resetState() {
-        this->isEscapePressed = false;
-        this->isLeftPressed = false;
-        this->isRightPressed = false;
-        this->isUpPressed = false;
-        this->isDownPressed = false;
-        this->isEnterPressed = false;
-    }
-
-    bool isMoving() {
-        return this->isLeftPressed || this->isRightPressed || this->isUpPressed || this->isDownPressed;
-    }
-};
 
 struct OpenglObjectOrderer {
     bool operator ()(const OpenglObject* lhs, const OpenglObject* rhs) const {
@@ -60,11 +31,7 @@ class Game {
 
         std::multiset<OpenglObject*, OpenglObjectOrderer> objects;
 
-        GameState gameState;
-        KeyControlsState keyControlsState; 
-
         void addMainCharacter();
-        void checkInput();
         void updatePositions();
         void draw();
 

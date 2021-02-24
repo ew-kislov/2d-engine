@@ -22,9 +22,11 @@ class ControlledObject : public OpenglObject {
     public:
         ControlledObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer, GLfloat speed);
 
-        void move(glm::vec3 movementVector);
+        void move();
         virtual void transform();
         virtual MathUtils::Rect* getBoundingRect();
+
+        virtual string getClassId();
 };
 
 #endif

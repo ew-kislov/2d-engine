@@ -17,7 +17,10 @@ class Tile : public OpenglObject {
 
         virtual void transform();
         virtual MathUtils::Rect* getBoundingRect();
+        
         bool isWalkable();
+
+        virtual string getClassId();
 };
 
 #endif

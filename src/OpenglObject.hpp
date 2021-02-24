@@ -56,6 +56,8 @@ class OpenglObject {
         virtual MathUtils::Rect* getBoundingRect() = 0;
 
         void draw();
+
+        virtual string getClassId() = 0;
 };
 
 #endif

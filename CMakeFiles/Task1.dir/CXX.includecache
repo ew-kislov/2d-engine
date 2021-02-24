@@ -31,6 +31,8 @@ ControlledObject.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.cpp
 ControlledObject.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.hpp
+Window.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.hpp
 OpenglObject.hpp
@@ -91,6 +93,8 @@ Camera.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
 Window.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
+Scene.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
 string
@@ -191,6 +195,20 @@ glm/gtc/type_ptr.hpp
 -
 config.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/config.hpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.cpp
+algorithm
+-
+Scene.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.hpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.hpp
+string
+-
+set
+-
+OpenglObject.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.cpp
 Tile.hpp

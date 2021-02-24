@@ -13,6 +13,8 @@ CMakeFiles/Task1.dir/src/main.cpp.o: src/ObjectPool.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/OpenglObject.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/OpenglObject.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/OpenglUtils.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/Scene.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/Scene.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Tile.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Tile.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Window.cpp

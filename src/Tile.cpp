@@ -31,3 +31,7 @@ MathUtils::Rect* Tile::getBoundingRect() {
 bool Tile::isWalkable() {
     return this->walkable;
 }
+
+string Tile::getClassId() {
+    return "Tile";
+}

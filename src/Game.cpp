@@ -81,7 +81,6 @@ void Game::runMainLoop() {
     do {
         Window::clear();
 
-        this->checkInput();
         this->updatePositions();
         this->draw();
 
@@ -96,23 +95,6 @@ void Game::draw() {
     }
 }
 
-void Game::checkInput() {
-    this->keyControlsState.resetState();
-
-    if (Window::isKeyPressed(EKey::W)) {
-        this->keyControlsState.isUpPressed = true;
-    }
-    if (Window::isKeyPressed(EKey::S)) {
-        this->keyControlsState.isDownPressed = true;
-    }
-    if (Window::isKeyPressed(EKey::A)) {
-        this->keyControlsState.isLeftPressed = true;
-    }
-    if (Window::isKeyPressed(EKey::D)) {
-        this->keyControlsState.isRightPressed = true;
-    }
-}
-
 void Game::updatePositions() {
     for (uint8_t i = 0; i < this->map.size(); i++) {
         for (uint8_t j = 0; j < this->map[i].size(); j++) {
@@ -120,13 +102,6 @@ void Game::updatePositions() {
         }
     }
 
-    if (this->keyControlsState.isMoving()) {
-        this->mainCharacter->move(glm::vec3(
-            this->keyControlsState.isLeftPressed ? -1.0 : this->keyControlsState.isRightPressed ? 1.0 : 0.0,
-            this->keyControlsState.isUpPressed ? -1.0 : this->keyControlsState.isDownPressed ? 1.0 : 0.0,
-            0.0
-        ));
-    }
-
+    this->mainCharacter->move();
     this->mainCharacter->transform();
 }

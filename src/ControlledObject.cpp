@@ -2,6 +2,8 @@
 
 #include "ControlledObject.hpp";
 
+#include "Window.cpp"
+
 ControlledObject::ControlledObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer, GLfloat speed):
      OpenglObject(vertexShaderSource, fragmentShaderSource, textureSource, position, layer) {
 
@@ -15,7 +17,13 @@ ControlledObject::ControlledObject(char* vertexShaderSource, char* fragmentShade
     objectPool->setControlledObject(this);
 }
 
-void ControlledObject::move(glm::vec3 movementVector) {
+void ControlledObject::move() {
+    glm::vec3 movementVector = glm::vec3(
+        Window::isKeyPressed(EKey::A) ? -1.0 : Window::isKeyPressed(EKey::D) ? 1.0 : 0.0,
+        Window::isKeyPressed(EKey::W) ? -1.0 : Window::isKeyPressed(EKey::S) ? 1.0 : 0.0,
+        0.0
+    );
+
     movementVector = movementVector * speed;
 
     bool canMove = true;
@@ -54,4 +62,8 @@ MathUtils::Rect* ControlledObject::getBoundingRect() {
     glm::vec4 transformedD1 = this->movement * this->positionMatrix * d1;
 
     return new MathUtils::Rect(transformedD0.x, transformedD0.y, transformedD1.x, transformedD1.y);
+}
+
+string ControlledObject::getClassId() {
+    return "ControlledObject";
 }
