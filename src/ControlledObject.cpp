@@ -4,24 +4,19 @@
 
 #include "Window.cpp"
 
-ControlledObject::ControlledObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer, GLfloat speed):
-     OpenglObject(vertexShaderSource, fragmentShaderSource, textureSource, position, layer) {
+#include "Camera.cpp"
+
+ControlledObject::ControlledObject(char* textureSource, glm::vec3 position, int layer, GLfloat speed):
+    OpenglObject(textureSource, position, layer) {
 
     this->movement = glm::mat4(1.0);
     this->speed = speed;
-
-    ObjectPool* objectPool = ObjectPool::getInstance();
-    if (objectPool->getControlledObject() != nullptr) {
-        throw runtime_error("Controlled object was already initialized");
-    }
-    objectPool->setControlledObject(this);
 }
 
 void ControlledObject::move() {
-    glm::vec3 movementVector = glm::vec3(
+    glm::vec2 movementVector = glm::vec2(
         Window::isKeyPressed(EKey::A) ? -1.0 : Window::isKeyPressed(EKey::D) ? 1.0 : 0.0,
-        Window::isKeyPressed(EKey::W) ? -1.0 : Window::isKeyPressed(EKey::S) ? 1.0 : 0.0,
-        0.0
+        Window::isKeyPressed(EKey::W) ? -1.0 : Window::isKeyPressed(EKey::S) ? 1.0 : 0.0
     );
 
     movementVector = movementVector * speed;
@@ -34,24 +29,25 @@ void ControlledObject::move() {
     newRect->y0 += movementVector.y;
     newRect->y1 += movementVector.y;
 
-    vector<Tile*> map = ObjectPool::getInstance()->getMap();
+    auto tiles = this->getScene()->getSprites("Tile");
 
-    for (int i = 0; i < map.size(); i++) {
-        if (!map[i]->isWalkable() && MathUtils::areRectsIntercepting(newRect, map[i]->getBoundingRect())) {
+    for (OpenglObject* baseTile: tiles) {
+        Tile* tile = (Tile*)baseTile;
+        if (!tile->isWalkable() && MathUtils::areRectsIntercepting(newRect, tile->getBoundingRect())) {
             canMove = false;
             break;
         }
     }
 
     if (canMove) {
-        this->movement = glm::translate(this->movement, movementVector);
-        ObjectPool::getInstance()->getCamera()->moveTarget(glm::vec2(movementVector.x, movementVector.y));
+        this->movementVector += movementVector;
+        this->movement = glm::translate(this->movement, glm::vec3(movementVector, 0.0f));
     }
 }
 
 void ControlledObject::transform() {
-    glm::mat4 projectionMatrix = ObjectPool::getInstance()->getCamera()->getTransformation();
-    this->applyTransformationMatrix(projectionMatrix * this->movement * this->positionMatrix);
+    glm::mat4 cameraMatrix = Camera::getResultMatrix();
+    this->applyTransformationMatrix(cameraMatrix * this->movement * this->positionMatrix);
 }
 
 MathUtils::Rect* ControlledObject::getBoundingRect() {

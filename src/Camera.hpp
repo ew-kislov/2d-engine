@@ -3,24 +3,28 @@
 
 #include <glm/glm.hpp>
 
-#include "ControlledObject.hpp"
+#include "OpenglObject.hpp"
+
+#include "Game.hpp"
 
 class Camera {
     private:
-        int width;
-        int height;
+        static int width;
+        static int height;
 
-        glm::mat4 projectionMatrix;
-        glm::mat4 lookAtMatrix;
+        static glm::mat4 projectionMatrix;
+        static glm::mat4 lookAtMatrix;
+
+        static OpenglObject* target;
+
+        static void move();
+
+        friend class Game;
 
     public:
-        Camera(int width, int height);
-
-        void setProjection();
-        void setTargetInitialPosition(ControlledObject* target);
-        void moveTarget(glm::vec2 vector);
-        glm::mat4 getProjection();
-        glm::mat4 getTransformation();
+        static void setResolution(int width, int height);
+        static void lookAt(OpenglObject* target);
+        static glm::mat4 getResultMatrix();
 };
 
 #endif

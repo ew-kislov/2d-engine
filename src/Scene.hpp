@@ -4,27 +4,24 @@
 #include <string>
 #include <set>
 
-#include "OpenglObject.hpp";
+#include "OpenglObject.hpp"
+#include "SpriteOrderer.hpp"
 
 using namespace std;
 
-
-struct SpriteOrderer {
-    bool operator()(const OpenglObject* lhs, const OpenglObject* rhs) const {
-        return lhs->getLayer() < rhs->getLayer();
-    }
-};
+class OpenglObject;
 
 
 class Scene {
     private:
-        set<OpenglObject*, SpriteOrderer> sprites;
+        multiset<OpenglObject*, SpriteOrderer> sprites;
 
     public:
         Scene();
 
-        set<OpenglObject*, SpriteOrderer> getSprites(string typeId = string());
+        multiset<OpenglObject*, SpriteOrderer> getSprites(string typeId = string());
         OpenglObject* find(string spriteId);
+        void addSprite(OpenglObject* sprite);
 };
 
 #endif

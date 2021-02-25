@@ -20,9 +20,9 @@ class ControlledObject : public OpenglObject {
         GLfloat speed;
 
     public:
-        ControlledObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer, GLfloat speed);
+        ControlledObject(char* textureSource, glm::vec3 position, int layer, GLfloat speed);
 
-        void move();
+        virtual void move();
         virtual void transform();
         virtual MathUtils::Rect* getBoundingRect();
 

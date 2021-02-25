@@ -17,13 +17,15 @@
 #include "OpenglUtils.cpp"
 #include "MathUtils.cpp"
 
-OpenglObject::OpenglObject(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer) {
-    this->vertexShaderSource = vertexShaderSource;
-    this->fragmentShaderSource = fragmentShaderSource;
+OpenglObject::OpenglObject(char* textureSource, glm::vec3 position, int layer) {
+    this->vertexShaderSource = "src/vertex_shader.glsl";
+    this->fragmentShaderSource = "src/fragment_shader.glsl";
     this->textureSource = textureSource;
     this->position = position;
     this->positionMatrix = glm::translate(position);
     this->layer = layer;
+
+    this->movementVector = glm::vec2(0.0f, 0.0f);
 
     this->programId = OpenglUtils::createShaderProgram(this->vertexShaderSource, this->fragmentShaderSource);
 
@@ -141,4 +143,12 @@ void OpenglObject::draw() {
     glBindVertexArray(this->vao);
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
+}
+
+Scene* OpenglObject::getScene() {
+    return this->scene;
+}
+
+glm::vec2 OpenglObject::getMovement() {
+    return this->movementVector;
 }

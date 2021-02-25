@@ -13,9 +13,10 @@ class Tile : public OpenglObject {
         bool walkable;
 
     public:
-        Tile(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer, bool walkable);
+        Tile(char* textureSource, glm::vec3 position, int layer, bool walkable);
 
         virtual void transform();
+        virtual void move();
         virtual MathUtils::Rect* getBoundingRect();
         
         bool isWalkable();

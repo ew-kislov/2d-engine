@@ -9,8 +9,6 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/transform.hpp>
 
-#include "config.hpp"
-
 using namespace std;
 
 namespace MathUtils {
@@ -41,9 +39,4 @@ namespace MathUtils {
             r1->y1 > r2->y0 && r1->y0 < r2->y1
         );
     }
-
-    const glm::mat4 projectionMatrix =
-        glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(1, 0, 0)) *
-        glm::translate(glm::vec3(-1.0, -1.0, 0.0)) *
-        glm::scale(glm::vec3(2.0 / WINDOW_WIDTH, 2.0 / WINDOW_HEIGHT, 1.f));
 }

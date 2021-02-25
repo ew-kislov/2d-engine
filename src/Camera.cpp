@@ -8,40 +8,43 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/transform.hpp>
 
-#include "ObjectPool.cpp"
+#include "OpenglObject.cpp"
 
-Camera::Camera(int width, int height) {
-    this->width = width;
-    this->height = height;
+int Camera::width = 0;
+int Camera::height = 0;
 
-    this->setProjection();
+glm::mat4 Camera::projectionMatrix = glm::mat4(1.0);
+glm::mat4 Camera::lookAtMatrix = glm::mat4(1.0);
 
-    ObjectPool *objectPool = ObjectPool::getInstance();
-    if (objectPool->getCamera() != nullptr) {
-        throw runtime_error("Camera was already initialized");
-    }
-    objectPool->setCamera(this);
-};
+OpenglObject* Camera::target = nullptr;
 
-void Camera::setProjection() {
-    this->projectionMatrix =
+void Camera::setResolution(int pWidth, int pHeight) {
+    width = pWidth;
+    height = pHeight;
+
+    projectionMatrix =
         glm::rotate(glm::mat4(1.0f), glm::radians(180.0f), glm::vec3(1, 0, 0)) *
         glm::translate(glm::vec3(-1.0, -1.0, 0.0)) *
-        glm::scale(glm::vec3(2.0 / this->width, 2.0 / this->height, 1.f));
+        glm::scale(glm::vec3(2.0 / width, 2.0 / height, 1.f));
 }
 
-void Camera::setTargetInitialPosition(ControlledObject* target) {
-    this->lookAtMatrix = glm::translate(this->lookAtMatrix, glm::vec3(-target->getInitialPosition().x + this->width / 2 - target->getWidth() / 2, -target->getInitialPosition().y + this->height / 2 - target->getHeight() / 2, 0.0f));
+void Camera::lookAt(OpenglObject* pTarget) {
+    target = pTarget;
 }
 
-void Camera::moveTarget(glm::vec2 vector) {
-    this->lookAtMatrix = glm::translate(this->lookAtMatrix, glm::vec3(-vector.x, -vector.y, 0.0f));
+glm::mat4 Camera::getResultMatrix() {
+    return projectionMatrix * lookAtMatrix;
 }
 
-glm::mat4 Camera::getProjection() {
-    return this->projectionMatrix;
-}
-
-glm::mat4 Camera::getTransformation() {
-    return this->projectionMatrix * this->lookAtMatrix;
+void Camera::move() {
+    if (target) {
+        lookAtMatrix = glm::translate(
+            glm::mat4(1.0),
+            glm::vec3(
+                -target->getInitialPosition().x - target->getMovement().x + width / 2 - target->getWidth() / 2,
+                -target->getInitialPosition().y - target->getMovement().y + height / 2 - target->getHeight() / 2,
+                0.0f
+            )
+        );
+    }
 }

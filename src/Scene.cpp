@@ -4,15 +4,18 @@
 
 #include "Scene.hpp";
 
+#include "OpenglObject.cpp";
+#include "SpriteOrderer.cpp";
+
 Scene::Scene() {
 }
 
-set<OpenglObject*, SpriteOrderer> Scene::getSprites(string typeId) {
+multiset<OpenglObject*, SpriteOrderer> Scene::getSprites(string typeId) {
     if (typeId.empty()) {
         return this->sprites;
     }
 
-    set<OpenglObject*, SpriteOrderer> filteredSprites;
+    multiset<OpenglObject*, SpriteOrderer> filteredSprites;
 
     copy_if(
         this->sprites.begin(),
@@ -26,4 +29,9 @@ set<OpenglObject*, SpriteOrderer> Scene::getSprites(string typeId) {
 
 OpenglObject* Scene::find(string spriteId) {
     return NULL;
+}
+
+void Scene::addSprite(OpenglObject* sprite) {
+    this->sprites.insert(sprite);
+    sprite->scene = this;
 }

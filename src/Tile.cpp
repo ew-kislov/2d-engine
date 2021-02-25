@@ -2,20 +2,17 @@
 
 #include "Tile.hpp"
 
-#include "ObjectPool.cpp"
+#include "Camera.cpp"
 
-Tile::Tile(char* vertexShaderSource, char* fragmentShaderSource, char* textureSource, glm::vec3 position, int layer, bool walkable):
-    OpenglObject(vertexShaderSource, fragmentShaderSource, textureSource, position, layer) {
+Tile::Tile(char* textureSource, glm::vec3 position, int layer, bool walkable):
+    OpenglObject(textureSource, position, layer) {
 
     this->walkable = walkable;
-
-    ObjectPool* objectPool = ObjectPool::getInstance();
-    objectPool->addTile(this);
 }
 
 void Tile::transform() {
-    glm::mat4 projectionMatrix = ObjectPool::getInstance()->getCamera()->getTransformation();
-    this->applyTransformationMatrix(projectionMatrix * this->positionMatrix);
+    glm::mat4 cameraMatrix = Camera::getResultMatrix();
+    this->applyTransformationMatrix(cameraMatrix * this->positionMatrix);
 }
 
 MathUtils::Rect* Tile::getBoundingRect() {
@@ -34,4 +31,7 @@ bool Tile::isWalkable() {
 
 string Tile::getClassId() {
     return "Tile";
+}
+
+void Tile::move() {
 }

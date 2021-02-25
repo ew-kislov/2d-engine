@@ -19,20 +19,24 @@ glm/gtx/string_cast.hpp
 -
 glm/gtx/transform.hpp
 -
-ObjectPool.cpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ObjectPool.cpp
+OpenglObject.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.hpp
 glm/glm.hpp
 -
-ControlledObject.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.hpp
+OpenglObject.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.hpp
+Game.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.cpp
 ControlledObject.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.hpp
 Window.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
+Camera.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.hpp
 OpenglObject.hpp
@@ -69,24 +73,10 @@ glm/gtx/transform.hpp
 -
 OpenglObject.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.cpp
+SpriteOrderer.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.cpp
 ControlledObject.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.cpp
-Camera.cpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
-
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.hpp
-vector
--
-set
--
-GL/glew.h
--
-GLFW/glfw3.h
--
-OpenglObject.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.hpp
-ControlledObject.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.hpp
 Tile.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.cpp
 Camera.cpp
@@ -95,6 +85,22 @@ Window.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
 Scene.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.cpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.hpp
+vector
+-
+set
+-
+string
+-
+map
+-
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+Scene.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
 string
@@ -111,26 +117,6 @@ glm/gtx/string_cast.hpp
 -
 glm/gtx/transform.hpp
 -
-config.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/config.hpp
-
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ObjectPool.cpp
-ObjectPool.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ObjectPool.hpp
-Camera.cpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
-
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ObjectPool.hpp
-vector
--
-mutex
--
-Camera.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.hpp
-ControlledObject.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.hpp
-Tile.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.cpp
 OpenglObject.hpp
@@ -165,6 +151,8 @@ glm/glm.hpp
 -
 MathUtils.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
+Scene.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglUtils.cpp
 algorithm
@@ -193,14 +181,16 @@ glm/glm.hpp
 -
 glm/gtc/type_ptr.hpp
 -
-config.hpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/config.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.cpp
 algorithm
 -
 Scene.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.hpp
+OpenglObject.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.cpp
+SpriteOrderer.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.hpp
 string
@@ -209,12 +199,24 @@ set
 -
 OpenglObject.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.hpp
+SpriteOrderer.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.hpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.cpp
+SpriteOrderer.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.hpp
+OpenglObject.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.cpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.hpp
+OpenglObject.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.cpp
 Tile.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.hpp
-ObjectPool.cpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ObjectPool.cpp
+Camera.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.hpp
 GL/glew.h
@@ -240,8 +242,6 @@ GLFW/glfw3.h
 string
 -
 
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/config.hpp
-
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/main.cpp
 iostream
 -
@@ -259,6 +259,12 @@ GLFW/glfw3.h
 -
 Game.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.cpp
+Scene.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.cpp
+OpenglObject.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.cpp
+ControlledObject.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.cpp
 Window.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
 

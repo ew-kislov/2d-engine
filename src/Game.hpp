@@ -3,35 +3,22 @@
 
 #include <vector>
 #include <set>
+#include <string>
+#include <map>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "OpenglObject.hpp"
-#include "ControlledObject.hpp"
-#include "Tile.cpp"
-#include "Camera.cpp"
-#include "Window.cpp"
-#include "Scene.cpp"
+#include "Scene.hpp"
 
 using namespace std;
 
-struct OpenglObjectOrderer {
-    bool operator ()(const OpenglObject* lhs, const OpenglObject* rhs) const {
-        return lhs->getLayer() < rhs->getLayer();
-    }
-};
 
 class Game {
     private:
-        Camera* camera;
+        std::map<string, Scene*> scenes;
+        Scene* activeScene;
 
-        ControlledObject* mainCharacter;
-        vector<vector<Tile*>> map;
-
-        std::multiset<OpenglObject*, OpenglObjectOrderer> objects;
-
-        void addMainCharacter();
         void updatePositions();
         void draw();
 
@@ -39,8 +26,10 @@ class Game {
         Game();
 
         void init();
-        void loadLevel();
         void runMainLoop();
+
+        void addScene(string name, Scene* scene);
+        void setActiveScene(string name);
 };
 
 #endif

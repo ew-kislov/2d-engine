@@ -16,8 +16,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "config.hpp"
-
 using namespace std;
 
 namespace OpenglUtils {
