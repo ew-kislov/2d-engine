@@ -9,6 +9,8 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/transform.hpp>
 
+#include <GL/glew.h>
+
 using namespace std;
 
 namespace MathUtils {

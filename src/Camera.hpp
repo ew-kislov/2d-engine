@@ -17,11 +17,10 @@ class Camera {
 
         static OpenglObject* target;
 
-        static void move();
-
         friend class Game;
 
     public:
+    static void move();
         static void setResolution(int width, int height);
         static void lookAt(OpenglObject* target);
         static glm::mat4 getResultMatrix();

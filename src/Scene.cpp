@@ -2,10 +2,10 @@
 
 #include <algorithm>
 
-#include "Scene.hpp";
+#include "Scene.hpp"
 
-#include "OpenglObject.cpp";
-#include "SpriteOrderer.cpp";
+#include "OpenglObject.cpp"
+#include "SpriteOrderer.cpp"
 
 Scene::Scene() {
 }

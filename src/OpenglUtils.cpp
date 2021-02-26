@@ -102,12 +102,12 @@ namespace OpenglUtils {
     }
 
     void setUniformMat4(GLuint programId, char* name, glm::mat4 matrix) {
-        GLuint MatrixId = glGetUniformLocation(programId, "transform_matrix");
+        GLuint MatrixId = glGetUniformLocation(programId, name);
         glUniformMatrix4fv(MatrixId, 1, GL_FALSE, glm::value_ptr(matrix));
     }
 
     void setUniformMat4(GLuint programId, char* name, GLfloat* matrix) {
-        GLuint MatrixId = glGetUniformLocation(programId, "transform_matrix");
+        GLuint MatrixId = glGetUniformLocation(programId, name);
         glUniformMatrix4fv(MatrixId, 1, GL_FALSE, matrix);
     }
 }

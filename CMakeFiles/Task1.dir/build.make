@@ -100,6 +100,7 @@ Task1: CMakeFiles/Task1.dir/src/main.cpp.o
 Task1: CMakeFiles/Task1.dir/build.make
 Task1: external/glfw-3.1.2/src/libglfw3.a
 Task1: external/libGLEW.a
+Task1: /usr/local/lib/libfreetype.dylib
 Task1: CMakeFiles/Task1.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/evgeniykislov/Documents/msu/mashgraph/task1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable Task1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Task1.dir/link.txt --verbose=$(VERBOSE)

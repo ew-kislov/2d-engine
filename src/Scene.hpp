@@ -4,13 +4,12 @@
 #include <string>
 #include <set>
 
-#include "OpenglObject.hpp"
 #include "SpriteOrderer.hpp"
+#include "OpenglObject.hpp"
 
 using namespace std;
 
 class OpenglObject;
-
 
 class Scene {
     private:

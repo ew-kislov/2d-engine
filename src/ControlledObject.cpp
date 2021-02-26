@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ControlledObject.hpp";
+#include "ControlledObject.hpp"
 
 #include "Window.cpp"
 

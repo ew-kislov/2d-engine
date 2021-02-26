@@ -12,6 +12,9 @@ set(CMAKE_CXX_COMPILER_ID "AppleClang")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "external/glfw-3.1.2/include"
   "external/glm-0.9.7.1"
+  "external/freetype-2.10.3"
+  "/Library/Frameworks/Mono.framework/Headers"
+  "/usr/local/include/freetype2"
   "external/glew-1.13.0/include"
   "external/stb_image"
   "src"

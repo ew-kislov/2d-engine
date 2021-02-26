@@ -17,37 +17,13 @@
 #include "OpenglUtils.cpp"
 #include "MathUtils.cpp"
 
-OpenglObject::OpenglObject(char* textureSource, glm::vec3 position, int layer) {
-    this->vertexShaderSource = "src/vertex_shader.glsl";
-    this->fragmentShaderSource = "src/fragment_shader.glsl";
+#include "BaseObject.cpp"
+
+OpenglObject::OpenglObject(char* textureSource, glm::vec3 position, int layer):
+    BaseObject("src/fragment_shader.glsl", "src/shader_shader.glsl", position, layer) {
     this->textureSource = textureSource;
-    this->position = position;
-    this->positionMatrix = glm::translate(position);
-    this->layer = layer;
-
-    this->movementVector = glm::vec2(0.0f, 0.0f);
-
-    this->programId = OpenglUtils::createShaderProgram(this->vertexShaderSource, this->fragmentShaderSource);
-
-    glUseProgram(this->programId);
 
     this->setPreview();
-}
-
-int OpenglObject::getLayer() const {
-    return this->layer;
-}
-
-int OpenglObject::getWidth() {
-    return this->width;
-}
-
-int OpenglObject::getHeight() {
-    return this->height;
-}
-
-glm::vec3 OpenglObject::getInitialPosition() {
-    return this->position;
 }
 
 void OpenglObject::setPreview() {
@@ -132,23 +108,10 @@ void OpenglObject::setPreview() {
     stbi_image_free(textureData);
 }
 
-void OpenglObject::applyTransformationMatrix(glm::mat4 matrix) {
-    glUseProgram(this->programId);
-    OpenglUtils::setUniformMat4(this->programId, "transform_matrix", matrix);
-}
-
 void OpenglObject::draw() {
     glBindTexture(GL_TEXTURE_2D, this->textureId);
     glUseProgram(this->programId);
     glBindVertexArray(this->vao);
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
-}
-
-Scene* OpenglObject::getScene() {
-    return this->scene;
-}
-
-glm::vec2 OpenglObject::getMovement() {
-    return this->movementVector;
 }
