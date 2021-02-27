@@ -24,6 +24,7 @@ class Camera {
         static void setResolution(int width, int height);
         static void lookAt(OpenglObject* target);
         static glm::mat4 getResultMatrix();
+        static glm::mat4 getProjectionMatrix();
 };
 
 #endif

@@ -16,7 +16,7 @@ Label::Label(string text, string fontSource, int size, glm::vec4 color, glm::vec
 }
 
 void Label::transform() {
-    glm::mat4 cameraMatrix = Camera::getResultMatrix();
+    glm::mat4 cameraMatrix = Camera::getProjectionMatrix();
     this->applyTransformationMatrix(cameraMatrix * this->positionMatrix);
 }
 

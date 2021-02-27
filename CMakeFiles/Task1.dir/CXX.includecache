@@ -263,16 +263,24 @@ OpenglObject.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.cpp
 SpriteOrderer.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.cpp
+Window.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.hpp
 string
 -
 set
 -
+map
+-
 SpriteOrderer.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.hpp
 OpenglObject.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglObject.hpp
+Window.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.hpp
+Label.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Label.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.cpp
 SpriteOrderer.hpp

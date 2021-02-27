@@ -13,6 +13,7 @@ enum EKey {
     A = GLFW_KEY_A,
     S = GLFW_KEY_S,
     D = GLFW_KEY_D,
+    P = GLFW_KEY_P,
     Enter = GLFW_KEY_ENTER,
     Escape = GLFW_KEY_ESCAPE
 };

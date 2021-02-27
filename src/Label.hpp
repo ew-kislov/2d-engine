@@ -21,13 +21,12 @@ class Label: public BaseObject {
         int size;
         glm::vec4 color;
 
-    protected:
+        void setPreview();
 
     public:
         Label(string text, string fontSource, int size, glm::vec4 color, glm::vec3 position, int layer);
 
         void transform();
-        void setPreview();
         void draw();
 };
 

@@ -24,9 +24,36 @@ int main(void) {
     Window::setResolution(1024, 768);
     Window::open();
 
+    //  create game instance
+
+    Game* game = new Game();
+    // add intro scene
+
+    Scene* introScene = new Scene();
+
+    Label* introLabel = new Label("Wake the fuck up, samurai.", "assets/fonts/fuck.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec3(100.f, 100.f, 0.f), 3);
+    Label* actionLabel = new Label("Press enter to start the game.", "assets/fonts/fuck.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec3(100.f, 120.f, 0.f), 3);
+
+    introScene->addUiElement(introLabel);
+    introScene->addUiElement(actionLabel);
+
+    introScene->addKeyHandler(EKey::Enter, [game]() { game->setActiveScene("Level"); });
+
+    // add pause scene
+
+    Scene* pauseScene = new Scene();
+
+    Label* pauseLabel = new Label("Press P to resume the game.", "assets/fonts/fuck.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec3(100.f, 100.f, 0.f), 3);
+
+    pauseScene->addUiElement(pauseLabel);
+
+    pauseScene->addKeyHandler(EKey::P, [game]() { game->setActiveScene("Level"); });
+
     // add level scene
 
     Scene* levelScene = new Scene();
+
+    levelScene->addKeyHandler(EKey::P, [game]() { game->setActiveScene("Pause"); });
 
     // add main character to scene
 
@@ -73,17 +100,16 @@ int main(void) {
         i++;
     }
 
-    // create game
-
-    Game* game = new Game();
+    // init game
 
     game->addScene("Level", levelScene);
-    game->setActiveScene("Level");
+    game->addScene("Intro", introScene);
+    game->addScene("Pause", pauseScene);
+
+    game->setActiveScene("Intro");
 
     game->init();
     game->runMainLoop();
-
-
 
     return 0;
 }

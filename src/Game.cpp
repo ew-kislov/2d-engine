@@ -31,6 +31,8 @@ void Game::runMainLoop() {
     do {
         Window::clear();
 
+        this->activeScene->runKeyHandlers();
+
         Camera::move();
 
         this->updatePositions();
@@ -47,6 +49,12 @@ void Game::draw() {
     for (OpenglObject* sprite : sprites) {
         sprite->draw();
     }
+
+    set<Label*> ui = this->activeScene->getUi();
+
+    for (Label* label : ui) {
+        label->draw();
+    }
 }
 
 void Game::updatePositions() {
@@ -55,6 +63,12 @@ void Game::updatePositions() {
     for (OpenglObject* sprite : sprites) {
         sprite->move();
         sprite->transform();
+    }
+
+    set<Label*> ui = this->activeScene->getUi();
+
+    for (Label* label : ui) {
+        label->transform();
     }
 }
 
