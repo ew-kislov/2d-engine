@@ -19,7 +19,6 @@
 #include "Camera.cpp"
 #include "Window.cpp"
 #include "Scene.cpp"
-#include "Label.cpp"
 
 Game::Game() {
 }
@@ -29,18 +28,13 @@ void Game::init() {
 }
 
 void Game::runMainLoop() {
-    Label* label = new Label("fuck you", "assets/fonts/fuck.ttf", 70, glm::vec4(1.f, 0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 0.f), 3);
-    label->setPreview();
     do {
         Window::clear();
 
         Camera::move();
 
-        label->transform();
-        label->draw();
-
-        // this->updatePositions();
-        // this->draw();
+        this->updatePositions();
+        this->draw();
 
         Window::update();
 

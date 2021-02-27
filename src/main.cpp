@@ -28,50 +28,50 @@ int main(void) {
 
     Scene* levelScene = new Scene();
 
-    // // add main character to scene
+    // add main character to scene
 
-    // OpenglObject* mainCharacter = new ControlledObject(
-    //     "assets/main_character/Upset.png",
-    //     glm::vec3(200.f, 360.f, 0.f),
-    //     1,
-    //     3.0f
-    // );
+    OpenglObject* mainCharacter = new ControlledObject(
+        "assets/main_character/Upset.png",
+        glm::vec3(200.f, 360.f, 0.f),
+        1,
+        3.0f
+    );
 
-    // levelScene->addSprite(mainCharacter);
+    levelScene->addSprite(mainCharacter);
 
-    // Camera::lookAt(mainCharacter);
+    Camera::lookAt(mainCharacter);
 
-    // // add map to scene
+    // add map to scene
 
-    // ifstream mazeFile("src/maze.txt");
-    // string line;
+    ifstream mazeFile("src/maze.txt");
+    string line;
 
-    // if (!mazeFile.is_open()){
-    //     cout << "error while opening maze map" << endl;
-    //     exit(1);
-    // }
+    if (!mazeFile.is_open()){
+        cout << "error while opening maze map" << endl;
+        exit(1);
+    }
 
-    // uint8_t i = 0;
+    uint8_t i = 0;
 
-    // while (getline(mazeFile, line)) {
-    //     vector<char> mapLine(line.begin(), line.end());
-    //     vector<Tile*> tileLine(mapLine.size());
+    while (getline(mazeFile, line)) {
+        vector<char> mapLine(line.begin(), line.end());
+        vector<Tile*> tileLine(mapLine.size());
 
-    //     for (uint8_t j = 0; j < mapLine.size(); j++) {
-    //         char* textureSource = (char*)(mapLine[j] == '.' ? "assets/textures/floor/center_001.png" : "assets/textures/walls/wall_001.png");
+        for (uint8_t j = 0; j < mapLine.size(); j++) {
+            char* textureSource = (char*)(mapLine[j] == '.' ? "assets/textures/floor/center_001.png" : "assets/textures/walls/wall_001.png");
 
-    //         OpenglObject* tile = new Tile(
-    //             textureSource,
-    //             glm::vec3(j * 72.f, i * 72.f, 0.f),
-    //             0,
-    //             mapLine[j] == '.' ? true : false
-    //         );
+            OpenglObject* tile = new Tile(
+                textureSource,
+                glm::vec3(j * 72.f, i * 72.f, 0.f),
+                0,
+                mapLine[j] == '.' ? true : false
+            );
 
-    //         levelScene->addSprite(tile);
-    //     }
+            levelScene->addSprite(tile);
+        }
 
-    //     i++;
-    // }
+        i++;
+    }
 
     // create game
 

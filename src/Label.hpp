@@ -21,8 +21,6 @@ class Label: public BaseObject {
         int size;
         glm::vec4 color;
 
-        GLuint VAO, VBO;
-
     protected:
 
     public:
