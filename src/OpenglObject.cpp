@@ -20,7 +20,7 @@
 #include "BaseObject.cpp"
 
 OpenglObject::OpenglObject(char* textureSource, glm::vec3 position, int layer):
-    BaseObject("src/fragment_shader.glsl", "src/shader_shader.glsl", position, layer) {
+    BaseObject("src/fragment_shader.glsl", "src/vertex_shader.glsl", position, layer) {
     this->textureSource = textureSource;
 
     this->setPreview();

@@ -29,7 +29,7 @@ void Game::init() {
 }
 
 void Game::runMainLoop() {
-    Label* label = new Label("fuck you", "assets/fonts/fuck.ttf", 36, glm::vec4(1.f, 0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 0.f), 3);
+    Label* label = new Label("fuck you", "assets/fonts/fuck.ttf", 70, glm::vec4(1.f, 0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, 0.f), 3);
     label->setPreview();
     do {
         Window::clear();

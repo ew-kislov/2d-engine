@@ -149,10 +149,10 @@ Scene.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Label.cpp
 Label.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Label.hpp
+TextLib.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/TextLib.cpp
 Camera.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
-ft2build.h
--
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Label.hpp
 map
@@ -283,6 +283,18 @@ SpriteOrderer.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.hpp
 BaseSpriteOrderer.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/BaseSpriteOrderer.hpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/TextLib.cpp
+TextLib.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/TextLib.hpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/TextLib.hpp
+string
+-
+ft2build.h
+-
+glm/glm.hpp
+-
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.cpp
 Tile.hpp

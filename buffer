@@ -2,6 +2,8 @@
 
 #include "Label.hpp"
 
+#include <algorithm>
+
 #include "TextLib.cpp"
 #include "Camera.cpp"
 
@@ -21,55 +23,24 @@ void Label::transform() {
 void Label::setPreview() {
     TextLib::initFont(fontSource, this->size);
 
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+    // glGenVertexArrays(1, &VAO);
+    // glGenBuffers(1, &VBO);
+    // glBindVertexArray(VAO);
+    // glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    // // glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+    // glEnableVertexAttribArray(0);
+    // glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
 }
 
 void Label::draw() {
     glUseProgram(programId);
     glUniform3f(glGetUniformLocation(programId, "textColor"), color.x, color.y, color.z);
-    // glActiveTexture(GL_TEXTURE0);
-    glBindVertexArray(VAO);
+    glActiveTexture(GL_TEXTURE0);
 
     float x = this->position.x;
     float y = this->position.y;
-    
-    GLfloat* buffer = new GLfloat[text.size() * 24];
-    // cout << "shit 2" << endl;
 
-    for (int i = 0; i < text.size(); i++) 
-    {
-        Character* ch = TextLib::getChar(text[i]);
-
-        float xpos = x;
-        float ypos = y + this->size - ch->bearing.y;
-
-        float w = ch->size.x;
-        float h = ch->size.y;
-        // update VBO for each character
-        GLfloat* vertices = new GLfloat[24] {
-             xpos,     ypos + h,   0.0f, 1.0f ,            
-             xpos,     ypos,       0.0f, 0.0f ,
-             xpos + w, ypos,       1.0f, 0.0f ,
-
-             xpos,     ypos + h,   0.0f, 1.0f ,
-             xpos + w, ypos,       1.0f, 0.0f ,
-             xpos + w, ypos + h,   1.0f, 1.0f       
-        };
-
-        memcpy(buffer + i * 24, vertices, 24 * sizeof(GLfloat));
-
-        delete[] vertices;
-    }
-
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, 24 * text.size() * sizeof(GLfloat), buffer, GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+    float* buffer = new float[text.size() * 24];
 
     // iterate through all characters
     for (int i = 0; i < text.size(); i++) 
@@ -82,7 +53,8 @@ void Label::draw() {
         float w = ch->size.x;
         float h = ch->size.y;
         // update VBO for each character
-        float vertices[24] = {
+
+        float fuck[24] =  {
              xpos,     ypos + h,   0.0f, 1.0f ,            
              xpos,     ypos,       0.0f, 0.0f ,
              xpos + w, ypos,       1.0f, 0.0f ,
@@ -91,19 +63,42 @@ void Label::draw() {
              xpos + w, ypos,       1.0f, 0.0f ,
              xpos + w, ypos + h,   1.0f, 1.0f       
         };
-        // render glyph texture over quad
-        glBindTexture(GL_TEXTURE_2D, ch->textureId);
-        // update content of VBO memory
-        glBindBuffer(GL_ARRAY_BUFFER, VBO);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices); // be sure to use glBufferSubData and not glBufferData
 
+        copy(buffer + i * 24, buffer + i * 24 + 24, fuck);
+        // render glyph texture over quad
+        // glBindTexture(GL_TEXTURE_2D, ch->textureId);
+        // update content of VBO memory
+        // glBindBuffer(GL_ARRAY_BUFFER, VBO);
+        // glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(buffer), buffer); // be sure to use glBufferSubData and not glBufferData
+
+        // glBindBuffer(GL_ARRAY_BUFFER, 0);
         // render quad
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        // glDrawArrays(GL_TRIANGLES, 0, 6);
         // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
         x += (ch->advance >> 6); // bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
     }
-    glBindVertexArray(0);
-    glBindTexture(GL_TEXTURE_2D, 0);
 
-    delete[] buffer;
+    glGenVertexArrays(1, &VAO);
+    glBindVertexArray(VAO);
+
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * text.size() * 24, buffer, GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void *)0);
+
+    for (int i = 0; i < text.size(); i++) 
+    {
+        Character* ch = TextLib::getChar(text[i]);
+        // render glyph texture over quad
+        glBindTexture(GL_TEXTURE_2D, ch->textureId);
+        // update content of VBO memory
+        // render quad
+        glDrawArrays(GL_TRIANGLES, i * 6, 6);
+        // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
+    }
+
+    // glBindVertexArray(0);
+    // glBindTexture(GL_TEXTURE_2D, 0);
 }

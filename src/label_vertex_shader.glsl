@@ -6,6 +6,6 @@ uniform mat4 transform_matrix;
 
 void main()
 {
-    gl_Position = transform_matrix * vec4(vertex.xy, 0.0, 1.0);
+    gl_Position = transform_matrix * vec4(vertex.xy, 0.9, 1.0);
     TexCoords = vertex.zw;
 }  

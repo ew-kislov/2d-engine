@@ -21,6 +21,8 @@ CMakeFiles/Task1.dir/src/main.cpp.o: src/Scene.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Scene.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/SpriteOrderer.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/SpriteOrderer.hpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/TextLib.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/TextLib.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Tile.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Tile.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Window.cpp

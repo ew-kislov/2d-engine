@@ -4,11 +4,7 @@
 
 map<char, Character*> TextLib::characters = {};
 string TextLib::fontSource = string();
-int TextLib::size = 0;
 FT_Library TextLib::lib = nullptr;
-
-void TextLib::initLib() {
-}
 
 void TextLib::initFont(string pFontSource, int size) {
     FT_Library ft;
@@ -61,6 +57,7 @@ void TextLib::initFont(string pFontSource, int size) {
         };
         characters.insert(std::pair<char, Character*>(c, character));
     }
+
     glBindTexture(GL_TEXTURE_2D, 0);
 
     FT_Done_Face(face);

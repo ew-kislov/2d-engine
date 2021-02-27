@@ -21,11 +21,8 @@ class TextLib {
     private:
         static map<char, Character*> characters;
         static string fontSource;
-        static int size;
         
         static FT_Library lib;
-
-        static void initLib();
 
     public:
         static void initFont(string pFontSource, int fontSize);

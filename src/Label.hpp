@@ -14,13 +14,6 @@
 
 using namespace std;
 
-struct Character {
-    unsigned int TextureID; // ID handle of the glyph texture
-    glm::ivec2   Size;      // Size of glyph
-    glm::ivec2   Bearing;   // Offset from baseline to left/top of glyph
-    unsigned int Advance;   // Horizontal offset to advance to next glyph
-};
-
 class Label: public BaseObject {
     private:
         string text;
@@ -29,7 +22,6 @@ class Label: public BaseObject {
         glm::vec4 color;
 
         GLuint VAO, VBO;
-        std::map<GLchar, Character> Characters;
 
     protected:
 
