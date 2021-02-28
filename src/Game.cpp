@@ -21,6 +21,9 @@
 #include "Window.cpp"
 #include "Scene.cpp"
 
+std::map<string, Scene*> Game::scenes = {};
+Scene* Game::activeScene = nullptr;
+
 Game::Game() {
 }
 
@@ -32,12 +35,12 @@ void Game::runMainLoop() {
     do {
         Window::clear();
 
-        this->activeScene->runKeyHandlers();
+        activeScene->runKeyHandlers();
 
         Camera::move();
 
-        this->updatePositions();
-        this->draw();
+        updatePositions();
+        draw();
 
         Window::update();
 
@@ -45,13 +48,13 @@ void Game::runMainLoop() {
 }
 
 void Game::draw() {
-    auto sprites = this->activeScene->getSprites();
+    auto sprites = activeScene->getSprites();
 
     for (Sprite* sprite : sprites) {
         sprite->draw();
     }
 
-    set<Label*> ui = this->activeScene->getUi();
+    set<Label*> ui = activeScene->getUi();
 
     for (Label* label : ui) {
         label->draw();
@@ -59,13 +62,13 @@ void Game::draw() {
 }
 
 void Game::updatePositions() {
-    auto sprites = this->activeScene->getSprites();
+    auto sprites = activeScene->getSprites();
 
     for (Sprite* sprite : sprites) {
         sprite->onUpdate();
     }
 
-    set<Label*> ui = this->activeScene->getUi();
+    set<Label*> ui = activeScene->getUi();
 
     for (Label* label : ui) {
         label->transform();
@@ -73,9 +76,9 @@ void Game::updatePositions() {
 }
 
 void Game::addScene(string name, Scene* scene) {
-    this->scenes[name] = scene;
+    scenes[name] = scene;
 }
 
 void Game::setActiveScene(string name) {
-    this->activeScene = this->scenes[name];
+    activeScene = scenes[name];
 }

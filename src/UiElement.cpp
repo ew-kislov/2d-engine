@@ -7,6 +7,7 @@ UiElement::UiElement(char* fragmentShaderSource, char* vertexShaderSource, glm::
 }
 
 void UiElement::transform() {
+    glUseProgram(programId);
     glm::mat4 cameraMatrix = Camera::getProjectionMatrix();
     OpenglUtils::setUniformMat4(
         this->programId,

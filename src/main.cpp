@@ -24,9 +24,6 @@ int main(void) {
     Window::setResolution(1024, 768);
     Window::open();
 
-    //  create game instance
-
-    Game* game = new Game();
     // add intro scene
 
     Scene* introScene = new Scene();
@@ -37,7 +34,7 @@ int main(void) {
     introScene->addUiElement(introLabel);
     introScene->addUiElement(actionLabel);
 
-    introScene->onKeyDown(EKey::Enter, [game]() { game->setActiveScene("Level"); });
+    introScene->onKeyDown(EKey::Enter, []() { Game::setActiveScene("Level"); });
 
     // add pause scene
 
@@ -47,13 +44,23 @@ int main(void) {
 
     pauseScene->addUiElement(pauseLabel);
 
-    pauseScene->onKeyDown(EKey::P, [game]() { game->setActiveScene("Level"); });
+    pauseScene->onKeyDown(EKey::P, []() { Game::setActiveScene("Level"); });
+
+    // add game over scene
+
+    Scene* gameOverScene = new Scene();
+
+    Label* gameOverLabel = new Label("You`r fucked. Press enter for main menu", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
+
+    gameOverScene->addUiElement(gameOverLabel);
+
+    gameOverScene->onKeyDown(EKey::Enter, []() { Game::setActiveScene("Intro"); });
 
     // add level scene
 
     Scene* levelScene = new Scene();
 
-    levelScene->onKeyDown(EKey::P, [game]() { game->setActiveScene("Pause"); });
+    levelScene->onKeyDown(EKey::P, []() { Game::setActiveScene("Pause"); });
 
     // add main character to scene
 
@@ -102,14 +109,15 @@ int main(void) {
 
     // init game
 
-    game->addScene("Level", levelScene);
-    game->addScene("Intro", introScene);
-    game->addScene("Pause", pauseScene);
+    Game::addScene("Level", levelScene);
+    Game::addScene("Intro", introScene);
+    Game::addScene("Pause", pauseScene);
+    Game::addScene("Game Over", gameOverScene);
 
-    game->setActiveScene("Intro");
+    Game::setActiveScene("Intro");
 
-    game->init();
-    game->runMainLoop();
+    Game::init();
+    Game::runMainLoop();
 
     return 0;
 }

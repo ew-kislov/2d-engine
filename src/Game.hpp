@@ -16,20 +16,20 @@ using namespace std;
 
 class Game {
     private:
-        std::map<string, Scene*> scenes;
-        Scene* activeScene;
+        static std::map<string, Scene*> scenes;
+        static Scene* activeScene;
 
-        void updatePositions();
-        void draw();
+        static void updatePositions();
+        static void draw();
 
     public:
         Game();
 
-        void init();
-        void runMainLoop();
+        static void init();
+        static void runMainLoop();
 
-        void addScene(string name, Scene* scene);
-        void setActiveScene(string name);
+        static void addScene(string name, Scene* scene);
+        static void setActiveScene(string name);
 };
 
 #endif
