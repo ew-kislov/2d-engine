@@ -18,6 +18,12 @@ enum EKey {
     Escape = GLFW_KEY_ESCAPE
 };
 
+enum EKeyEvent {
+    PRESS = 1,
+    DOWN = 2,
+    UP = 3
+};
+
 class Window {
     private:
         static GLFWwindow* window;
@@ -26,6 +32,8 @@ class Window {
         static int height;
 
         static string name;
+
+        static map<int, bool> keyState;
 
     public:
         static void setName(string pName);
@@ -41,6 +49,8 @@ class Window {
         static void update();
 
         static bool isKeyPressed(EKey key);
+        static bool isKeyDown(EKey key);
+        static bool isKeyUp(EKey key);
 };
 
 #endif

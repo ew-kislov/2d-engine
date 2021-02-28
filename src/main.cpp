@@ -37,7 +37,7 @@ int main(void) {
     introScene->addUiElement(introLabel);
     introScene->addUiElement(actionLabel);
 
-    introScene->addKeyHandler(EKey::Enter, [game]() { game->setActiveScene("Level"); });
+    introScene->onKeyDown(EKey::Enter, [game]() { game->setActiveScene("Level"); });
 
     // add pause scene
 
@@ -47,13 +47,13 @@ int main(void) {
 
     pauseScene->addUiElement(pauseLabel);
 
-    pauseScene->addKeyHandler(EKey::P, [game]() { game->setActiveScene("Level"); });
+    pauseScene->onKeyDown(EKey::P, [game]() { game->setActiveScene("Level"); });
 
     // add level scene
 
     Scene* levelScene = new Scene();
 
-    levelScene->addKeyHandler(EKey::P, [game]() { game->setActiveScene("Pause"); });
+    levelScene->onKeyDown(EKey::P, [game]() { game->setActiveScene("Pause"); });
 
     // add main character to scene
 

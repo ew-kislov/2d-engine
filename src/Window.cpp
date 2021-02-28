@@ -9,6 +9,7 @@ int Window::width = 0;
 int Window::height = 0;
 string Window::name = "";
 GLFWwindow* Window::window = nullptr;
+map<int, bool> Window::keyState = {};
 
 void Window::setName(string pName) {
     name = pName;
@@ -81,5 +82,20 @@ void Window::update() {
 }
 
 bool Window::isKeyPressed(EKey key) {
-    return glfwGetKey(window, key) == GLFW_PRESS;
+    bool result = glfwGetKey(window, key) == GLFW_PRESS;
+    Window::keyState[key] = result;
+    return result;
+}
+
+bool Window::isKeyDown(EKey key) {
+    bool result = glfwGetKey(window, key) == GLFW_PRESS;
+    bool downResult = result && !Window::keyState[key];
+    Window::keyState[key] = result;
+    return downResult;
+}
+
+bool Window::isKeyUp(EKey key) {
+    bool result = glfwGetKey(window, key) == GLFW_RELEASE;
+    Window::keyState[key] = !result;
+    return result;
 }

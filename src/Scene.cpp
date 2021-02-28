@@ -45,16 +45,42 @@ void Scene::addUiElement(Label* label) {
     this->ui.insert(label);
 }
 
-void Scene::addKeyHandler(EKey key, std::function<void(void)> handler) {
-    this->keyHandlers[key] = handler;
+void Scene::onKeyPress(EKey key, std::function<void(void)> handler) {
+    this->keyHandlers[key] = pair<EKeyEvent, std::function<void(void)>>(EKeyEvent::PRESS, handler);
+}
+
+void Scene::onKeyDown(EKey key, std::function<void(void)> handler) {
+    this->keyHandlers[key] = pair<EKeyEvent, std::function<void(void)>>(EKeyEvent::DOWN, handler);
+}
+
+void Scene::onKeyUp(EKey key, std::function<void(void)> handler) {
+    this->keyHandlers[key] = pair<EKeyEvent, std::function<void(void)>>(EKeyEvent::UP, handler);
 }
 
 void Scene::runKeyHandlers() {
-    map<EKey, std::function<void(void)>>::iterator it;
+    map<EKey, pair<EKeyEvent, std::function<void(void)>>>::iterator it;
 
     for (it = this->keyHandlers.begin(); it != this->keyHandlers.end(); it++) {
-        if (Window::isKeyPressed(it->first)) {
-            it->second();
+        pair<EKeyEvent, std::function<void(void)>> handlerData = it->second;
+        bool isHandlerTriggered;
+
+        switch (handlerData.first) {
+            case EKeyEvent::DOWN:
+                isHandlerTriggered = Window::isKeyDown(it->first);
+                break;
+            case EKeyEvent::PRESS:
+                isHandlerTriggered = Window::isKeyPressed(it->first);
+                break;
+            case EKeyEvent::UP:
+                isHandlerTriggered = Window::isKeyUp(it->first);
+                break;
+            default:
+                throw runtime_error("Error: nsupported key event.");
+                exit(1);
+        }
+
+        if (isHandlerTriggered) {
+            handlerData.second();
         }
     }
 }

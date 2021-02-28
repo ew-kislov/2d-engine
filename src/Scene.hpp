@@ -18,7 +18,7 @@ class Scene {
     private:
         multiset<OpenglObject*, SpriteOrderer> sprites;
         set<Label*> ui;
-        map<EKey, function<void(void)>> keyHandlers;
+        map<EKey, pair<EKeyEvent, function<void(void)>>> keyHandlers;
 
     public:
         Scene();
@@ -28,7 +28,9 @@ class Scene {
         OpenglObject* find(string spriteId);
         void addSprite(OpenglObject* sprite);
         void addUiElement(Label* label);
-        void addKeyHandler(EKey key, function<void(void)> handler);
+        void onKeyPress(EKey key, function<void(void)> handler);
+        void onKeyDown(EKey key, function<void(void)> handler);
+        void onKeyUp(EKey key, function<void(void)> handler);
         void runKeyHandlers();
 };
 
