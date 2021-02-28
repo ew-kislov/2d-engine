@@ -1,5 +1,5 @@
-#ifndef OPENGL_OBJECT_H
-#define OPENGL_OBJECT_H
+#ifndef SPRITE_H
+#define SPRITE_H
 
 #include <map>
 
@@ -14,10 +14,9 @@
 using namespace std;
 
 
-class OpenglObject: public BaseObject {
+class Sprite: public BaseObject {
     private:
         char* textureSource;
-
         GLuint textureId;
 
         static constexpr float MIN_Z = 0.2f;
@@ -26,13 +25,16 @@ class OpenglObject: public BaseObject {
         void setPreview();
 
     public:
-        OpenglObject(char* textureSource, glm::vec3 position, int layer);
-
-        virtual void transform() = 0;
-        virtual MathUtils::Rect* getBoundingRect() = 0;
+        Sprite(char* textureSource, glm::vec2 position, int layer);
 
         void draw();
-        virtual void move() = 0;
+
+        MathUtils::Rect* getBoundingRect();
+
+        // implement this in final objects
+
+        virtual void onStart() = 0;
+        virtual void onUpdate() = 0;
 
         virtual string getClassId() = 0;
 };

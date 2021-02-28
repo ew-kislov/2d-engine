@@ -1,12 +1,12 @@
 #ifndef BASE_SPRITE_ORDERER_H
 #define BASE_SPRITE_ORDERER_H
 
-#include "OpenglObject.hpp"
+#include "Sprite.hpp"
 
-class OpenglObject; // TODO: delete
+class Sprite; // TODO: delete
 
 struct BaseSpriteOrderer {
-    virtual bool operator()(const OpenglObject* lhs, const OpenglObject* rhs) const = 0;
+    virtual bool operator()(const Sprite* lhs, const Sprite* rhs) const = 0;
 };
 
 #endif

@@ -8,7 +8,7 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/transform.hpp>
 
-#include "OpenglObject.cpp"
+#include "Sprite.cpp"
 
 int Camera::width = 0;
 int Camera::height = 0;
@@ -16,7 +16,7 @@ int Camera::height = 0;
 glm::mat4 Camera::projectionMatrix = glm::mat4(1.0);
 glm::mat4 Camera::lookAtMatrix = glm::mat4(1.0);
 
-OpenglObject* Camera::target = nullptr;
+Sprite* Camera::target = nullptr;
 
 void Camera::setResolution(int pWidth, int pHeight) {
     width = pWidth;
@@ -28,7 +28,7 @@ void Camera::setResolution(int pWidth, int pHeight) {
         glm::scale(glm::vec3(2.0 / width, 2.0 / height, 1.f));
 }
 
-void Camera::lookAt(OpenglObject* pTarget) {
+void Camera::lookAt(Sprite* pTarget) {
     target = pTarget;
 }
 
@@ -45,8 +45,8 @@ void Camera::move() {
         lookAtMatrix = glm::translate(
             glm::mat4(1.0),
             glm::vec3(
-                -target->getInitialPosition().x - target->getMovement().x + width / 2 - target->getWidth() / 2,
-                -target->getInitialPosition().y - target->getMovement().y + height / 2 - target->getHeight() / 2,
+                -target->getPosition().x + width / 2 - target->getWidth() / 2,
+                -target->getPosition().y + height / 2 - target->getHeight() / 2,
                 0.0f
             )
         );

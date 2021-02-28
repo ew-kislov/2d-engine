@@ -6,27 +6,27 @@
 #include <map>
 
 #include "SpriteOrderer.hpp"
-#include "OpenglObject.hpp"
+#include "Sprite.hpp"
 #include "Window.hpp"
 #include "Label.hpp"
 
 using namespace std;
 
-class OpenglObject;
+class Sprite;
 
 class Scene {
     private:
-        multiset<OpenglObject*, SpriteOrderer> sprites;
+        multiset<Sprite*, SpriteOrderer> sprites;
         set<Label*> ui;
         map<EKey, pair<EKeyEvent, function<void(void)>>> keyHandlers;
 
     public:
         Scene();
 
-        multiset<OpenglObject*, SpriteOrderer> getSprites(string typeId = string());
+        multiset<Sprite*, SpriteOrderer> getSprites(string typeId = string());
         set<Label*> getUi();
-        OpenglObject* find(string spriteId);
-        void addSprite(OpenglObject* sprite);
+        Sprite* find(string spriteId);
+        void addSprite(Sprite* sprite);
         void addUiElement(Label* label);
         void onKeyPress(EKey key, function<void(void)> handler);
         void onKeyDown(EKey key, function<void(void)> handler);

@@ -14,17 +14,11 @@
 #include "OpenglUtils.cpp"
 #include "MathUtils.cpp"
 
-BaseObject::BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec3 position, int layer) {
-    this->vertexShaderSource = vertexShaderSource;
-    this->fragmentShaderSource = fragmentShaderSource;
+BaseObject::BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer) {
     this->position = position;
-    this->positionMatrix = glm::translate(position);
     this->layer = layer;
 
-    this->movementVector = glm::vec2(0.0f, 0.0f);
-
-    this->programId = OpenglUtils::createShaderProgram(this->vertexShaderSource, this->fragmentShaderSource);
-
+    this->programId = OpenglUtils::createShaderProgram(vertexShaderSource, fragmentShaderSource);
     glUseProgram(this->programId);
 }
 
@@ -40,19 +34,10 @@ int BaseObject::getHeight() {
     return this->height;
 }
 
-glm::vec3 BaseObject::getInitialPosition() {
-    return this->position;
-}
-
-void BaseObject::applyTransformationMatrix(glm::mat4 matrix) {
-    glUseProgram(this->programId);
-    OpenglUtils::setUniformMat4(this->programId, "transform_matrix", matrix);
-}
-
 Scene* BaseObject::getScene() {
     return this->scene;
 }
 
-glm::vec2 BaseObject::getMovement() {
-    return this->movementVector;
+glm::vec2 BaseObject::getPosition() {
+    return this->position;
 }

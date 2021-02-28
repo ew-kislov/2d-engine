@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-#include "OpenglObject.hpp"
+#include "Sprite.hpp"
 
 #include "Game.hpp"
 
@@ -15,14 +15,14 @@ class Camera {
         static glm::mat4 projectionMatrix;
         static glm::mat4 lookAtMatrix;
 
-        static OpenglObject* target;
+        static Sprite* target;
 
         friend class Game;
 
     public:
     static void move();
         static void setResolution(int width, int height);
-        static void lookAt(OpenglObject* target);
+        static void lookAt(Sprite* target);
         static glm::mat4 getResultMatrix();
         static glm::mat4 getProjectionMatrix();
 };

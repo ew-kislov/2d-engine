@@ -4,20 +4,16 @@
 
 #include "TextLib.cpp"
 #include "Camera.cpp"
+#include "UiElement.cpp"
 
-Label::Label(string text, string fontSource, int size, glm::vec4 color, glm::vec3 position, int layer):
-    BaseObject("src/label_fragment_shader.glsl", "src/vertex_shader.glsl", position, layer) {
+Label::Label(string text, string fontSource, int size, glm::vec4 color, glm::vec2 position, int layer):
+    UiElement("src/label_fragment_shader.glsl", "src/vertex_shader.glsl", position, layer) {
     this->text = text;
     this->fontSource = fontSource;
     this->size = size;
     this->color = color;
 
     this->setPreview();
-}
-
-void Label::transform() {
-    glm::mat4 cameraMatrix = Camera::getProjectionMatrix();
-    this->applyTransformationMatrix(cameraMatrix * this->positionMatrix);
 }
 
 void Label::setPreview() {
@@ -129,4 +125,8 @@ void Label::draw() {
 
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+string Label::getClassId() {
+    return "Label";
 }

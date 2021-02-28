@@ -12,10 +12,11 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/transform.hpp>
 
-#include "OpenglObject.cpp"
+#include "Sprite.cpp"
 #include "SpriteOrderer.cpp"
 #include "ControlledObject.cpp"
 #include "Tile.cpp"
+#include "UiElement.cpp"
 #include "Camera.cpp"
 #include "Window.cpp"
 #include "Scene.cpp"
@@ -46,7 +47,7 @@ void Game::runMainLoop() {
 void Game::draw() {
     auto sprites = this->activeScene->getSprites();
 
-    for (OpenglObject* sprite : sprites) {
+    for (Sprite* sprite : sprites) {
         sprite->draw();
     }
 
@@ -60,9 +61,8 @@ void Game::draw() {
 void Game::updatePositions() {
     auto sprites = this->activeScene->getSprites();
 
-    for (OpenglObject* sprite : sprites) {
-        sprite->move();
-        sprite->transform();
+    for (Sprite* sprite : sprites) {
+        sprite->onUpdate();
     }
 
     set<Label*> ui = this->activeScene->getUi();

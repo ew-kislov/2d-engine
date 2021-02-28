@@ -9,7 +9,7 @@
 
 #include "Game.cpp"
 #include "Scene.cpp"
-#include "OpenglObject.cpp"
+#include "Sprite.cpp"
 #include "ControlledObject.cpp"
 #include "Window.cpp"
 #include "Camera.cpp"
@@ -31,8 +31,8 @@ int main(void) {
 
     Scene* introScene = new Scene();
 
-    Label* introLabel = new Label("Wake the fuck up, samurai.", "assets/fonts/fuck.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec3(100.f, 100.f, 0.f), 3);
-    Label* actionLabel = new Label("Press enter to start the game.", "assets/fonts/fuck.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec3(100.f, 120.f, 0.f), 3);
+    Label* introLabel = new Label("Wake the fuck up, samurai.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
+    Label* actionLabel = new Label("Press enter to start the game.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 120.f), 3);
 
     introScene->addUiElement(introLabel);
     introScene->addUiElement(actionLabel);
@@ -43,7 +43,7 @@ int main(void) {
 
     Scene* pauseScene = new Scene();
 
-    Label* pauseLabel = new Label("Press P to resume the game.", "assets/fonts/fuck.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec3(100.f, 100.f, 0.f), 3);
+    Label* pauseLabel = new Label("Press P to resume the game.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
 
     pauseScene->addUiElement(pauseLabel);
 
@@ -57,9 +57,9 @@ int main(void) {
 
     // add main character to scene
 
-    OpenglObject* mainCharacter = new ControlledObject(
+    Sprite* mainCharacter = new ControlledObject(
         "assets/main_character/Upset.png",
-        glm::vec3(200.f, 360.f, 0.f),
+        glm::vec2(200.f, 360.f),
         1,
         3.0f
     );
@@ -87,9 +87,9 @@ int main(void) {
         for (uint8_t j = 0; j < mapLine.size(); j++) {
             char* textureSource = (char*)(mapLine[j] == '.' ? "assets/textures/floor/center_001.png" : "assets/textures/walls/wall_001.png");
 
-            OpenglObject* tile = new Tile(
+            Sprite* tile = new Tile(
                 textureSource,
-                glm::vec3(j * 72.f, i * 72.f, 0.f),
+                glm::vec2(j * 72.f, i * 72.f),
                 0,
                 mapLine[j] == '.' ? true : false
             );

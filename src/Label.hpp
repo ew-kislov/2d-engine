@@ -8,28 +8,26 @@
 
 #include <glm/glm.hpp>
 
-#include "BaseObject.hpp"
+#include "UiElement.hpp"
 #include "MathUtils.cpp"
-#include "Scene.hpp"
 
 using namespace std;
 
-class Label: public BaseObject {
+class Label: public UiElement {
     private:
         string text;
         string fontSource;
         int size;
         glm::vec4 color;
 
-        static constexpr float MIN_Z = 0.4f;
-
         void setPreview();
 
     public:
-        Label(string text, string fontSource, int size, glm::vec4 color, glm::vec3 position, int layer);
+        Label(string text, string fontSource, int size, glm::vec4 color, glm::vec2 position, int layer);
 
-        void transform();
         void draw();
+
+        string getClassId();
 };
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef CONTROLLED_OBJECT_H
 #define CONTROLLED_OBJECT_H
 
-#include "OpenglObject.hpp"
+#include "Sprite.hpp"
 
 #include <iostream>
 
@@ -14,19 +14,17 @@
 
 using namespace std;
 
-class ControlledObject : public OpenglObject {
+class ControlledObject : public Sprite {
     private:
-        glm::mat4 movement;
         GLfloat speed;
 
     public:
-        ControlledObject(char* textureSource, glm::vec3 position, int layer, GLfloat speed);
+        ControlledObject(char* textureSource, glm::vec2 position, int layer, GLfloat speed);
 
-        virtual void move();
-        virtual void transform();
-        virtual MathUtils::Rect* getBoundingRect();
+        void onStart();
+        void onUpdate();
 
-        virtual string getClassId();
+        string getClassId();
 };
 
 #endif

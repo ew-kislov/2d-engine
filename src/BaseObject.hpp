@@ -21,25 +21,22 @@ enum VboType {
 
 class BaseObject {
     private:
-        char* vertexShaderSource;
-        char* fragmentShaderSource;
-
         Scene* scene;
 
         friend class Scene; 
 
     protected:
-        glm::mat4 positionMatrix;
-        
-        glm::vec3 position;
-
-        glm::vec2 movementVector;
+        glm::vec2 position;
 
         int width;
         int height;
+        
+        int layer;
 
         const static int MAX_LAYERS = 100;
-        int layer;
+
+        // TODO: move program to shader
+        // TODO: move vao, vbo to resource manager
 
         GLuint programId;
         GLuint vao;
@@ -49,21 +46,16 @@ class BaseObject {
 
         virtual void setPreview() = 0;
 
-        void applyTransformationMatrix(glm::mat4 matrix);
-
     public:
-        BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec3 position, int layer);
+        BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer);
 
         int getLayer() const;
         int getWidth();
         int getHeight();
-        glm::vec3 getInitialPosition();
-
-        virtual void transform() = 0;
 
         virtual void draw() = 0;
 
-        glm::vec2 getMovement();
+        glm::vec2 getPosition();
 };
 
 #endif

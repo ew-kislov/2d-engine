@@ -4,6 +4,6 @@
 
 // #include "OpenglObject.cpp"
 
-bool SpriteOrderer::operator()(const OpenglObject* lhs, const OpenglObject* rhs) const {
+bool SpriteOrderer::operator()(const Sprite* lhs, const Sprite* rhs) const {
     return lhs->getLayer() < rhs->getLayer();
 }

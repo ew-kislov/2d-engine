@@ -4,7 +4,7 @@
 #include "BaseSpriteOrderer.hpp"
 
 struct SpriteOrderer: BaseSpriteOrderer {
-    virtual bool operator()(const OpenglObject* lhs, const OpenglObject* rhs) const;
+    virtual bool operator()(const Sprite* lhs, const Sprite* rhs) const;
 };
 
 #endif

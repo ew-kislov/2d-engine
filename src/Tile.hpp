@@ -1,6 +1,8 @@
 #ifndef TILE_H
 #define TILE_H
 
+#include "Sprite.hpp"
+
 #include <GL/glew.h>
 
 #include <glm/glm.hpp>
@@ -8,20 +10,19 @@
 
 using namespace std;
 
-class Tile : public OpenglObject {
+class Tile : public Sprite {
     private:
         bool walkable;
 
     public:
-        Tile(char* textureSource, glm::vec3 position, int layer, bool walkable);
+        Tile(char* textureSource, glm::vec2 position, int layer, bool walkable);
 
-        virtual void transform();
-        virtual void move();
-        virtual MathUtils::Rect* getBoundingRect();
+        void onStart();
+        void onUpdate();
         
         bool isWalkable();
 
-        virtual string getClassId();
+        string getClassId();
 };
 
 #endif

@@ -4,25 +4,25 @@
 
 #include "Scene.hpp"
 
-#include "OpenglObject.cpp"
+#include "Sprite.cpp"
 #include "SpriteOrderer.cpp"
 #include "Window.cpp"
 
 Scene::Scene() {
 }
 
-multiset<OpenglObject*, SpriteOrderer> Scene::getSprites(string typeId) {
+multiset<Sprite*, SpriteOrderer> Scene::getSprites(string typeId) {
     if (typeId.empty()) {
         return this->sprites;
     }
 
-    multiset<OpenglObject*, SpriteOrderer> filteredSprites;
+    multiset<Sprite*, SpriteOrderer> filteredSprites;
 
     copy_if(
         this->sprites.begin(),
         this->sprites.end(),
         inserter(filteredSprites, filteredSprites.end()),
-        [typeId](OpenglObject* sprite){ return sprite->getClassId() == typeId; }
+        [typeId](Sprite* sprite){ return sprite->getClassId() == typeId; }
     );
 
     return filteredSprites;
@@ -32,11 +32,11 @@ set<Label*> Scene::getUi() {
     return this->ui;
 }
 
-OpenglObject* Scene::find(string spriteId) {
+Sprite* Scene::find(string spriteId) {
     return NULL;
 }
 
-void Scene::addSprite(OpenglObject* sprite) {
+void Scene::addSprite(Sprite* sprite) {
     this->sprites.insert(sprite);
     sprite->scene = this;
 }
