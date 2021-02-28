@@ -21,6 +21,8 @@ class Label: public BaseObject {
         int size;
         glm::vec4 color;
 
+        static constexpr float MIN_Z = 0.4f;
+
         void setPreview();
 
     public:

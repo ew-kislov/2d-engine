@@ -41,7 +41,7 @@ void OpenglObject::setPreview() {
      * initiate vertex data
      */
 
-    GLfloat z = 1.0 * this->layer / MAX_LAYERS;
+    GLfloat z = 1.0 * this->layer / MAX_LAYERS + MIN_Z;
 
     GLfloat* positionData = new GLfloat[18] {
         0.0f, 0.0f, z,

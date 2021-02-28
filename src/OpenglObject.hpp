@@ -20,6 +20,8 @@ class OpenglObject: public BaseObject {
 
         GLuint textureId;
 
+        static constexpr float MIN_Z = 0.2f;
+
     protected:
         void setPreview();
 
