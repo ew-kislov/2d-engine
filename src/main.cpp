@@ -11,6 +11,7 @@
 #include "Scene.cpp"
 #include "Sprite.cpp"
 #include "ControlledObject.cpp"
+#include "WinningDoor.cpp"
 #include "Window.cpp"
 #include "Camera.cpp"
 #include "Label.cpp"
@@ -26,7 +27,7 @@ int main(void) {
 
     // add intro scene
 
-    Scene* introScene = new Scene();
+    Scene* introScene = new Scene(true);
 
     Label* introLabel = new Label("Wake the fuck up, samurai.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
     Label* actionLabel = new Label("Press enter to start the game.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 120.f), 3);
@@ -38,7 +39,7 @@ int main(void) {
 
     // add pause scene
 
-    Scene* pauseScene = new Scene();
+    Scene* pauseScene = new Scene(true);
 
     Label* pauseLabel = new Label("Press P to resume the game.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
 
@@ -48,7 +49,7 @@ int main(void) {
 
     // add game over scene
 
-    Scene* gameOverScene = new Scene();
+    Scene* gameOverScene = new Scene(true);
 
     Label* gameOverLabel = new Label("You`r fucked. Press enter for main menu", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
 
@@ -56,9 +57,19 @@ int main(void) {
 
     gameOverScene->onKeyDown(EKey::Enter, []() { Game::setActiveScene("Intro"); });
 
+    // add game over scene
+
+    Scene* winScene = new Scene(true);
+
+    Label* winLabel = new Label("You fucking won. Press enter for main menu", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
+
+    winScene->addUiElement(winLabel);
+
+    winScene->onKeyDown(EKey::Enter, []() { Game::setActiveScene("Intro"); });
+
     // add level scene
 
-    Scene* levelScene = new Scene();
+    Scene* levelScene = new Scene(false);
 
     levelScene->onKeyDown(EKey::P, []() { Game::setActiveScene("Pause"); });
 
@@ -67,9 +78,11 @@ int main(void) {
     Sprite* mainCharacter = new ControlledObject(
         "assets/main_character/Upset.png",
         glm::vec2(200.f, 360.f),
-        1,
+        2,
         3.0f
     );
+
+    mainCharacter->setObjectId("Main character");
 
     levelScene->addSprite(mainCharacter);
 
@@ -107,15 +120,25 @@ int main(void) {
         i++;
     }
 
+
+    Sprite* door = new WinningDoor(
+        "assets/items/door.png",
+        glm::vec2(576, 390),
+        1
+    );
+
+    levelScene->addSprite(door);
+
     // init game
+
 
     Game::addScene("Level", levelScene);
     Game::addScene("Intro", introScene);
     Game::addScene("Pause", pauseScene);
     Game::addScene("Game Over", gameOverScene);
+    Game::addScene("Win", winScene);
 
     Game::setActiveScene("Intro");
-
     Game::init();
     Game::runMainLoop();
 

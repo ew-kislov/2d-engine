@@ -15,6 +15,7 @@
 #include "MathUtils.cpp"
 
 BaseObject::BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer) {
+    this->initialPosition = position;
     this->position = position;
     this->layer = layer;
 
@@ -40,4 +41,15 @@ Scene* BaseObject::getScene() {
 
 glm::vec2 BaseObject::getPosition() {
     return this->position;
+}
+
+void BaseObject::setObjectId(string objectId) {
+    this->objectId = objectId;
+}
+
+string BaseObject::getObjectId() {
+    return this->objectId;
+}
+
+BaseObject::~BaseObject() {
 }

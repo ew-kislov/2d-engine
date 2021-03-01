@@ -8,7 +8,37 @@
 #include "SpriteOrderer.cpp"
 #include "Window.cpp"
 
-Scene::Scene() {
+Scene::Scene(bool cacheable) {
+    this->cacheable = cacheable;
+}
+
+void Scene::load() {
+    for (Sprite* sprite: this->sprites) {
+        sprite->init();
+    }
+
+    for (UiElement* uiElement: this->ui) {
+        uiElement->init();
+    }
+
+    this->loaded = true;
+}
+
+void Scene::unload() {
+    // TODO: detach objects from opengl
+    //
+    // for (auto sprite: this->sprites) {
+    //     delete sprite;
+    // }
+
+    // for (auto uiElement: this->ui) {
+    //     delete uiElement;
+    // }
+
+    // this->sprites = {};
+    // this->ui = {};
+
+    this->loaded = false;
 }
 
 multiset<Sprite*, SpriteOrderer> Scene::getSprites(string typeId) {
@@ -33,7 +63,12 @@ set<Label*> Scene::getUi() {
 }
 
 Sprite* Scene::find(string spriteId) {
-    return NULL;
+    set<Sprite*>::iterator it = find_if(
+        this->sprites.begin(),
+        this->sprites.end(),
+        [spriteId] (Sprite* sprite) { return sprite->getObjectId() == spriteId; }
+    );
+    return *it;
 }
 
 void Scene::addSprite(Sprite* sprite) {
@@ -57,7 +92,7 @@ void Scene::onKeyUp(EKey key, std::function<void(void)> handler) {
     this->keyHandlers[key] = pair<EKeyEvent, std::function<void(void)>>(EKeyEvent::UP, handler);
 }
 
-void Scene::runKeyHandlers() {
+void Scene::update() {
     map<EKey, pair<EKeyEvent, std::function<void(void)>>>::iterator it;
 
     for (it = this->keyHandlers.begin(); it != this->keyHandlers.end(); it++) {
@@ -83,4 +118,12 @@ void Scene::runKeyHandlers() {
             handlerData.second();
         }
     }
+}
+
+bool Scene::isCacheable() {
+    return this->cacheable;
+}
+
+bool Scene::isLoaded() {
+    return this->loaded;
 }

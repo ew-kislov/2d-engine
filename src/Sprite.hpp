@@ -21,12 +21,10 @@ class Sprite: public BaseObject {
 
         static constexpr float MIN_Z = 0.2f;
 
-    protected:
-        void setPreview();
-
     public:
         Sprite(char* textureSource, glm::vec2 position, int layer);
 
+        void init();
         void draw();
 
         MathUtils::Rect* getBoundingRect();

@@ -20,11 +20,10 @@ class Label: public UiElement {
         int size;
         glm::vec4 color;
 
-        void setPreview();
-
     public:
         Label(string text, string fontSource, int size, glm::vec4 color, glm::vec2 position, int layer);
 
+        void init();
         void draw();
 
         string getClassId();

@@ -23,10 +23,11 @@
 Sprite::Sprite(char* textureSource, glm::vec2 position, int layer):
     BaseObject("src/fragment_shader.glsl", "src/vertex_shader.glsl", position, layer) {
     this->textureSource = textureSource;
-    this->setPreview();
 }
 
-void Sprite::setPreview() {
+void Sprite::init() {
+    this->position = this->initialPosition;
+
     GLuint positionVbo;
     GLuint textureCoordVbo;
     GLuint textureId;

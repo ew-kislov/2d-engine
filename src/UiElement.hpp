@@ -16,13 +16,13 @@ class UiElement: public BaseObject {
     protected:
         static constexpr float MIN_Z = 0.4f;
 
-        void setPreview() = 0;
-
     public:
         UiElement(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer);
 
         void transform();
-        void draw() = 0;
+
+        virtual void draw() = 0;
+        virtual void init() = 0;
 
         virtual string getClassId() = 0;
 };

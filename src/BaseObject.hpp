@@ -2,6 +2,7 @@
 #define BASE_OBJECT_H
 
 #include <map>
+#include <string>
 
 #include <GL/glew.h>
 
@@ -21,12 +22,15 @@ enum VboType {
 
 class BaseObject {
     private:
+        string objectId;
+
         Scene* scene;
 
-        friend class Scene; 
+        friend class Scene;
 
     protected:
         glm::vec2 position;
+        glm::vec2 initialPosition;
 
         int width;
         int height;
@@ -44,8 +48,6 @@ class BaseObject {
 
         Scene* getScene();
 
-        virtual void setPreview() = 0;
-
     public:
         BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer);
 
@@ -53,9 +55,15 @@ class BaseObject {
         int getWidth();
         int getHeight();
 
+        virtual void init() = 0;
         virtual void draw() = 0;
 
         glm::vec2 getPosition();
+
+        void setObjectId(string objectId);
+        string getObjectId();
+
+        virtual ~BaseObject();
 };
 
 #endif

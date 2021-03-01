@@ -29,6 +29,8 @@ CMakeFiles/Task1.dir/src/main.cpp.o: src/UiElement.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/UiElement.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Window.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Window.hpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/WinningDoor.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/WinningDoor.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/main.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: /usr/local/include/freetype2/freetype/config/ftheader.h
 CMakeFiles/Task1.dir/src/main.cpp.o: external/glew-1.13.0/include/GL/glew.h

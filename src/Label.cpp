@@ -12,11 +12,9 @@ Label::Label(string text, string fontSource, int size, glm::vec4 color, glm::vec
     this->fontSource = fontSource;
     this->size = size;
     this->color = color;
-
-    this->setPreview();
 }
 
-void Label::setPreview() {
+void Label::init() {
     // init font
     
     TextLib::initFont(fontSource, this->size);

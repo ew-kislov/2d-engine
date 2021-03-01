@@ -23,6 +23,8 @@
 
 std::map<string, Scene*> Game::scenes = {};
 Scene* Game::activeScene = nullptr;
+bool Game::shouldChangeScene = NULL;
+string Game::nextScene = string();
 
 Game::Game() {
 }
@@ -35,7 +37,11 @@ void Game::runMainLoop() {
     do {
         Window::clear();
 
-        activeScene->runKeyHandlers();
+        if (!Game::activeScene || Game::shouldChangeScene) {
+            Game::switchScene();
+        }
+
+        activeScene->update();
 
         Camera::move();
 
@@ -79,6 +85,27 @@ void Game::addScene(string name, Scene* scene) {
     scenes[name] = scene;
 }
 
+void Game::switchScene() {
+    Scene* scene = scenes[Game::nextScene];
+    if (scene == nullptr) {
+        throw runtime_error("Error: scene with given name doesn't exist");
+    }
+
+    Scene* prevScene = Game::activeScene;
+
+    if (prevScene != nullptr && !prevScene->isCacheable() && prevScene->isLoaded()) {
+        prevScene->unload();
+    }
+    
+    if (!scene->isLoaded()) {
+        scene->load();
+    }
+
+    Game::activeScene = scene;
+    Game::shouldChangeScene = false;
+}
+
 void Game::setActiveScene(string name) {
-    activeScene = scenes[name];
+    Game::nextScene = name;
+    Game::shouldChangeScene = true;
 }

@@ -19,6 +19,9 @@ class Game {
         static std::map<string, Scene*> scenes;
         static Scene* activeScene;
 
+        static bool shouldChangeScene;
+        static string nextScene;
+
         static void updatePositions();
         static void draw();
 
@@ -29,7 +32,9 @@ class Game {
         static void runMainLoop();
 
         static void addScene(string name, Scene* scene);
+        static void switchScene();
         static void setActiveScene(string name);
+        static void loadScene(string name);
 };
 
 #endif

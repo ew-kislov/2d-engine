@@ -35,6 +35,8 @@ MathUtils.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/BaseObject.hpp
 map
 -
+string
+-
 GL/glew.h
 -
 glm/glm.hpp
@@ -243,6 +245,8 @@ Window.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.hpp
 Label.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Label.hpp
+Game.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Sprite.cpp
 Sprite.hpp
@@ -309,8 +313,6 @@ glm/glm.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.cpp
 Tile.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.hpp
-Camera.cpp
-/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.hpp
 Sprite.hpp
@@ -354,6 +356,24 @@ GLFW/glfw3.h
 string
 -
 
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/WinningDoor.cpp
+WinningDoor.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/WinningDoor.hpp
+Sprite.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Sprite.cpp
+Game.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.cpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/WinningDoor.hpp
+Sprite.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Sprite.hpp
+GL/glew.h
+-
+glm/glm.hpp
+-
+glm/gtx/transform.hpp
+-
+
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/main.cpp
 iostream
 -
@@ -377,6 +397,8 @@ Sprite.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Sprite.cpp
 ControlledObject.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.cpp
+WinningDoor.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/WinningDoor.cpp
 Window.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
 Camera.cpp
