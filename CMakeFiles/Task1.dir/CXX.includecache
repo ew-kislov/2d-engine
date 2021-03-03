@@ -31,6 +31,8 @@ OpenglUtils.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglUtils.cpp
 MathUtils.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
+OpenGL.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenGL.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/BaseObject.hpp
 map
@@ -172,6 +174,24 @@ UiElement.hpp
 MathUtils.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
 
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/LoosingDoor.cpp
+LoosingDoor.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/LoosingDoor.hpp
+Sprite.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Sprite.cpp
+Game.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.cpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/LoosingDoor.hpp
+Sprite.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Sprite.hpp
+GL/glew.h
+-
+glm/glm.hpp
+-
+glm/gtx/transform.hpp
+-
+
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
 string
 -
@@ -188,6 +208,38 @@ glm/gtx/string_cast.hpp
 glm/gtx/transform.hpp
 -
 GL/glew.h
+-
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MazeLoader.cpp
+iostream
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+string
+-
+vector
+-
+map
+-
+fstream
+-
+algorithm
+-
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenGL.cpp
+OpenGL.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenGL.hpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenGL.hpp
+GL/glew.h
+-
+map
+-
+string
 -
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglUtils.cpp
@@ -217,6 +269,22 @@ glm/glm.hpp
 -
 glm/gtc/type_ptr.hpp
 -
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ResourceManager.cpp
+ResourceManager.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ResourceManager.hpp
+stb_image.h
+-
+iostream
+-
+Texture.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Texture.cpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ResourceManager.hpp
+map
+-
+Texture.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Texture.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.cpp
 algorithm
@@ -265,8 +333,6 @@ glm/gtx/string_cast.hpp
 -
 glm/gtx/transform.hpp
 -
-stb_image.h
--
 OpenglUtils.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglUtils.cpp
 MathUtils.cpp
@@ -275,6 +341,10 @@ BaseObject.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/BaseObject.cpp
 Camera.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
+Texture.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Texture.cpp
+OpenGL.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenGL.cpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Sprite.hpp
 map
@@ -289,6 +359,8 @@ MathUtils.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
 Scene.hpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.hpp
+Texture.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Texture.hpp
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.cpp
 SpriteOrderer.hpp
@@ -308,6 +380,14 @@ string
 ft2build.h
 -
 glm/glm.hpp
+-
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Texture.cpp
+Texture.hpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Texture.hpp
+
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Texture.hpp
+GL/glew.h
 -
 
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.cpp
@@ -385,6 +465,8 @@ string.h
 -
 string
 -
+vector
+-
 GL/glew.h
 -
 GLFW/glfw3.h
@@ -399,12 +481,18 @@ ControlledObject.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ControlledObject.cpp
 WinningDoor.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/WinningDoor.cpp
+LoosingDoor.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/LoosingDoor.cpp
 Window.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Window.cpp
 Camera.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Camera.cpp
 Label.cpp
 /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Label.cpp
+ResourceManager.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ResourceManager.cpp
+MazeLoader.cpp
+/Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MazeLoader.cpp
 
 /usr/local/include/freetype2/freetype/config/ftheader.h
 

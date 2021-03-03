@@ -99,3 +99,7 @@ bool Window::isKeyUp(EKey key) {
     Window::keyState[key] = !result;
     return result;
 }
+
+double Window::getTime() {
+    return glfwGetTime();
+}

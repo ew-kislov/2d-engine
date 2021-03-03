@@ -5,8 +5,8 @@
 #include "Window.cpp"
 #include "Camera.cpp"
 
-ControlledObject::ControlledObject(char* textureSource, glm::vec2 position, int layer, GLfloat speed):
-    Sprite(textureSource, position, layer) {
+ControlledObject::ControlledObject(Texture* texture, glm::vec2 position, int layer, GLfloat speed):
+    Sprite(texture, position, layer) {
     this->speed = speed;
 }
 

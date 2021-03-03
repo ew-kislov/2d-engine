@@ -25,6 +25,8 @@ std::map<string, Scene*> Game::scenes = {};
 Scene* Game::activeScene = nullptr;
 bool Game::shouldChangeScene = NULL;
 string Game::nextScene = string();
+int Game::framesPerSec = 0;
+double Game::lastUpdateTime = 0;
 
 Game::Game() {
 }
@@ -35,6 +37,8 @@ void Game::init() {
 
 void Game::runMainLoop() {
     do {
+        Game::calculateFps();
+
         Window::clear();
 
         if (!Game::activeScene || Game::shouldChangeScene) {
@@ -108,4 +112,14 @@ void Game::switchScene() {
 void Game::setActiveScene(string name) {
     Game::nextScene = name;
     Game::shouldChangeScene = true;
+}
+
+void Game::calculateFps() {
+    double currentTime = Window::getTime();
+    Game::framesPerSec++;
+    if (currentTime - Game::lastUpdateTime >= 1.0 ){
+        cout << 1000.0 / double(Game::framesPerSec) << "ms/frame" << endl;
+        Game::framesPerSec = 0;
+        Game::lastUpdateTime += 1.0;
+    }
 }

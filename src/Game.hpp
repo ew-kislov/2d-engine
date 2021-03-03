@@ -22,6 +22,11 @@ class Game {
         static bool shouldChangeScene;
         static string nextScene;
 
+        static int framesPerSec;
+        static double lastUpdateTime;
+
+        static void calculateFps();
+
         static void updatePositions();
         static void draw();
 

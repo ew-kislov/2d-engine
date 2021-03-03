@@ -25,6 +25,7 @@ class Camera {
         static void lookAt(Sprite* target);
         static glm::mat4 getResultMatrix();
         static glm::mat4 getProjectionMatrix();
+        static glm::mat4 getLookAtMatrix();
 };
 
 #endif

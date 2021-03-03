@@ -19,7 +19,7 @@ class ControlledObject : public Sprite {
         GLfloat speed;
 
     public:
-        ControlledObject(char* textureSource, glm::vec2 position, int layer, GLfloat speed);
+        ControlledObject(Texture* texture, glm::vec2 position, int layer, GLfloat speed);
 
         void onStart();
         void onUpdate();

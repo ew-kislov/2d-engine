@@ -11,18 +11,20 @@
 #include <glm/gtx/string_cast.hpp>
 #include <glm/gtx/transform.hpp>
 
-#define STB_IMAGE_IMPLEMENTATION
-#include <stb_image.h>
-
 #include "OpenglUtils.cpp"
 #include "MathUtils.cpp"
 
 #include "BaseObject.cpp"
 #include "Camera.cpp"
+#include "Texture.cpp"
 
-Sprite::Sprite(char* textureSource, glm::vec2 position, int layer):
+#include "OpenGL.cpp"
+
+Sprite::Sprite(Texture* texture, glm::vec2 position, int layer):
     BaseObject("src/fragment_shader.glsl", "src/vertex_shader.glsl", position, layer) {
-    this->textureSource = textureSource;
+    this->texture = texture;
+    this->height = texture->getHeight();
+    this->width = texture->getWidth();
 }
 
 void Sprite::init() {
@@ -30,13 +32,9 @@ void Sprite::init() {
 
     GLuint positionVbo;
     GLuint textureCoordVbo;
-    GLuint textureId;
 
     glGenVertexArrays(1, &this->vao);
     glBindVertexArray(this->vao);
-
-    int channels;
-    unsigned char *textureData = stbi_load(this->textureSource, &this->width, &this->height, &channels, 0);
 
     /**
      * initiate vertex data
@@ -85,32 +83,14 @@ void Sprite::init() {
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void *)0);
 
     this->vbos[VboType::TextureCoords] = textureCoordVbo;
-
-    /**
-     * load texture
-     */
-
-    glGenTextures(1, &this->textureId);
-    glBindTexture(GL_TEXTURE_2D, this->textureId);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, channels == 4 ? GL_CLAMP_TO_EDGE : GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, channels == 4 ? GL_CLAMP_TO_EDGE : GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    if (textureData) {
-        glTexImage2D(GL_TEXTURE_2D, 0, channels == 3 ? GL_RGB : GL_RGBA, width, height, 0, channels == 3 ? GL_RGB : GL_RGBA, GL_UNSIGNED_BYTE, textureData);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else {
-        cout << "Failed to load texture" << endl;
-    }
-
-    stbi_image_free(textureData);
 }
 
 void Sprite::draw() {
-    glUseProgram(this->programId);
+    if (this->isOutOfWindow()) {
+        return;
+    }
+
+    OpenGL::useProgram(this->programId);
 
     glm::mat4 cameraMatrix = Camera::getResultMatrix();
     OpenglUtils::setUniformMat4(
@@ -119,8 +99,8 @@ void Sprite::draw() {
         cameraMatrix * glm::translate(glm::vec3(this->position, 0.0f))
     );
 
-    glBindTexture(GL_TEXTURE_2D, this->textureId);
-    glBindVertexArray(this->vao);
+    OpenGL::bindTexture(this->texture->getId());
+    OpenGL::bindVao(this->vao);
 
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
@@ -130,4 +110,10 @@ MathUtils::Rect* Sprite::getBoundingRect() {
     glm::vec4 d1 = glm::vec4(1.0f * (width + this->position.x), 1.0f * (height + this->position.y), 0.0f, 1.0f);
 
     return new MathUtils::Rect(d0.x, d0.y, d1.x, d1.y);
+}
+
+bool Sprite::isOutOfWindow() {
+    MathUtils::Rect* rect = MathUtils::transformRect(this->getBoundingRect(), Camera::getLookAtMatrix());
+
+    return rect->y1 < 0 || rect->x1 < 0 || rect->y0 > Window::getHeight() || rect->x0 > Window::getWidth();
 }

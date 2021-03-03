@@ -1,25 +1,25 @@
 #pragma once
 
-#include "WinningDoor.hpp"
+#include "LoosingDoor.hpp"
 
 #include "Sprite.cpp"
 #include "Game.cpp"
 
-WinningDoor::WinningDoor(Texture* texture, glm::vec2 position, int layer):
+LoosingDoor::LoosingDoor(Texture* texture, glm::vec2 position, int layer):
     Sprite(texture, position, layer) {
 }
 
-void WinningDoor::onStart() {
+void LoosingDoor::onStart() {
     // Do nothing
 }
 
-void WinningDoor::onUpdate() {
+void LoosingDoor::onUpdate() {
     Sprite* mainCharacter = this->getScene()->find("Main character");
     if (MathUtils::areRectsIntercepting(this->getBoundingRect(), mainCharacter->getBoundingRect())) {
-        Game::setActiveScene("Win");
+        Game::setActiveScene("Game Over");
     }
 }
 
-string WinningDoor::getClassId() {
-    return "WinningDoor";
+string LoosingDoor::getClassId() {
+    return "LoosingDoor";
 }

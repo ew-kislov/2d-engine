@@ -1,5 +1,5 @@
-#ifndef TILE_H
-#define TILE_H
+#ifndef LOOSING_DOOR_H
+#define LOOSING_DOOR_H
 
 #include "Sprite.hpp"
 
@@ -10,17 +10,12 @@
 
 using namespace std;
 
-class Tile : public Sprite {
-    private:
-        bool walkable;
-
+class LoosingDoor : public Sprite {
     public:
-        Tile(Texture* texture, glm::vec2 position, int layer, bool walkable);
+        LoosingDoor(Texture* texture, glm::vec2 position, int layer);
 
         void onStart();
         void onUpdate();
-        
-        bool isWalkable();
 
         string getClassId();
 };

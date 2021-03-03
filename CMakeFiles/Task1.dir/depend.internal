@@ -14,8 +14,15 @@ CMakeFiles/Task1.dir/src/main.cpp.o
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Game.hpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Label.cpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Label.hpp
+ /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/LoosingDoor.cpp
+ /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/LoosingDoor.hpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MathUtils.cpp
+ /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/MazeLoader.cpp
+ /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenGL.cpp
+ /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenGL.hpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/OpenglUtils.cpp
+ /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ResourceManager.cpp
+ /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/ResourceManager.hpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.cpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Scene.hpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Sprite.cpp
@@ -24,6 +31,8 @@ CMakeFiles/Task1.dir/src/main.cpp.o
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/SpriteOrderer.hpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/TextLib.cpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/TextLib.hpp
+ /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Texture.cpp
+ /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Texture.hpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.cpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/Tile.hpp
  /Users/evgeniykislov/Documents/msu/mashgraph/task1/src/UiElement.cpp

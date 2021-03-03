@@ -13,14 +13,15 @@
 
 #include "OpenglUtils.cpp"
 #include "MathUtils.cpp"
+#include "OpenGL.cpp"
 
 BaseObject::BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer) {
     this->initialPosition = position;
     this->position = position;
     this->layer = layer;
 
-    this->programId = OpenglUtils::createShaderProgram(vertexShaderSource, fragmentShaderSource);
-    glUseProgram(this->programId);
+    this->programId = OpenGL::createProgram(vertexShaderSource, fragmentShaderSource);
+    OpenGL::useProgram(this->programId);
 }
 
 int BaseObject::getLayer() const {

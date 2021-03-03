@@ -19,9 +19,7 @@ void Label::init() {
     
     TextLib::initFont(fontSource, this->size);
 
-    // init program
-
-    glUseProgram(programId);
+    OpenGL::useProgram(this->programId);
 
     // init vao
 
@@ -111,13 +109,13 @@ void Label::init() {
 }
 
 void Label::draw() {
-    glUseProgram(programId);
+    OpenGL::useProgram(this->programId);
     glBindVertexArray(this->vao);
 
     for (int i = 0; i < text.size(); i++) {
         Character* ch = TextLib::getChar(text[i]);
 
-        glBindTexture(GL_TEXTURE_2D, ch->textureId);
+        OpenGL::bindTexture(ch->textureId);
         glDrawArrays(GL_TRIANGLES, i * 6, 6);
     }
 

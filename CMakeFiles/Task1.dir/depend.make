@@ -13,8 +13,15 @@ CMakeFiles/Task1.dir/src/main.cpp.o: src/Game.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Game.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Label.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Label.hpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/LoosingDoor.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/LoosingDoor.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/MathUtils.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/MazeLoader.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/OpenGL.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/OpenGL.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/OpenglUtils.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/ResourceManager.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/ResourceManager.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Scene.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Scene.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Sprite.cpp
@@ -23,6 +30,8 @@ CMakeFiles/Task1.dir/src/main.cpp.o: src/SpriteOrderer.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/SpriteOrderer.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/TextLib.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/TextLib.hpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/Texture.cpp
+CMakeFiles/Task1.dir/src/main.cpp.o: src/Texture.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Tile.cpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/Tile.hpp
 CMakeFiles/Task1.dir/src/main.cpp.o: src/UiElement.cpp

@@ -12,7 +12,7 @@ using namespace std;
 
 class WinningDoor : public Sprite {
     public:
-        WinningDoor(char* textureSource, glm::vec2 position, int layer);
+        WinningDoor(Texture* texture, glm::vec2 position, int layer);
 
         void onStart();
         void onUpdate();

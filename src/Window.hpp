@@ -51,6 +51,8 @@ class Window {
         static bool isKeyPressed(EKey key);
         static bool isKeyDown(EKey key);
         static bool isKeyUp(EKey key);
+
+        static double getTime();
 };
 
 #endif

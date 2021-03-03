@@ -40,6 +40,10 @@ glm::mat4 Camera::getProjectionMatrix() {
     return projectionMatrix;
 }
 
+glm::mat4 Camera::getLookAtMatrix() {
+    return lookAtMatrix;
+}
+
 void Camera::move() {
     if (target) {
         lookAtMatrix = glm::translate(

@@ -2,8 +2,8 @@
 
 #include "Tile.hpp"
 
-Tile::Tile(char* textureSource, glm::vec2 position, int layer, bool walkable):
-    Sprite(textureSource, position, layer) {
+Tile::Tile(Texture* texture, glm::vec2 position, int layer, bool walkable):
+    Sprite(texture, position, layer) {
     this->walkable = walkable;
 }
 

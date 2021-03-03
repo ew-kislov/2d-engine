@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <string>
+#include <vector>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -12,9 +13,13 @@
 #include "Sprite.cpp"
 #include "ControlledObject.cpp"
 #include "WinningDoor.cpp"
+#include "LoosingDoor.cpp"
 #include "Window.cpp"
 #include "Camera.cpp"
 #include "Label.cpp"
+#include "ResourceManager.cpp"
+
+#include "MazeLoader.cpp"
 
 using namespace std;
 
@@ -25,12 +30,20 @@ int main(void) {
     Window::setResolution(1024, 768);
     Window::open();
 
+    // prepare resources
+
+    ResourceManager::loadTexture("assets/textures/floor/center_001.png");
+    ResourceManager::loadTexture("assets/textures/walls/wall_001.png");
+    ResourceManager::loadTexture("assets/items/empty_door.png");
+    ResourceManager::loadTexture("assets/items/door.png");
+    ResourceManager::loadTexture("assets/main_character/main.png");
+
     // add intro scene
 
     Scene* introScene = new Scene(true);
 
     Label* introLabel = new Label("Wake the fuck up, samurai.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
-    Label* actionLabel = new Label("Press enter to start the game.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 120.f), 3);
+    Label* actionLabel = new Label("Press enter to start the game.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 140.f), 3);
 
     introScene->addUiElement(introLabel);
     introScene->addUiElement(actionLabel);
@@ -73,64 +86,64 @@ int main(void) {
 
     levelScene->onKeyDown(EKey::P, []() { Game::setActiveScene("Pause"); });
 
-    // add main character to scene
-
-    Sprite* mainCharacter = new ControlledObject(
-        "assets/main_character/Upset.png",
-        glm::vec2(200.f, 360.f),
-        2,
-        3.0f
-    );
-
-    mainCharacter->setObjectId("Main character");
-
-    levelScene->addSprite(mainCharacter);
-
-    Camera::lookAt(mainCharacter);
-
     // add map to scene
 
-    ifstream mazeFile("src/maze.txt");
-    string line;
+    vector<vector<char>> mazeMap = MazeLoader::getMazeTilemap();
 
-    if (!mazeFile.is_open()){
-        cout << "error while opening maze map" << endl;
-        exit(1);
-    }
+    for (uint8_t i = 0; i < mazeMap.size(); i++) {
+        for (uint8_t j = 0; j < mazeMap[i].size(); j++) {
+            Sprite* tile;
 
-    uint8_t i = 0;
-
-    while (getline(mazeFile, line)) {
-        vector<char> mapLine(line.begin(), line.end());
-        vector<Tile*> tileLine(mapLine.size());
-
-        for (uint8_t j = 0; j < mapLine.size(); j++) {
-            char* textureSource = (char*)(mapLine[j] == '.' ? "assets/textures/floor/center_001.png" : "assets/textures/walls/wall_001.png");
-
-            Sprite* tile = new Tile(
-                textureSource,
-                glm::vec2(j * 72.f, i * 72.f),
-                0,
-                mapLine[j] == '.' ? true : false
-            );
+            switch (mazeMap[i][j]) {
+                case '.':
+                    tile = new Tile(
+                        ResourceManager::getTexture("assets/textures/floor/center_001.png"),
+                        glm::vec2(j * 72.f, i * 72.f),
+                        0,
+                        true
+                    );
+                    break;
+                case '#':
+                    tile = new Tile(
+                        ResourceManager::getTexture("assets/textures/walls/wall_001.png"),
+                        glm::vec2(j * 72.f, i * 72.f),
+                        0,
+                        false
+                    );
+                    break;
+                case 'L':
+                    tile = new LoosingDoor(
+                        ResourceManager::getTexture("assets/items/empty_door.png"),
+                        glm::vec2(j * 72.f, i * 72.f),
+                        1
+                    );
+                    break;
+                case 'W':
+                    tile = new WinningDoor(
+                        ResourceManager::getTexture("assets/items/door.png"),
+                        glm::vec2(j * 72.f, i * 72.f),
+                        1
+                    );
+                    break;
+                case '@':
+                    tile = new ControlledObject(
+                        ResourceManager::getTexture("assets/main_character/main.png"),
+                        glm::vec2(j * 72.f, i * 72.f),
+                        2,
+                        3.0f
+                    );
+                    tile->setObjectId("Main character");
+                    Camera::lookAt(tile);
+                    break;
+                default:
+                    throw runtime_error("Error: unknown tile character");
+            }
 
             levelScene->addSprite(tile);
         }
-
-        i++;
     }
 
-
-    Sprite* door = new WinningDoor(
-        "assets/items/door.png",
-        glm::vec2(576, 390),
-        1
-    );
-
-    levelScene->addSprite(door);
-
     // init game
-
 
     Game::addScene("Level", levelScene);
     Game::addScene("Intro", introScene);

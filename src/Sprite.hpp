@@ -10,19 +10,21 @@
 #include "BaseObject.hpp"
 #include "MathUtils.cpp"
 #include "Scene.hpp"
+#include "Texture.hpp"
 
 using namespace std;
 
 
 class Sprite: public BaseObject {
     private:
-        char* textureSource;
-        GLuint textureId;
+        Texture* texture;
 
         static constexpr float MIN_Z = 0.2f;
 
+        bool isOutOfWindow();
+
     public:
-        Sprite(char* textureSource, glm::vec2 position, int layer);
+        Sprite(Texture* texture, glm::vec2 position, int layer);
 
         void init();
         void draw();
