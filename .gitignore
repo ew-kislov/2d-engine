@@ -1,8 +1,10 @@
 .vscode
 .DS_Store
-/cmake_install.cmake
 /CMakeCache.txt
 /Makefile
-/CMakeFiles
+CMakeFiles/
+external/CMakeFiles/
+**/cmake_install.cmake
 /Task1
 /libGLEW.a
+external/libGLEW.a
