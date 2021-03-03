@@ -146,7 +146,6 @@ int main(void) {
                         0,
                         true
                     ));
-
                     tile = new ControlledObject(
                         ResourceManager::getTexture("assets/main_character/main.png"),
                         glm::vec2(j * 72.f, i * 72.f),
@@ -164,6 +163,7 @@ int main(void) {
         }
     }
 
+
     // init game
 
     Game::addScene("Level", levelScene);
@@ -173,6 +173,7 @@ int main(void) {
     Game::addScene("Win", winScene);
 
     Game::setActiveScene("Intro");
+
     Game::init();
     Game::runMainLoop();
 

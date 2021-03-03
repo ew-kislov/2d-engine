@@ -99,7 +99,6 @@ GLuint OpenGL::createProgram(char *vertexShaderSource, char *fragmentShaderSourc
 
 void OpenGL::useProgram(GLuint id) {
     if (id != OpenGL::activeProgram) {
-        cout << "changing shader " << id << endl;
         glUseProgram(id);
         OpenGL::activeProgram = id;
     }

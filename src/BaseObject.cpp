@@ -16,6 +16,8 @@
 #include "OpenGL.cpp"
 
 BaseObject::BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer) {
+    this->scene = nullptr;
+
     this->initialPosition = position;
     this->position = position;
     this->layer = layer;
