@@ -11,7 +11,7 @@ void Tile::onStart() {
     // Do nothing
 }
 
-void Tile::onUpdate() {
+void Tile::onUpdate(double deltaTime) {
     // Do nothing
 }
 

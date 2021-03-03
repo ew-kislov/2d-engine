@@ -46,6 +46,10 @@ glm::vec2 BaseObject::getPosition() {
 
 void BaseObject::setObjectId(string objectId) {
     this->objectId = objectId;
+    
+    if (this->getScene() != nullptr) {
+        this->getScene()->addNamedObject(this);
+    }
 }
 
 string BaseObject::getObjectId() {

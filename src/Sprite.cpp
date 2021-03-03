@@ -113,7 +113,8 @@ MathUtils::Rect* Sprite::getBoundingRect() {
 }
 
 bool Sprite::isOutOfWindow() {
-    MathUtils::Rect* rect = MathUtils::transformRect(this->getBoundingRect(), Camera::getLookAtMatrix());
+    MathUtils::Rect* rect = this->getBoundingRect();
+    glm::vec2 cameraPosition = Camera::getPosition();
 
-    return rect->y1 < 0 || rect->x1 < 0 || rect->y0 > Window::getHeight() || rect->x0 > Window::getWidth();
+    return rect->y1 + cameraPosition.y < 0 || rect->x1 + cameraPosition.x < 0 || rect->y0 + cameraPosition.y > Window::getHeight() || rect->x0 + cameraPosition.x > Window::getWidth();
 }

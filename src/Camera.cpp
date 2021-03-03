@@ -15,6 +15,7 @@ int Camera::height = 0;
 
 glm::mat4 Camera::projectionMatrix = glm::mat4(1.0);
 glm::mat4 Camera::lookAtMatrix = glm::mat4(1.0);
+glm::vec2 Camera::position = glm::vec2(0.0, 0.0);
 
 Sprite* Camera::target = nullptr;
 
@@ -44,13 +45,21 @@ glm::mat4 Camera::getLookAtMatrix() {
     return lookAtMatrix;
 }
 
+glm::vec2 Camera::getPosition() {
+    return position;
+}
+
 void Camera::move() {
     if (target) {
+        position = glm::vec2(
+            -target->getPosition().x + width / 2 - target->getWidth() / 2,
+            -target->getPosition().y + height / 2 - target->getHeight() / 2
+        );
         lookAtMatrix = glm::translate(
             glm::mat4(1.0),
             glm::vec3(
-                -target->getPosition().x + width / 2 - target->getWidth() / 2,
-                -target->getPosition().y + height / 2 - target->getHeight() / 2,
+                position.x,
+                position.y,
                 0.0f
             )
         );

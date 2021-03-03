@@ -13,8 +13,8 @@ void WinningDoor::onStart() {
     // Do nothing
 }
 
-void WinningDoor::onUpdate() {
-    Sprite* mainCharacter = this->getScene()->find("Main character");
+void WinningDoor::onUpdate(double deltaTime) {
+    Sprite* mainCharacter = (Sprite*)(this->getScene()->find("Main character"));
     if (MathUtils::areRectsIntercepting(this->getBoundingRect(), mainCharacter->getBoundingRect())) {
         Game::setActiveScene("Win");
     }

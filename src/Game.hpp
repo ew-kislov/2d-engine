@@ -23,7 +23,9 @@ class Game {
         static string nextScene;
 
         static int framesPerSec;
-        static double lastUpdateTime;
+        static double lastFpsUpdateTime;
+        static double lastTime;
+        static double deltaTime;
 
         static void calculateFps();
 

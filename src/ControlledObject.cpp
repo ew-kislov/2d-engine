@@ -14,33 +14,48 @@ void ControlledObject::onStart() {
     // Do nothing
 }
 
-void ControlledObject::onUpdate() {
-    glm::vec2 movementVector = glm::vec2(
-        Window::isKeyPressed(EKey::A) ? -1.0 * this->speed : Window::isKeyPressed(EKey::D) ? 1.0 * this->speed : 0.0,
-        Window::isKeyPressed(EKey::W) ? -1.0 * this->speed : Window::isKeyPressed(EKey::S) ? 1.0 * this->speed : 0.0
+void ControlledObject::onUpdate(double deltaTime) {
+    glm::vec2 xMovementVector = glm::vec2(
+        Window::isKeyPressed(EKey::A) ? -1.0 * deltaTime / 20 * this->speed : Window::isKeyPressed(EKey::D) ? 1.0 * deltaTime / 20 * this->speed : 0.0,
+        0.0
     );
 
-    bool canMove = true;
+    glm::vec2 yMovementVector = glm::vec2(
+        0.0,
+        Window::isKeyPressed(EKey::W) ? -1.0 * deltaTime / 20 * this->speed : Window::isKeyPressed(EKey::S) ? 1.0 * deltaTime / 20 * this->speed : 0.0
+    );
 
-    MathUtils::Rect* newRect = this->getBoundingRect();
+    bool canMoveX = true;
+    bool canMoveY = true;
 
-    newRect->x0 += movementVector.x;
-    newRect->x1 += movementVector.x;
-    newRect->y0 += movementVector.y;
-    newRect->y1 += movementVector.y;
+    MathUtils::Rect* newRectX = this->getBoundingRect();
+    MathUtils::Rect* newRectY = this->getBoundingRect();
+
+    newRectX->x0 += xMovementVector.x;
+    newRectX->x1 += xMovementVector.x;
+    newRectY->y0 += yMovementVector.y;
+    newRectY->y1 += yMovementVector.y;
 
     auto tiles = this->getScene()->getSprites("Tile");
 
     for (Sprite* baseTile: tiles) {
         Tile* tile = (Tile*)baseTile;
-        if (!tile->isWalkable() && MathUtils::areRectsIntercepting(newRect, tile->getBoundingRect())) {
-            canMove = false;
+        if (!tile->isWalkable() && MathUtils::areRectsIntercepting(newRectX, tile->getBoundingRect())) {
+            canMoveX = false;
+        }
+        if (!tile->isWalkable() && MathUtils::areRectsIntercepting(newRectY, tile->getBoundingRect())) {
+            canMoveY = false;
+        }
+        if (!canMoveX && !canMoveY) {
             break;
         }
     }
 
-    if (canMove) {
-        this->position += movementVector;
+    if (canMoveX) {
+        this->position += xMovementVector;
+    }
+    if (canMoveY) {
+        this->position += yMovementVector;
     }
 }
 

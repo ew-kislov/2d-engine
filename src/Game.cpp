@@ -25,8 +25,11 @@ std::map<string, Scene*> Game::scenes = {};
 Scene* Game::activeScene = nullptr;
 bool Game::shouldChangeScene = NULL;
 string Game::nextScene = string();
+
 int Game::framesPerSec = 0;
-double Game::lastUpdateTime = 0;
+double Game::lastFpsUpdateTime = 0;
+double Game::lastTime = 0;
+double Game::deltaTime = 0;
 
 Game::Game() {
 }
@@ -38,6 +41,10 @@ void Game::init() {
 void Game::runMainLoop() {
     do {
         Game::calculateFps();
+
+        double currentTime = Window::getTime();
+        Game::deltaTime = 1000 * (currentTime - Game::lastTime);
+        Game::lastTime = currentTime;
 
         Window::clear();
 
@@ -75,8 +82,12 @@ void Game::updatePositions() {
     auto sprites = activeScene->getSprites();
 
     for (Sprite* sprite : sprites) {
-        sprite->onUpdate();
+        sprite->onUpdate(Game::deltaTime);
     }
+
+    // Sprite* main = activeScene->find("Main character");
+    // if (main != nullptr)
+    //     main->onUpdate(Game::deltaTime);
 
     set<Label*> ui = activeScene->getUi();
 
@@ -117,9 +128,9 @@ void Game::setActiveScene(string name) {
 void Game::calculateFps() {
     double currentTime = Window::getTime();
     Game::framesPerSec++;
-    if (currentTime - Game::lastUpdateTime >= 1.0 ){
+    if (currentTime - Game::lastFpsUpdateTime >= 1.0 ){
         cout << 1000.0 / double(Game::framesPerSec) << "ms/frame" << endl;
         Game::framesPerSec = 0;
-        Game::lastUpdateTime += 1.0;
+        Game::lastFpsUpdateTime += 1.0;
     }
 }

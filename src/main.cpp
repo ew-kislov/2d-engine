@@ -112,20 +112,41 @@ int main(void) {
                     );
                     break;
                 case 'L':
+                    levelScene->addSprite(new Tile(
+                        ResourceManager::getTexture("assets/textures/floor/center_001.png"),
+                        glm::vec2(j * 72.f, i * 72.f),
+                        0,
+                        true
+                    ));
+
                     tile = new LoosingDoor(
                         ResourceManager::getTexture("assets/items/empty_door.png"),
-                        glm::vec2(j * 72.f, i * 72.f),
+                        glm::vec2(j * 72.f, i * 72.f - 42),
                         1
                     );
                     break;
                 case 'W':
+                    levelScene->addSprite(new Tile(
+                        ResourceManager::getTexture("assets/textures/floor/center_001.png"),
+                        glm::vec2(j * 72.f, i * 72.f),
+                        0,
+                        true
+                    ));
+
                     tile = new WinningDoor(
                         ResourceManager::getTexture("assets/items/door.png"),
-                        glm::vec2(j * 72.f, i * 72.f),
+                        glm::vec2(j * 72.f, i * 72.f - 42),
                         1
                     );
                     break;
                 case '@':
+                    levelScene->addSprite(new Tile(
+                        ResourceManager::getTexture("assets/textures/floor/center_001.png"),
+                        glm::vec2(j * 72.f, i * 72.f),
+                        0,
+                        true
+                    ));
+
                     tile = new ControlledObject(
                         ResourceManager::getTexture("assets/main_character/main.png"),
                         glm::vec2(j * 72.f, i * 72.f),

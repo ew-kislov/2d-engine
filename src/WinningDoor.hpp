@@ -15,7 +15,7 @@ class WinningDoor : public Sprite {
         WinningDoor(Texture* texture, glm::vec2 position, int layer);
 
         void onStart();
-        void onUpdate();
+        void onUpdate(double deltaTime);
 
         string getClassId();
 };

@@ -34,7 +34,7 @@ class Sprite: public BaseObject {
         // implement this in final objects
 
         virtual void onStart() = 0;
-        virtual void onUpdate() = 0;
+        virtual void onUpdate(double deltaTime) = 0;
 
         virtual string getClassId() = 0;
 };

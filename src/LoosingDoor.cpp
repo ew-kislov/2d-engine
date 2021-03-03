@@ -13,8 +13,8 @@ void LoosingDoor::onStart() {
     // Do nothing
 }
 
-void LoosingDoor::onUpdate() {
-    Sprite* mainCharacter = this->getScene()->find("Main character");
+void LoosingDoor::onUpdate(double deltaTime) {
+    Sprite* mainCharacter = (Sprite*)(this->getScene()->find("Main character"));
     if (MathUtils::areRectsIntercepting(this->getBoundingRect(), mainCharacter->getBoundingRect())) {
         Game::setActiveScene("Game Over");
     }

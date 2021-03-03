@@ -22,7 +22,7 @@ class ControlledObject : public Sprite {
         ControlledObject(Texture* texture, glm::vec2 position, int layer, GLfloat speed);
 
         void onStart();
-        void onUpdate();
+        void onUpdate(double deltaTime);
 
         string getClassId();
 };

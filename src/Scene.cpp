@@ -26,7 +26,6 @@ void Scene::load() {
 
 void Scene::unload() {
     // TODO: detach objects from opengl
-    //
     // for (auto sprite: this->sprites) {
     //     delete sprite;
     // }
@@ -62,22 +61,34 @@ set<Label*> Scene::getUi() {
     return this->ui;
 }
 
-Sprite* Scene::find(string spriteId) {
-    set<Sprite*>::iterator it = find_if(
-        this->sprites.begin(),
-        this->sprites.end(),
-        [spriteId] (Sprite* sprite) { return sprite->getObjectId() == spriteId; }
-    );
-    return *it;
+BaseObject* Scene::find(string objectId) {
+    BaseObject* object = this->namedObjects[objectId];
+    if (object == nullptr) {
+        throw runtime_error("Object with given id wasn't found");
+    }
+    return object;
 }
 
 void Scene::addSprite(Sprite* sprite) {
     this->sprites.insert(sprite);
     sprite->scene = this;
+
+    if (!sprite->getObjectId().empty()) {
+        this->namedObjects[sprite->getObjectId()] = sprite;
+    }
 }
 
 void Scene::addUiElement(Label* label) {
     this->ui.insert(label);
+    label->scene = this;
+
+    if (!label->getObjectId().empty()) {
+        this->namedObjects[label->getObjectId()] = label;
+    }
+}
+
+void Scene::addNamedObject(BaseObject* object) {
+    this->namedObjects[object->getObjectId()] = object;
 }
 
 void Scene::onKeyPress(EKey key, std::function<void(void)> handler) {

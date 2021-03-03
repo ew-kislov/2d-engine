@@ -12,6 +12,7 @@ class Camera {
         static int width;
         static int height;
 
+        static glm::vec2 position;
         static glm::mat4 projectionMatrix;
         static glm::mat4 lookAtMatrix;
 
@@ -20,9 +21,10 @@ class Camera {
         friend class Game;
 
     public:
-    static void move();
+        static void move();
         static void setResolution(int width, int height);
         static void lookAt(Sprite* target);
+        static glm::vec2 getPosition();
         static glm::mat4 getResultMatrix();
         static glm::mat4 getProjectionMatrix();
         static glm::mat4 getLookAtMatrix();
