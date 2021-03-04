@@ -65,7 +65,7 @@ void Sprite::init() {
      * initiate texture coord data
      */
 
-    GLfloat* textureСoordData = new GLfloat[12] {
+    GLfloat* textureCoords = new GLfloat[12] {
         0.0f, 0.0f,
         0.0f, 1.0f,
         1.0f, 0.0f,
@@ -77,7 +77,7 @@ void Sprite::init() {
 
     glGenBuffers(1, &textureCoordVbo);
     glBindBuffer(GL_ARRAY_BUFFER, textureCoordVbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12, textureСoordData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12, textureCoords, GL_STATIC_DRAW);
 
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void *)0);

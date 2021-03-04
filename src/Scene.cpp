@@ -91,23 +91,23 @@ void Scene::addNamedObject(BaseObject* object) {
     this->namedObjects[object->getObjectId()] = object;
 }
 
-void Scene::onKeyPress(EKey key, std::function<void(void)> handler) {
-    this->keyHandlers[key] = pair<EKeyEvent, std::function<void(void)>>(EKeyEvent::PRESS, handler);
+void Scene::onKeyPress(EKey key, function<void(void)> handler) {
+    this->keyHandlers[key] = pair<EKeyEvent, function<void(void)> >(EKeyEvent::PRESS, handler);
 }
 
-void Scene::onKeyDown(EKey key, std::function<void(void)> handler) {
-    this->keyHandlers[key] = pair<EKeyEvent, std::function<void(void)>>(EKeyEvent::DOWN, handler);
+void Scene::onKeyDown(EKey key, function<void(void)> handler) {
+    this->keyHandlers[key] = pair<EKeyEvent, function<void(void)> >(EKeyEvent::DOWN, handler);
 }
 
-void Scene::onKeyUp(EKey key, std::function<void(void)> handler) {
-    this->keyHandlers[key] = pair<EKeyEvent, std::function<void(void)>>(EKeyEvent::UP, handler);
+void Scene::onKeyUp(EKey key, function<void(void)> handler) {
+    this->keyHandlers[key] = pair<EKeyEvent, function<void(void)> >(EKeyEvent::UP, handler);
 }
 
 void Scene::update() {
-    map<EKey, pair<EKeyEvent, std::function<void(void)>>>::iterator it;
+    map<EKey, pair<EKeyEvent, function<void(void)> > >::iterator it;
 
     for (it = this->keyHandlers.begin(); it != this->keyHandlers.end(); it++) {
-        pair<EKeyEvent, std::function<void(void)>> handlerData = it->second;
+        pair<EKeyEvent, function<void(void)> > handlerData = it->second;
         bool isHandlerTriggered;
 
         switch (handlerData.first) {

@@ -4,6 +4,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include <functional>
 
 #include "SpriteOrderer.hpp"
 #include "BaseObject.hpp"
@@ -22,7 +23,7 @@ class Scene {
         map<string, BaseObject*> namedObjects;
         set<Label*> ui;
 
-        map<EKey, pair<EKeyEvent, function<void(void)>>> keyHandlers;
+        map<EKey, pair<EKeyEvent, function<void(void)> > > keyHandlers;
 
         bool cacheable;
         bool loaded = false;

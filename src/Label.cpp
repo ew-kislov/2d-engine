@@ -30,7 +30,7 @@ void Label::init() {
 
     GLuint textureCoordVbo;
 
-    GLfloat textureСoordData[12] {
+    GLfloat textureCoords[12] {
         0.0f, 1.0f,            
         0.0f, 0.0f,
         1.0f, 0.0f,
@@ -46,7 +46,7 @@ void Label::init() {
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12 * text.size(), NULL, GL_STATIC_DRAW);
 
     for (int i = 0; i < this->text.size(); i++) {
-        glBufferSubData(GL_ARRAY_BUFFER, i * 12 * sizeof(GLfloat), sizeof(GLfloat) * 12, &textureСoordData);
+        glBufferSubData(GL_ARRAY_BUFFER, i * 12 * sizeof(GLfloat), sizeof(GLfloat) * 12, &textureCoords);
     }
 
     glEnableVertexAttribArray(1);
