@@ -1,6 +1,7 @@
 .vscode
 .DS_Store
 /CMakeCache.txt
+external/Makefile
 Makefile/
 CMakeFiles/
 external/CMakeFiles/
