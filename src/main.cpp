@@ -18,6 +18,7 @@
 #include "Camera.cpp"
 #include "Label.cpp"
 #include "ResourceManager.cpp"
+#include "Font.cpp"
 
 #include "MazeLoader.cpp"
 
@@ -38,12 +39,15 @@ int main(void) {
     ResourceManager::loadTexture("assets/items/door.png");
     ResourceManager::loadTexture("assets/main_character/main.png");
 
+    ResourceManager::loadFont("assets/fonts/arial.ttf", 32);
+    ResourceManager::loadFont("assets/fonts/arial.ttf", 64);
+
     // add intro scene
 
     Scene* introScene = new Scene(true);
 
-    Label* introLabel = new Label("Wake the fuck up, samurai.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
-    Label* actionLabel = new Label("Press enter to start the game.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 140.f), 3);
+    Label* introLabel = new Label("Wake the fuck up, samurai.", ResourceManager::getFont("assets/fonts/arial.ttf", 64), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
+    Label* actionLabel = new Label("Press enter to start the game.", ResourceManager::getFont("assets/fonts/arial.ttf", 32), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 180.f), 3);
 
     introScene->addUiElement(introLabel);
     introScene->addUiElement(actionLabel);
@@ -54,7 +58,7 @@ int main(void) {
 
     Scene* pauseScene = new Scene(true);
 
-    Label* pauseLabel = new Label("Press P to resume the game.", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
+    Label* pauseLabel = new Label("Press P to resume the game.", ResourceManager::getFont("assets/fonts/arial.ttf", 32), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
 
     pauseScene->addUiElement(pauseLabel);
 
@@ -64,7 +68,7 @@ int main(void) {
 
     Scene* gameOverScene = new Scene(true);
 
-    Label* gameOverLabel = new Label("You`r fucked. Press enter for main menu", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
+    Label* gameOverLabel = new Label("You`r fucked. Press enter for main menu", ResourceManager::getFont("assets/fonts/arial.ttf", 32), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
 
     gameOverScene->addUiElement(gameOverLabel);
 
@@ -74,7 +78,7 @@ int main(void) {
 
     Scene* winScene = new Scene(true);
 
-    Label* winLabel = new Label("You fucking won. Press enter for main menu", "assets/fonts/arial.ttf", 32, glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
+    Label* winLabel = new Label("You fucking won. Press enter for main menu", ResourceManager::getFont("assets/fonts/arial.ttf", 32), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
 
     winScene->addUiElement(winLabel);
 

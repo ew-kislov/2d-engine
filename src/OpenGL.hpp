@@ -11,6 +11,7 @@ using namespace std;
 class OpenGL {
     private:
         static map<string, GLuint> programs;
+        static map<string, GLuint> rectVaos;
 
         static GLuint activeProgram;
         static GLuint activeTexture;
@@ -21,6 +22,10 @@ class OpenGL {
         static void useProgram(GLuint id);
         static void bindTexture(GLuint id);
         static void bindVao(GLuint id);
+
+        static GLuint createRectVao(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z);
+
+        static string getRectHash(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z);
 };
 
 #endif

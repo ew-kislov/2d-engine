@@ -2,29 +2,24 @@
 
 #include "Label.hpp"
 
-#include "TextLib.cpp"
 #include "Camera.cpp"
 #include "UiElement.cpp"
+#include "Font.cpp"
 
-Label::Label(string text, string fontSource, int size, glm::vec4 color, glm::vec2 position, int layer):
+Label::Label(string text, Font* font, glm::vec4 color, glm::vec2 position, int layer):
     UiElement("src/label_fragment_shader.glsl", "src/vertex_shader.glsl", position, layer) {
     this->text = text;
-    this->fontSource = fontSource;
-    this->size = size;
+    this->font = font;
     this->color = color;
 }
 
 void Label::init() {
-    // init font
-    
-    TextLib::initFont(fontSource, this->size);
-
     OpenGL::useProgram(this->programId);
 
     // init vao
 
     glGenVertexArrays(1, &this->vao);
-    glBindVertexArray(this->vao);
+    OpenGL::bindVao(this->vao);
 
     // init texture
 
@@ -56,7 +51,7 @@ void Label::init() {
 
     // init vertices
 
-    GLfloat z = 1.0 * this->layer / MAX_LAYERS + MIN_Z;
+    GLfloat z = 1.0 * this->layer / MAX_LAYERS;
 
     GLuint positionVbo;
 
@@ -71,10 +66,10 @@ void Label::init() {
     GLfloat* buffer = new GLfloat[text.size() * 18];
 
     for (int i = 0; i < text.size(); i++) {
-        Character* ch = TextLib::getChar(text[i]);
+        Character* ch = this->font->getCharacter(text[i]);
 
-        float xpos = x;
-        float ypos = y + this->size - ch->bearing.y;
+        float xpos = x + ch->bearing.x;
+        float ypos = y + this->font->getSize() - ch->bearing.y;
 
         float w = ch->size.x;
         float h = ch->size.y;
@@ -110,17 +105,14 @@ void Label::init() {
 
 void Label::draw() {
     OpenGL::useProgram(this->programId);
-    glBindVertexArray(this->vao);
+    OpenGL::bindVao(this->vao);
 
     for (int i = 0; i < text.size(); i++) {
-        Character* ch = TextLib::getChar(text[i]);
+        Character* ch = font->getCharacter(text[i]);
 
         OpenGL::bindTexture(ch->textureId);
         glDrawArrays(GL_TRIANGLES, i * 6, 6);
     }
-
-    glBindVertexArray(0);
-    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 string Label::getClassId() {

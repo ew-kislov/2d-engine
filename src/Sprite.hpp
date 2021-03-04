@@ -19,8 +19,6 @@ class Sprite: public BaseObject {
     private:
         Texture* texture;
 
-        static constexpr float MIN_Z = 0.2f;
-
         bool isOutOfWindow();
 
     public:

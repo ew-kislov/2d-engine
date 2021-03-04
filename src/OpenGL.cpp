@@ -3,6 +3,7 @@
 #include "OpenGL.hpp"
 
 map<string, GLuint> OpenGL::programs = {};
+map<string, GLuint> OpenGL::rectVaos = {};
 GLuint OpenGL::activeProgram = -1;
 GLuint OpenGL::activeTexture = -1;
 GLuint OpenGL::activeVao = -1;
@@ -116,4 +117,67 @@ void OpenGL::bindVao(GLuint id) {
         glBindVertexArray(id);
         OpenGL::activeVao = id;
     }
+}
+
+GLuint OpenGL::createRectVao(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z) {
+    GLuint vao = OpenGL::rectVaos[OpenGL::getRectHash(x0, y0, width, height, z)];
+    if (vao) {
+        return vao;
+    }
+
+    GLuint positionVbo;
+    GLuint textureCoordVbo;
+
+    glGenVertexArrays(1, &vao);
+    OpenGL::bindVao(vao);
+
+    /**
+     * initiate vertex data
+     */
+
+    GLfloat* positionData = new GLfloat[18] {
+        1.0f * x0, 1.0f * y0, z,
+        1.0f * x0, 1.0f * (y0 + height), z,
+        1.0f * (x0 + width), y0, z,
+
+        1.0f * x0, 1.0f * (y0 + height), z,
+        1.0f * (x0 + width), y0, z,
+        1.0f * (x0 + width), 1.0f * (y0 + height), z
+    };
+
+    glGenBuffers(1, &positionVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, positionVbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, positionData, GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
+
+    /**
+     * initiate texture coord data
+     */
+
+    GLfloat* textureCoords = new GLfloat[12] {
+        0.0f, 0.0f,
+        0.0f, 1.0f,
+        1.0f, 0.0f,
+
+        0.0f, 1.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f
+    };
+
+    glGenBuffers(1, &textureCoordVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, textureCoordVbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12, textureCoords, GL_STATIC_DRAW);
+
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void *)0);
+
+    OpenGL::rectVaos[OpenGL::getRectHash(x0, y0, width, height, z)] = vao;
+
+    return vao;
+}
+
+string OpenGL::getRectHash(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z) {
+    return to_string(x0) + '/' + to_string(y0) + '/' + to_string(width) + '/' + to_string(height) + '/' + to_string(z);
 }

@@ -13,9 +13,6 @@
 using namespace std;
 
 class UiElement: public BaseObject {
-    protected:
-        static constexpr float MIN_Z = 0.4f;
-
     public:
         UiElement(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer);
 

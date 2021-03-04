@@ -10,18 +10,18 @@
 
 #include "UiElement.hpp"
 #include "MathUtils.cpp"
+#include "Font.hpp"
 
 using namespace std;
 
 class Label: public UiElement {
     private:
         string text;
-        string fontSource;
-        int size;
+        Font* font;
         glm::vec4 color;
 
     public:
-        Label(string text, string fontSource, int size, glm::vec4 color, glm::vec2 position, int layer);
+        Label(string text, Font* font, glm::vec4 color, glm::vec2 position, int layer);
 
         void init();
         void draw();

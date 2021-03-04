@@ -6,7 +6,7 @@
 
 - Skip
 
-### Ubuntu 
+### Linux 
 
 - `sudo apt install libfreetype6 libfreetype6-dev`
 - `sudo apt install libpng16-16 libpng-dev`

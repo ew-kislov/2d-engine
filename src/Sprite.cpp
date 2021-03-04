@@ -30,59 +30,9 @@ Sprite::Sprite(Texture* texture, glm::vec2 position, int layer):
 void Sprite::init() {
     this->position = this->initialPosition;
 
-    GLuint positionVbo;
-    GLuint textureCoordVbo;
+    GLfloat z = 1.0 * this->layer / MAX_LAYERS;
 
-    glGenVertexArrays(1, &this->vao);
-    glBindVertexArray(this->vao);
-
-    /**
-     * initiate vertex data
-     */
-
-    GLfloat z = 1.0 * this->layer / MAX_LAYERS + MIN_Z;
-
-    GLfloat* positionData = new GLfloat[18] {
-        0.0f, 0.0f, z,
-        0.0f, 1.0f * this->height, z,
-        1.0f * this->width, 0.0f, z,
-
-        0.0f, 1.0f * this->height, z,
-        1.0f * this->width, 0.0f, z,
-        1.0f * this->width, 1.0f * this->height, z
-    };
-
-    glGenBuffers(1, &positionVbo);
-    glBindBuffer(GL_ARRAY_BUFFER, positionVbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, positionData, GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
-
-    this->vbos[VboType::Position] = positionVbo;
-
-    /**
-     * initiate texture coord data
-     */
-
-    GLfloat* textureCoords = new GLfloat[12] {
-        0.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 0.0f,
-
-        0.0f, 1.0f,
-        1.0f, 0.0f,
-        1.0f, 1.0f
-    };
-
-    glGenBuffers(1, &textureCoordVbo);
-    glBindBuffer(GL_ARRAY_BUFFER, textureCoordVbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 12, textureCoords, GL_STATIC_DRAW);
-
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void *)0);
-
-    this->vbos[VboType::TextureCoords] = textureCoordVbo;
+    this->vao = OpenGL::createRectVao(0, 0, this->width, this->height, z);
 }
 
 void Sprite::draw() {
