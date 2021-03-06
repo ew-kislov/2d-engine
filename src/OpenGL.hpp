@@ -23,9 +23,9 @@ class OpenGL {
         static void bindTexture(GLuint id);
         static void bindVao(GLuint id);
 
-        static GLuint createRectVao(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z);
+        static GLuint createRectVao(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z, bool isFlipX = false, bool isFlipY = false);
 
-        static string getRectHash(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z);
+        static string getRectHash(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z, bool isFlipX, bool isFlipY);
 };
 
 #endif

@@ -119,8 +119,8 @@ void OpenGL::bindVao(GLuint id) {
     }
 }
 
-GLuint OpenGL::createRectVao(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z) {
-    GLuint vao = OpenGL::rectVaos[OpenGL::getRectHash(x0, y0, width, height, z)];
+GLuint OpenGL::createRectVao(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z, bool isFlipX, bool isFlipY) {
+    GLuint vao = OpenGL::rectVaos[OpenGL::getRectHash(x0, y0, width, height, z, isFlipX, isFlipY)];
     if (vao) {
         return vao;
     }
@@ -157,13 +157,13 @@ GLuint OpenGL::createRectVao(GLfloat x0, GLfloat y0, GLfloat width, GLfloat heig
      */
 
     GLfloat* textureCoords = new GLfloat[12] {
-        0.0f, 0.0f,
-        0.0f, 1.0f,
-        1.0f, 0.0f,
+        isFlipX ? 1.0f : 0.0f, 0.0f,
+        isFlipX ? 1.0f : 0.0f, 1.0f,
+        isFlipX ? 0.0f : 1.0f, 0.0f,
 
-        0.0f, 1.0f,
-        1.0f, 0.0f,
-        1.0f, 1.0f
+        isFlipX ? 1.0f : 0.0f, 1.0f,
+        isFlipX ? 0.0f : 1.0f, 0.0f,
+        isFlipX ? 0.0f : 1.0f, 1.0f
     };
 
     glGenBuffers(1, &textureCoordVbo);
@@ -173,11 +173,11 @@ GLuint OpenGL::createRectVao(GLfloat x0, GLfloat y0, GLfloat width, GLfloat heig
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void *)0);
 
-    OpenGL::rectVaos[OpenGL::getRectHash(x0, y0, width, height, z)] = vao;
+    OpenGL::rectVaos[OpenGL::getRectHash(x0, y0, width, height, z, isFlipX, isFlipY)] = vao;
 
     return vao;
 }
 
-string OpenGL::getRectHash(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z) {
-    return to_string(x0) + '/' + to_string(y0) + '/' + to_string(width) + '/' + to_string(height) + '/' + to_string(z);
+string OpenGL::getRectHash(GLfloat x0, GLfloat y0, GLfloat width, GLfloat height, GLfloat z, bool isFlipX, bool isFlipY) {
+    return to_string(x0) + '/' + to_string(y0) + '/' + to_string(width) + '/' + to_string(height) + '/' + to_string(z) + '/' + to_string(isFlipX) + '/' + to_string(isFlipY);
 }

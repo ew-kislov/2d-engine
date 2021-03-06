@@ -15,6 +15,7 @@ Scene::Scene(bool cacheable) {
 void Scene::load() {
     for (Sprite* sprite: this->sprites) {
         sprite->init();
+        sprite->onStart();
     }
 
     for (UiElement* uiElement: this->ui) {

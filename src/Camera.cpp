@@ -52,8 +52,8 @@ glm::vec2 Camera::getPosition() {
 void Camera::move() {
     if (target) {
         position = glm::vec2(
-            -target->getPosition().x + width / 2 - target->getWidth() / 2,
-            -target->getPosition().y + height / 2 - target->getHeight() / 2
+            -target->getPosition().x + width / 2,
+            -target->getPosition().y + height / 2
         );
         lookAtMatrix = glm::translate(
             glm::mat4(1.0),

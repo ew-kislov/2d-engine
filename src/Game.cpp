@@ -83,11 +83,8 @@ void Game::updatePositions() {
 
     for (Sprite* sprite : sprites) {
         sprite->onUpdate(Game::deltaTime);
+        sprite->updateComponents(Game::deltaTime);
     }
-
-    // Sprite* main = activeScene->find("Main character");
-    // if (main != nullptr)
-    //     main->onUpdate(Game::deltaTime);
 
     set<Label*> ui = activeScene->getUi();
 
@@ -129,7 +126,7 @@ void Game::calculateFps() {
     double currentTime = Window::getTime();
     Game::framesPerSec++;
     if (currentTime - Game::lastFpsUpdateTime >= 1.0 ){
-        cout << 1000.0 / double(Game::framesPerSec) << "ms/frame" << endl;
+        cout << "FPS: " << Game::framesPerSec << endl;
         Game::framesPerSec = 0;
         Game::lastFpsUpdateTime += 1.0;
     }

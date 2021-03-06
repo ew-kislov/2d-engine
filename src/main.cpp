@@ -35,9 +35,51 @@ int main(void) {
 
     ResourceManager::loadTexture("assets/textures/floor/center_001.png");
     ResourceManager::loadTexture("assets/textures/walls/wall_001.png");
+
     ResourceManager::loadTexture("assets/items/empty_door.png");
     ResourceManager::loadTexture("assets/items/door.png");
-    ResourceManager::loadTexture("assets/main_character/main.png");
+
+    ResourceManager::loadTexture("assets/hero/walk_000.png");
+    ResourceManager::loadTexture("assets/hero/walk_001.png");
+    ResourceManager::loadTexture("assets/hero/walk_002.png");
+    ResourceManager::loadTexture("assets/hero/walk_003.png");
+    ResourceManager::loadTexture("assets/hero/walk_004.png");
+    ResourceManager::loadTexture("assets/hero/walk_005.png");
+    ResourceManager::loadTexture("assets/hero/walk_006.png");
+    ResourceManager::loadTexture("assets/hero/walk_007.png");
+    ResourceManager::loadTexture("assets/hero/walk_008.png");
+    ResourceManager::loadTexture("assets/hero/walk_009.png");
+    ResourceManager::loadTexture("assets/hero/walk_010.png");
+    ResourceManager::loadTexture("assets/hero/walk_011.png");
+    ResourceManager::loadTexture("assets/hero/walk_012.png");
+    ResourceManager::loadTexture("assets/hero/walk_013.png");
+    ResourceManager::loadTexture("assets/hero/walk_014.png");
+    ResourceManager::loadTexture("assets/hero/walk_015.png");
+    ResourceManager::loadTexture("assets/hero/walk_016.png");
+    ResourceManager::loadTexture("assets/hero/walk_017.png");
+    ResourceManager::loadTexture("assets/hero/walk_018.png");
+    ResourceManager::loadTexture("assets/hero/walk_019.png");
+
+    ResourceManager::loadTexture("assets/hero/idle_000.png");
+    ResourceManager::loadTexture("assets/hero/idle_001.png");
+    ResourceManager::loadTexture("assets/hero/idle_002.png");
+    ResourceManager::loadTexture("assets/hero/idle_003.png");
+    ResourceManager::loadTexture("assets/hero/idle_004.png");
+    ResourceManager::loadTexture("assets/hero/idle_005.png");
+    ResourceManager::loadTexture("assets/hero/idle_006.png");
+    ResourceManager::loadTexture("assets/hero/idle_007.png");
+    ResourceManager::loadTexture("assets/hero/idle_008.png");
+    ResourceManager::loadTexture("assets/hero/idle_009.png");
+    ResourceManager::loadTexture("assets/hero/idle_010.png");
+    ResourceManager::loadTexture("assets/hero/idle_011.png");
+    ResourceManager::loadTexture("assets/hero/idle_012.png");
+    ResourceManager::loadTexture("assets/hero/idle_013.png");
+    ResourceManager::loadTexture("assets/hero/idle_014.png");
+    ResourceManager::loadTexture("assets/hero/idle_015.png");
+    ResourceManager::loadTexture("assets/hero/idle_016.png");
+    ResourceManager::loadTexture("assets/hero/idle_017.png");
+    ResourceManager::loadTexture("assets/hero/idle_018.png");
+    ResourceManager::loadTexture("assets/hero/idle_019.png");
 
     ResourceManager::loadFont("assets/fonts/arial.ttf", 32);
     ResourceManager::loadFont("assets/fonts/arial.ttf", 64);
@@ -151,10 +193,11 @@ int main(void) {
                         true
                     ));
                     tile = new ControlledObject(
-                        ResourceManager::getTexture("assets/main_character/main.png"),
+                        ResourceManager::getTexture("assets/hero/idle_000.png"),
                         glm::vec2(j * 72.f, i * 72.f),
                         2,
-                        3.0f
+                        3.0f,
+                        0.22
                     );
                     tile->setObjectId("Main character");
                     Camera::lookAt(tile);

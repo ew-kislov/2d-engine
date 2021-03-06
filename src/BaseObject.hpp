@@ -52,8 +52,6 @@ class BaseObject {
         BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer);
 
         int getLayer() const;
-        int getWidth();
-        int getHeight();
 
         virtual void init() = 0;
         virtual void draw() = 0;

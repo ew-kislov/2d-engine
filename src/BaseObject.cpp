@@ -30,14 +30,6 @@ int BaseObject::getLayer() const {
     return this->layer;
 }
 
-int BaseObject::getWidth() {
-    return this->width;
-}
-
-int BaseObject::getHeight() {
-    return this->height;
-}
-
 Scene* BaseObject::getScene() {
     return this->scene;
 }
