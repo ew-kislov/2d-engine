@@ -2,7 +2,7 @@
 .DS_Store
 /CMakeCache.txt
 external/Makefile
-Makefile/
+/Makefile
 CMakeFiles/
 external/CMakeFiles/
 **/cmake_install.cmake
