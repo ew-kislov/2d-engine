@@ -19,12 +19,12 @@ class Font {
     private:
         string source;
         int size;
-        map<char, Character*> characters;
+        map<char, shared_ptr<Character> > characters;
 
     public:
-        Font(string source, int size, map<char, Character*> characters);
+        Font(string source, int size, map<char, shared_ptr<Character> > characters);
 
-        Character* getCharacter(char c);
+        shared_ptr<Character> getCharacter(char c);
         int getSize();
 };
 

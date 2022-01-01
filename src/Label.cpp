@@ -66,7 +66,7 @@ void Label::init() {
     GLfloat* buffer = new GLfloat[text.size() * 18];
 
     for (int i = 0; i < text.size(); i++) {
-        Character* ch = this->font->getCharacter(text[i]);
+        shared_ptr<Character> ch = this->font->getCharacter(text[i]);
 
         float xpos = x + ch->bearing.x;
         float ypos = y + this->font->getSize() - ch->bearing.y;
@@ -108,7 +108,7 @@ void Label::draw() {
     OpenGL::bindVao(this->vao);
 
     for (int i = 0; i < text.size(); i++) {
-        Character* ch = font->getCharacter(text[i]);
+        shared_ptr<Character> ch = font->getCharacter(text[i]);
 
         OpenGL::bindTexture(ch->textureId);
         glDrawArrays(GL_TRIANGLES, i * 6, 6);

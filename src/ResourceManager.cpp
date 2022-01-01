@@ -58,7 +58,7 @@ void ResourceManager::loadFont(string fontSource, int size) {
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    map<char, Character*> characters;
+    map<char, shared_ptr<Character>> characters;
   
     for (unsigned char c = 0; c < 128; c++) {
         if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
@@ -85,12 +85,12 @@ void ResourceManager::loadFont(string fontSource, int size) {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-        Character* character = new Character {
+        shared_ptr<Character> character (new Character {
             texture,
             glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
             glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
             static_cast<unsigned int>(face->glyph->advance.x)
-        };
+        });
         characters[c] = character;
     }
 

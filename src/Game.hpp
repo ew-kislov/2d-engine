@@ -28,6 +28,8 @@ class Game {
 
         static void calculateFps();
 
+        static void switchScene();
+
         static void updatePositions();
         static void draw();
 
@@ -39,9 +41,6 @@ class Game {
 
         static void addScene(shared_ptr<Scene> scene);
         static shared_ptr<Scene> getScene(string name);
-
-        // TODO: make private
-        static void switchScene();
 
         static void setActiveScene(string name);
         static void loadScene(string name);

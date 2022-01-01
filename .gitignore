@@ -12,3 +12,4 @@ external/libGLEW.a
 **/*.make
 **/*.cmake
 **/*.internal
+.idea
