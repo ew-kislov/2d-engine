@@ -18,7 +18,7 @@ class OpenGL {
         static GLuint activeVao;
 
     public:
-        static GLuint createProgram(char* vertexShaderSource, char* fragmentShaderSource);
+        static GLuint createProgram(string vertexShaderSource, string fragmentShaderSource);
         static void useProgram(GLuint id);
         static void bindTexture(GLuint id);
         static void bindVao(GLuint id);

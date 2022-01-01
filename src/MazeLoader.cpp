@@ -25,7 +25,7 @@ namespace MazeLoader {
         }
     }
 
-    vector<vector<char>> getRoomTilemap(char* roomName) {
+    vector<vector<char>> getRoomTilemap(string roomName) {
         ifstream roomFile(roomName);
         string line;
 

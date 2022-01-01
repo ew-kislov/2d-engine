@@ -24,7 +24,7 @@ class BaseObject {
     private:
         string objectId;
 
-        Scene* scene;
+        string scene;
 
         friend class Scene;
 
@@ -46,10 +46,10 @@ class BaseObject {
         GLuint vao;
         map<VboType, GLuint> vbos;
 
-        Scene* getScene();
+        shared_ptr<Scene> getScene();
 
     public:
-        BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer);
+        BaseObject(string fragmentShaderSource, string vertexShaderSource, glm::vec2 position, int layer);
 
         int getLayer() const;
 

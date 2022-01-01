@@ -13,14 +13,14 @@
 #include "Texture.cpp"
 #include "Font.cpp"
 
-map<char*, Texture*> ResourceManager::textures = {};
+map<string, Texture*> ResourceManager::textures = {};
 map<string, Font*> ResourceManager::fonts = {};
 
-void ResourceManager::loadTexture(char* textureSource) {
+void ResourceManager::loadTexture(string textureSource) {
     int width, height, channels;
     GLuint textureId;
 
-    unsigned char *textureData = stbi_load(textureSource, &width, &height, &channels, 0);
+    unsigned char *textureData = stbi_load(textureSource.c_str(), &width, &height, &channels, 0);
 
     if (!textureData) {
         throw runtime_error("Error: failed to load texture");
@@ -102,7 +102,7 @@ void ResourceManager::loadFont(string fontSource, int size) {
     ResourceManager::fonts[ResourceManager::getFontHash(fontSource, size)] = new Font(fontSource, size, characters);
 }
 
-Texture* ResourceManager::getTexture(char* textureSource) {
+Texture* ResourceManager::getTexture(string textureSource) {
     Texture* texture = ResourceManager::textures[textureSource];
     if (!texture) {
         throw runtime_error("Error: no texture with given source");

@@ -3,14 +3,14 @@
 #include "Animator.hpp"
 
 Animator::Animator(double speed) {
-    this->speed;
+    this->speed = speed;
     this->msPerClip = 1000.0 / speed;
 
     this->activeAnimation = "";
 }
 
 void Animator::changeSpeed(double speed) {
-    this->speed;
+    this->speed = speed;
     this->msPerClip = 1000.0 / speed;
 }
 

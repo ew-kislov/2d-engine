@@ -8,8 +8,13 @@
 #include "SpriteOrderer.cpp"
 #include "Window.cpp"
 
-Scene::Scene(bool cacheable) {
+Scene::Scene(string name, bool cacheable) {
+    this->name = name;
     this->cacheable = cacheable;
+}
+
+string Scene::getName() {
+    return this->name;
 }
 
 void Scene::load() {
@@ -27,6 +32,7 @@ void Scene::load() {
 
 void Scene::unload() {
     // TODO: detach objects from opengl
+    
     // for (auto sprite: this->sprites) {
     //     delete sprite;
     // }
@@ -72,7 +78,7 @@ BaseObject* Scene::find(string objectId) {
 
 void Scene::addSprite(Sprite* sprite) {
     this->sprites.insert(sprite);
-    sprite->scene = this;
+    sprite->scene = this->name;
 
     if (!sprite->getObjectId().empty()) {
         this->namedObjects[sprite->getObjectId()] = sprite;
@@ -81,7 +87,7 @@ void Scene::addSprite(Sprite* sprite) {
 
 void Scene::addUiElement(Label* label) {
     this->ui.insert(label);
-    label->scene = this;
+    label->scene = this->name;
 
     if (!label->getObjectId().empty()) {
         this->namedObjects[label->getObjectId()] = label;
@@ -122,7 +128,7 @@ void Scene::update() {
                 isHandlerTriggered = Window::isKeyUp(it->first);
                 break;
             default:
-                throw runtime_error("Error: nsupported key event.");
+                throw runtime_error("Error: not supported key event.");
                 exit(1);
         }
 

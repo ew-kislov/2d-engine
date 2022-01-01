@@ -13,16 +13,16 @@ using namespace std;
 
 class ResourceManager {
     private:
-        static map<char*, Texture*> textures;
+        static map<string, Texture*> textures;
         static map<string, Font*> fonts;
 
         static string getFontHash(string source, int size);
 
     public:
-        static void loadTexture(char* textureSource);
+        static void loadTexture(string textureSource);
         static void loadFont(string fontSource, int size);
 
-        static Texture* getTexture(char* textureSource);
+        static Texture* getTexture(string textureSource);
         static Font* getFont(string fontSource, int size);
 };
 

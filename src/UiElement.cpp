@@ -2,7 +2,7 @@
 
 #include "UiElement.hpp"
 
-UiElement::UiElement(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer):
+UiElement::UiElement(string fragmentShaderSource, string vertexShaderSource, glm::vec2 position, int layer):
     BaseObject(fragmentShaderSource, vertexShaderSource, position, layer) {
 }
 

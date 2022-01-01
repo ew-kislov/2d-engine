@@ -9,3 +9,6 @@ external/CMakeFiles/
 /Task1
 /libGLEW.a
 external/libGLEW.a
+**/*.make
+**/*.cmake
+**/*.internal

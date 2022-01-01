@@ -86,7 +86,7 @@ int main(void) {
 
     // add intro scene
 
-    Scene* introScene = new Scene(true);
+    shared_ptr<Scene> introScene(new Scene("Intro", true));
 
     Label* introLabel = new Label("Wake the **** up, samurai.", ResourceManager::getFont("assets/fonts/arial.ttf", 64), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
     Label* actionLabel = new Label("Press enter to start the game.", ResourceManager::getFont("assets/fonts/arial.ttf", 32), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 180.f), 3);
@@ -94,11 +94,13 @@ int main(void) {
     introScene->addUiElement(introLabel);
     introScene->addUiElement(actionLabel);
 
-    introScene->onKeyDown(EKey::Enter, []() { Game::setActiveScene("Level"); });
+    introScene->onKeyDown(EKey::Enter, []() {
+        Game::setActiveScene("Level");
+    });
 
     // add pause scene
 
-    Scene* pauseScene = new Scene(true);
+    shared_ptr<Scene> pauseScene(new Scene("Pause", true));
 
     Label* pauseLabel = new Label("Press P to resume the game.", ResourceManager::getFont("assets/fonts/arial.ttf", 32), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
 
@@ -108,7 +110,7 @@ int main(void) {
 
     // add game over scene
 
-    Scene* gameOverScene = new Scene(true);
+    shared_ptr<Scene> gameOverScene(new Scene("Game Over", true));
 
     Label* gameOverLabel = new Label("You`r lost. Press enter for main menu", ResourceManager::getFont("assets/fonts/arial.ttf", 32), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
 
@@ -118,7 +120,7 @@ int main(void) {
 
     // add game over scene
 
-    Scene* winScene = new Scene(true);
+    shared_ptr<Scene> winScene(new Scene("Win", true));
 
     Label* winLabel = new Label("You won. Press enter for main menu", ResourceManager::getFont("assets/fonts/arial.ttf", 32), glm::vec4(1.f, 0.f, 1.f, 1.f), glm::vec2(100.f, 100.f), 3);
 
@@ -128,7 +130,7 @@ int main(void) {
 
     // add level scene
 
-    Scene* levelScene = new Scene(false);
+    shared_ptr<Scene> levelScene(new Scene("Level", false));
 
     levelScene->onKeyDown(EKey::P, []() { Game::setActiveScene("Pause"); });
 
@@ -213,11 +215,11 @@ int main(void) {
 
     // init game
 
-    Game::addScene("Level", levelScene);
-    Game::addScene("Intro", introScene);
-    Game::addScene("Pause", pauseScene);
-    Game::addScene("Game Over", gameOverScene);
-    Game::addScene("Win", winScene);
+    Game::addScene(levelScene);
+    Game::addScene(introScene);
+    Game::addScene(pauseScene);
+    Game::addScene(gameOverScene);
+    Game::addScene(winScene);
 
     Game::setActiveScene("Intro");
 

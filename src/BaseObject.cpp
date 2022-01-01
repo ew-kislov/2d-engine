@@ -15,9 +15,7 @@
 #include "MathUtils.cpp"
 #include "OpenGL.cpp"
 
-BaseObject::BaseObject(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer) {
-    this->scene = nullptr;
-
+BaseObject::BaseObject(string fragmentShaderSource, string vertexShaderSource, glm::vec2 position, int layer) {
     this->initialPosition = position;
     this->position = position;
     this->layer = layer;
@@ -30,8 +28,8 @@ int BaseObject::getLayer() const {
     return this->layer;
 }
 
-Scene* BaseObject::getScene() {
-    return this->scene;
+shared_ptr<Scene> BaseObject::getScene() {
+    return Game::getScene(this->scene);
 }
 
 glm::vec2 BaseObject::getPosition() {
@@ -41,7 +39,7 @@ glm::vec2 BaseObject::getPosition() {
 void BaseObject::setObjectId(string objectId) {
     this->objectId = objectId;
     
-    if (this->getScene() != nullptr) {
+    if (this->getScene()) {
         this->getScene()->addNamedObject(this);
     }
 }

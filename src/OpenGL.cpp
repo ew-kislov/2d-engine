@@ -8,7 +8,7 @@ GLuint OpenGL::activeProgram = -1;
 GLuint OpenGL::activeTexture = -1;
 GLuint OpenGL::activeVao = -1;
 
-GLuint OpenGL::createProgram(char *vertexShaderSource, char *fragmentShaderSource) {
+GLuint OpenGL::createProgram(string vertexShaderSource, string fragmentShaderSource) {
     string shadersString = string(vertexShaderSource) + string(fragmentShaderSource);
     GLuint cachedProgramId = OpenGL::programs[shadersString];
     if (cachedProgramId) {
@@ -27,7 +27,7 @@ GLuint OpenGL::createProgram(char *vertexShaderSource, char *fragmentShaderSourc
         vertexShaderCode = sstr.str();
         vertexShaderStream.close();
     } else {
-        fprintf(stderr, "Error: can't open %s.", vertexShaderSource);
+        fprintf(stderr, "Error: can't open %s.", vertexShaderSource.c_str());
         exit(1);
     }
 
@@ -40,7 +40,7 @@ GLuint OpenGL::createProgram(char *vertexShaderSource, char *fragmentShaderSourc
         fragmentShaderCode = sstr.str();
         fragmentShaderStream.close();
     } else {
-        fprintf(stderr, "Error: can't open %s.", vertexShaderSource);
+        fprintf(stderr, "Error: can't open %s.", vertexShaderSource.c_str());
         exit(1);
     }
 

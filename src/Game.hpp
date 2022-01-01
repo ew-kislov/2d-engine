@@ -13,11 +13,10 @@
 
 using namespace std;
 
-
 class Game {
     private:
-        static std::map<string, Scene*> scenes;
-        static Scene* activeScene;
+        static std::map<string, shared_ptr<Scene> > scenes;
+        static shared_ptr<Scene> activeScene;
 
         static bool shouldChangeScene;
         static string nextScene;
@@ -38,8 +37,12 @@ class Game {
         static void init();
         static void runMainLoop();
 
-        static void addScene(string name, Scene* scene);
+        static void addScene(shared_ptr<Scene> scene);
+        static shared_ptr<Scene> getScene(string name);
+
+        // TODO: make private
         static void switchScene();
+
         static void setActiveScene(string name);
         static void loadScene(string name);
 };

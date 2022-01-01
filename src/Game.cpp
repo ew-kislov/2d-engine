@@ -21,9 +21,9 @@
 #include "Window.cpp"
 #include "Scene.cpp"
 
-std::map<string, Scene*> Game::scenes = {};
-Scene* Game::activeScene = nullptr;
-bool Game::shouldChangeScene = NULL;
+map<string, shared_ptr<Scene> > Game::scenes = {};
+shared_ptr<Scene> Game::activeScene;
+bool Game::shouldChangeScene = false;
 string Game::nextScene = string();
 
 int Game::framesPerSec = 0;
@@ -93,19 +93,23 @@ void Game::updatePositions() {
     }
 }
 
-void Game::addScene(string name, Scene* scene) {
-    scenes[name] = scene;
+void Game::addScene(shared_ptr<Scene> scene) {
+    scenes[scene->getName()] = scene;
+}
+
+shared_ptr<Scene> Game::getScene(string name) {
+    return Game::scenes[name];
 }
 
 void Game::switchScene() {
-    Scene* scene = scenes[Game::nextScene];
-    if (scene == nullptr) {
+    shared_ptr<Scene> scene = scenes[Game::nextScene];
+    if (!scene) {
         throw runtime_error("Error: scene with given name doesn't exist");
     }
 
-    Scene* prevScene = Game::activeScene;
+    shared_ptr<Scene> prevScene = Game::activeScene;
 
-    if (prevScene != nullptr && !prevScene->isCacheable() && prevScene->isLoaded()) {
+    if (prevScene && !prevScene->isCacheable() && prevScene->isLoaded()) {
         prevScene->unload();
     }
     

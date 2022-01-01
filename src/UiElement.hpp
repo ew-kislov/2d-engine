@@ -14,7 +14,7 @@ using namespace std;
 
 class UiElement: public BaseObject {
     public:
-        UiElement(char* fragmentShaderSource, char* vertexShaderSource, glm::vec2 position, int layer);
+        UiElement(string fragmentShaderSource, string vertexShaderSource, glm::vec2 position, int layer);
 
         void transform();
 

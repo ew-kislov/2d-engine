@@ -19,6 +19,8 @@ class Sprite;
 
 class Scene {
     private:
+        string name;
+        
         multiset<Sprite*, SpriteOrderer> sprites;
         map<string, BaseObject*> namedObjects;
         set<Label*> ui;
@@ -29,7 +31,9 @@ class Scene {
         bool loaded = false;
 
     public:
-        Scene(bool cacheable);
+        Scene(string name, bool cacheable);
+
+        string getName();
 
         void load();
         void unload();
