@@ -5,7 +5,7 @@
 #include "Sprite.cpp"
 #include "Game.cpp"
 
-LoosingDoor::LoosingDoor(Texture* texture, glm::vec2 position, int layer):
+LoosingDoor::LoosingDoor(shared_ptr<Texture> texture, glm::vec2 position, int layer):
     Sprite(texture, position, layer) {
 }
 

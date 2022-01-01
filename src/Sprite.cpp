@@ -21,7 +21,7 @@
 
 #include "OpenGL.cpp"
 
-Sprite::Sprite(Texture* texture, glm::vec2 position, int layer, double scale):
+Sprite::Sprite(shared_ptr<Texture> texture, glm::vec2 position, int layer, double scale):
     BaseObject("src/fragment_shader.glsl", "src/vertex_shader.glsl", position, layer) {
     this->texture = texture;
     this->textureHeight = texture->getHeight();
@@ -31,7 +31,7 @@ Sprite::Sprite(Texture* texture, glm::vec2 position, int layer, double scale):
     this->scale = scale;
 }
 
-Sprite::Sprite(Texture* texture, glm::vec2 position, int layer, double width, double height, double scale):
+Sprite::Sprite(shared_ptr<Texture> texture, glm::vec2 position, int layer, double width, double height, double scale):
     BaseObject("src/fragment_shader.glsl", "src/vertex_shader.glsl", position, layer) {
     this->texture = texture;
     this->textureHeight = texture->getHeight();
@@ -80,7 +80,7 @@ MathUtils::Rect* Sprite::getBoundingRect() {
     return new MathUtils::Rect(d0.x, d0.y, d1.x, d1.y);
 }
 
-void Sprite::setTexture(Texture* texture) {
+void Sprite::setTexture(shared_ptr<Texture> texture) {
     this->texture = texture;
 
     if ((texture->getHeight() != this->height || texture->getWidth() != this->width) && !this->boxHeight && !this->boxWidth) {

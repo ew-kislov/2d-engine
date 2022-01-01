@@ -14,7 +14,7 @@ void Animator::changeSpeed(double speed) {
     this->msPerClip = 1000.0 / speed;
 }
 
-void Animator::addAnimation(string name, vector<Texture*> clips) {
+void Animator::addAnimation(string name, vector<shared_ptr<Texture> > clips) {
     this->animations[name] = clips;
 }
 

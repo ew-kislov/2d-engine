@@ -5,7 +5,7 @@
 #include "Sprite.cpp"
 #include "Game.cpp"
 
-WinningDoor::WinningDoor(Texture* texture, glm::vec2 position, int layer):
+WinningDoor::WinningDoor(shared_ptr<Texture> texture, glm::vec2 position, int layer):
     Sprite(texture, position, layer) {
 }
 

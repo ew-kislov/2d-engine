@@ -17,11 +17,11 @@ using namespace std;
 class Label: public UiElement {
     private:
         string text;
-        Font* font;
+        shared_ptr<Font> font;
         glm::vec4 color;
 
     public:
-        Label(string text, Font* font, glm::vec4 color, glm::vec2 position, int layer);
+        Label(string text, shared_ptr<Font> font, glm::vec4 color, glm::vec2 position, int layer);
 
         void init();
         void draw();

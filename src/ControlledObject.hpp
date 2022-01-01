@@ -19,8 +19,8 @@ class ControlledObject : public Sprite {
         GLfloat speed;
 
     public:
-        ControlledObject(Texture* texture, glm::vec2 position, int layer, GLfloat speed, double scale = 1.0f);
-        ControlledObject(Texture* texture, glm::vec2 position, int layer, GLfloat speed, double width, double height, double scale = 1.0f);
+        ControlledObject(shared_ptr<Texture> texture, glm::vec2 position, int layer, GLfloat speed, double scale = 1.0f);
+        ControlledObject(shared_ptr<Texture> texture, glm::vec2 position, int layer, GLfloat speed, double width, double height, double scale = 1.0f);
 
         void onStart();
         void onUpdate(double deltaTime);

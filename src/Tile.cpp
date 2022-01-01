@@ -2,7 +2,7 @@
 
 #include "Tile.hpp"
 
-Tile::Tile(Texture* texture, glm::vec2 position, int layer, bool walkable):
+Tile::Tile(shared_ptr<Texture> texture, glm::vec2 position, int layer, bool walkable):
     Sprite(texture, position, layer) {
     this->walkable = walkable;
 }

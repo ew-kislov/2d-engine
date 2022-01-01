@@ -7,12 +7,12 @@
 #include "Animator.cpp"
 #include "ResourceManager.cpp"
 
-ControlledObject::ControlledObject(Texture* texture, glm::vec2 position, int layer, GLfloat speed, double scale):
+ControlledObject::ControlledObject(shared_ptr<Texture> texture, glm::vec2 position, int layer, GLfloat speed, double scale):
     Sprite(texture, position, layer, scale) {
     this->speed = speed;
 }
 
-ControlledObject::ControlledObject(Texture* texture, glm::vec2 position, int layer, GLfloat speed, double width, double height, double scale):
+ControlledObject::ControlledObject(shared_ptr<Texture> texture, glm::vec2 position, int layer, GLfloat speed, double width, double height, double scale):
     Sprite(texture, position, layer, width, height, scale) {
     this->speed = speed;
 }
@@ -20,7 +20,7 @@ ControlledObject::ControlledObject(Texture* texture, glm::vec2 position, int lay
 void ControlledObject::onStart() {
     Animator* animator = new Animator(20.0f);
 
-    vector<Texture*> walkAnimation = {
+    vector<shared_ptr<Texture> > walkAnimation = {
         ResourceManager::getTexture("assets/hero/walk_000.png"),
         ResourceManager::getTexture("assets/hero/walk_001.png"),
         ResourceManager::getTexture("assets/hero/walk_002.png"),
@@ -43,7 +43,7 @@ void ControlledObject::onStart() {
         ResourceManager::getTexture("assets/hero/walk_019.png"),
     };
 
-    vector<Texture*> idleAnimation = {
+    vector<shared_ptr<Texture> > idleAnimation = {
         ResourceManager::getTexture("assets/hero/idle_000.png"),
         ResourceManager::getTexture("assets/hero/idle_001.png"),
         ResourceManager::getTexture("assets/hero/idle_002.png"),

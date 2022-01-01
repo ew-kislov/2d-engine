@@ -6,7 +6,7 @@
 #include "UiElement.cpp"
 #include "Font.cpp"
 
-Label::Label(string text, Font* font, glm::vec4 color, glm::vec2 position, int layer):
+Label::Label(string text, shared_ptr<Font> font, glm::vec4 color, glm::vec2 position, int layer):
     UiElement("src/label_fragment_shader.glsl", "src/vertex_shader.glsl", position, layer) {
     this->text = text;
     this->font = font;

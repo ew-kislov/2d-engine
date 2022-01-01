@@ -13,14 +13,14 @@
 #include "Texture.cpp"
 #include "Font.cpp"
 
-map<string, Texture*> ResourceManager::textures = {};
-map<string, Font*> ResourceManager::fonts = {};
+map<string, shared_ptr<Texture> > ResourceManager::textures = {};
+map<string, shared_ptr<Font> > ResourceManager::fonts = {};
 
 void ResourceManager::loadTexture(string textureSource) {
     int width, height, channels;
     GLuint textureId;
 
-    unsigned char *textureData = stbi_load(textureSource.c_str(), &width, &height, &channels, 0);
+    unsigned char* textureData = stbi_load(textureSource.c_str(), &width, &height, &channels, 0);
 
     if (!textureData) {
         throw runtime_error("Error: failed to load texture");
@@ -39,7 +39,7 @@ void ResourceManager::loadTexture(string textureSource) {
 
     stbi_image_free(textureData);
 
-    ResourceManager::textures[textureSource] = new Texture(textureId, width, height);
+    ResourceManager::textures[textureSource] = make_shared<Texture>(textureId, width, height);
 }
 
 void ResourceManager::loadFont(string fontSource, int size) {
@@ -99,19 +99,19 @@ void ResourceManager::loadFont(string fontSource, int size) {
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
 
-    ResourceManager::fonts[ResourceManager::getFontHash(fontSource, size)] = new Font(fontSource, size, characters);
+    ResourceManager::fonts[ResourceManager::getFontHash(fontSource, size)] = make_shared<Font>(fontSource, size, characters);
 }
 
-Texture* ResourceManager::getTexture(string textureSource) {
-    Texture* texture = ResourceManager::textures[textureSource];
+shared_ptr<Texture> ResourceManager::getTexture(string textureSource) {
+    shared_ptr<Texture> texture = ResourceManager::textures[textureSource];
     if (!texture) {
         throw runtime_error("Error: no texture with given source");
     }
     return texture;
 }
 
-Font* ResourceManager::getFont(string fontSource, int size) {
-    Font* font = ResourceManager::fonts[ResourceManager::getFontHash(fontSource, size)];
+shared_ptr<Font> ResourceManager::getFont(string fontSource, int size) {
+    shared_ptr<Font> font = ResourceManager::fonts[ResourceManager::getFontHash(fontSource, size)];
     if (!font) {
         throw runtime_error("Error: no font with given source and size");
     }

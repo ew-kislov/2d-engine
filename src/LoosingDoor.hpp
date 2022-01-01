@@ -12,7 +12,7 @@ using namespace std;
 
 class LoosingDoor : public Sprite {
     public:
-        LoosingDoor(Texture* texture, glm::vec2 position, int layer);
+        LoosingDoor(shared_ptr<Texture> texture, glm::vec2 position, int layer);
 
         void onStart();
         void onUpdate(double deltaTime);

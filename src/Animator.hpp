@@ -18,14 +18,14 @@ class Animator: public Component {
         string activeAnimation;
         int activeClip;
 
-        map<string, vector<Texture*> > animations;
+        map<string, vector<shared_ptr<Texture> > > animations;
 
     public:
         Animator(double speed);
 
         void changeSpeed(double speed);
 
-        void addAnimation(string name, vector<Texture*> clips);
+        void addAnimation(string name, vector<shared_ptr<Texture> > clips);
         void switchAnimation(string name);
 
         string getActiveAnimation();

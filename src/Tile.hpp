@@ -15,7 +15,7 @@ class Tile : public Sprite {
         bool walkable;
 
     public:
-        Tile(Texture* texture, glm::vec2 position, int layer, bool walkable);
+        Tile(shared_ptr<Texture> texture, glm::vec2 position, int layer, bool walkable);
 
         void onStart();
         void onUpdate(double deltaTime);

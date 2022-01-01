@@ -25,7 +25,7 @@ class Sprite: public BaseObject {
         double boxHeight;
         double scale;
 
-        Texture* texture;
+        shared_ptr<Texture> texture;
         map<string, Component*> components;
 
         bool isOutOfWindow();
@@ -38,8 +38,8 @@ class Sprite: public BaseObject {
         Component* getComponent(string id);
 
     public:
-        Sprite(Texture* texture, glm::vec2 position, int layer, double scale = 1.0f);
-        Sprite(Texture* texture, glm::vec2 position, int layer, double width, double height, double scale = 1.0f);
+        Sprite(shared_ptr<Texture> texture, glm::vec2 position, int layer, double scale = 1.0f);
+        Sprite(shared_ptr<Texture> texture, glm::vec2 position, int layer, double width, double height, double scale = 1.0f);
 
         int getWidth();
         int getHeight();
@@ -49,7 +49,7 @@ class Sprite: public BaseObject {
 
         MathUtils::Rect* getBoundingRect();
 
-        void setTexture(Texture* texture);
+        void setTexture(shared_ptr<Texture> texture);
 
         void updateComponents(double deltaTime);
 

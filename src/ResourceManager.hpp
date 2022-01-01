@@ -13,8 +13,8 @@ using namespace std;
 
 class ResourceManager {
     private:
-        static map<string, Texture*> textures;
-        static map<string, Font*> fonts;
+        static map<string, shared_ptr<Texture> > textures;
+        static map<string, shared_ptr<Font> > fonts;
 
         static string getFontHash(string source, int size);
 
@@ -22,8 +22,8 @@ class ResourceManager {
         static void loadTexture(string textureSource);
         static void loadFont(string fontSource, int size);
 
-        static Texture* getTexture(string textureSource);
-        static Font* getFont(string fontSource, int size);
+        static shared_ptr<Texture> getTexture(string textureSource);
+        static shared_ptr<Font> getFont(string fontSource, int size);
 };
 
 #endif
