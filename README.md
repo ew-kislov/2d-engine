@@ -1,9 +1,21 @@
-# MSU CMC Computer Graphics cource Task 1 (2D game)
+# 2D Engine
 
-## Дополнительные пункты
+Implemented in language C++ using OpenGL.
 
-- Плавная спрайтовая анимация динамических объектов - походка игрока и врагов, открытие дверей и.т.д. (от 2 до 5 баллов)  
-- Реализация большого лабиринта: 5 баллов
+## Demonstration
+
+Videorecord of example game - [here](https://drive.google.com/file/d/1iKzNWot9tIIyFhEboAMdo_MPsTa9somH/view?usp=sharing).  
+
+## Features
+
+- Sprites system  
+- Bahevior system  
+- UI system  
+- Components system  
+- Animation component  
+- Scenes system  
+- Resources management system(fonts, images)  
+- Map load system  
 
 ## Preparation guide
 
@@ -13,19 +25,15 @@
 
 ### Linux 
 
-- `sudo apt install libfreetype6 libfreetype6-dev`
-- `sudo apt install libpng16-16 libpng-dev`
+- `sudo apt-get install libfreetype6 libfreetype6-dev`
+- `sudo apt-get install libpng16-16 libpng-dev`
 - `sudo apt-get install libxinerama-dev`
 - `sudo apt-get install libxcursor-dev`
-- `sudo apt install libglu1-mesa-dev freeglut3-dev`
+- `sudo apt-get install libglu1-mesa-dev freeglut3-dev`
 
 ## Build
 
-- `cd {project directory}`
-- `cmake` .
-- `make`
-- `./Task1`
-
-## Author
-
-Evgeniy Kislov
+- `cd <project directory>`  
+- `cmake` .  
+- `make`  
+- `./engine`  
