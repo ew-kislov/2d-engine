@@ -13,7 +13,7 @@ Videorecord of example game - [here](https://drive.google.com/file/d/1iKzNWot9tI
 - UI system  
 - Components system  
 - Animation component  
-- Scenes manager system  
+- Scene management system  
 - Resources management system(fonts, images)  
 - Map load system  
 
