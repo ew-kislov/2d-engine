@@ -9,11 +9,11 @@ Videorecord of example game - [here](https://drive.google.com/file/d/1iKzNWot9tI
 ## Features
 
 - Sprites system  
-- Bahevior system  
+- Behavior system  
 - UI system  
 - Components system  
 - Animation component  
-- Scenes system  
+- Scenes manager system  
 - Resources management system(fonts, images)  
 - Map load system  
 
